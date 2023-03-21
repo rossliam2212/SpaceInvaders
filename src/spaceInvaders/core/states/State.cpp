@@ -4,12 +4,12 @@
 
 #include "State.h"
 
-State::State(sf::RenderWindow& window, std::stack<std::unique_ptr<State>>& states) noexcept
+State::State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states) noexcept
     : window{window},
       states{states},
       end{false},
       logger{"logs"} {
-    input::Input::Mouse::init(&window);
+    input::Input::Mouse::init(window.get());
 }
 
 void State::updateMousePositions() {

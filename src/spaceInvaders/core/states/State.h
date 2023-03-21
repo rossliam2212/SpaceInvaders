@@ -10,13 +10,14 @@
 #include <stack>
 #include <map>
 #include <memory>
+#include <fstream>
 
 #include "../../input/Input.h"
 
 
 class State {
 protected:
-    sf::RenderWindow& window;
+    std::shared_ptr<sf::RenderWindow> window;
     std::stack<std::unique_ptr<State>>& states;
     bool end;
 
@@ -27,11 +28,11 @@ protected:
     logger::Logger logger;
 
 public:
-    State(sf::RenderWindow& window, std::stack<std::unique_ptr<State>>& states) noexcept;
+    State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states) noexcept;
 
     virtual void update() = 0;
     virtual void updateInput(const float& dt) = 0;
-    virtual void render(sf::RenderWindow& window) = 0;
+    virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
     void endState();
     bool getEnd() const;

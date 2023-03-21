@@ -8,15 +8,20 @@
 #include <Logger.h>
 
 #include "states/State.h"
+#include "../managers/AssetManager.h"
 #include "../utilities/FixedClock.h"
 
 class Application {
 private:
-    sf::RenderWindow window;
+    static constexpr const int WINDOW_HEIGHT{1500};
+    static constexpr const int WINDOW_WIDTH{1500};
+
+    std::shared_ptr<sf::RenderWindow> window;
     sf::Event event;
 
     std::stack<std::unique_ptr<State>> states;
     std::map<std::string, int> supportedKeys;
+    AssetManager assetManager;
 
     FixedClock dtClock;
     float deltaTime;
@@ -40,6 +45,7 @@ private:
     void initWindow();
     void initStates();
     void initKeys();
+    void initAssets();
 };
 
 
