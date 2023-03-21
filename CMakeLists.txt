@@ -6,13 +6,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_FILES
         src/spaceInvaders/core/states/State.cpp
         src/spaceInvaders/utilities/Utils.cpp
-        src/spaceInvaders/input/Input.cpp)
+        src/spaceInvaders/input/Input.cpp
+        src/spaceInvaders/core/Application.cpp
+        src/spaceInvaders/utilities/FixedClock.cpp)
 
 
 set(HEADER_FILES
         src/spaceInvaders/core/states/State.h
         src/spaceInvaders/utilities/Utils.h
-        src/spaceInvaders/input/Input.h)
+        src/spaceInvaders/input/Input.h
+        src/spaceInvaders/core/Application.cpp
+        src/spaceInvaders/utilities/FixedClock.h)
 
 add_executable(space_invaders src/main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 

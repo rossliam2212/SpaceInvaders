@@ -7,7 +7,8 @@
 State::State(sf::RenderWindow& window, std::stack<std::unique_ptr<State>>& states) noexcept
     : window{window},
       states{states},
-      end{false} {
+      end{false},
+      logger{"logs"} {
     input::Input::Mouse::init(&window);
 }
 

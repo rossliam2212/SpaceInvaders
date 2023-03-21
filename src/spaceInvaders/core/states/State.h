@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <Logger.h>
 #include <stack>
+#include <map>
 #include <memory>
 
 #include "../../input/Input.h"

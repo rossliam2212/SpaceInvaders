@@ -1,13 +1,6 @@
-#include <iostream>
-#include <Logger.h>
-
-#include <SFML/Graphics.hpp>
-#include <string>
+#include "spaceInvaders/core/Application.h"
 
 int main() {
-    std::cout << "Hello, World!\n";
-    std::string name{"Liam"};
-    logger::Logger logger;
-    logger.info("Hello" + name);
+    Application app;
     return 0;
 }
