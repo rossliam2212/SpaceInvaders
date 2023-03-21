@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <fstream>
 
 namespace utilities {
         float length(const sf::Vector2f& v);
@@ -23,6 +24,9 @@ namespace utilities {
 
         double degreesToRadians(double degrees);
         double radiansToDegrees(double radians);
+
+
+        bool isFileEmpty(std::ifstream& file);
     }
 
 

@@ -42,4 +42,10 @@ namespace utilities {
     double radiansToDegrees(double radians) {
         return  (radians * (180 / M_PI));
     }
+
+
+    bool isFileEmpty(std::ifstream& file) {
+        return file.peek() == std::ifstream::traits_type::eof();
+    }
+
 }

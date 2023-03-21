@@ -10,6 +10,7 @@
 #include "states/MainMenuState.h"
 #include "../managers/AssetManager.h"
 #include "../utilities/FixedClock.h"
+#include "../utilities/Utils.h"
 
 class Application {
 private:
