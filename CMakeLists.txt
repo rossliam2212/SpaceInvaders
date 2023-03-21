@@ -3,7 +3,18 @@ project(space_invaders)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(space_invaders src/main.cpp)
+set(SOURCE_FILES
+        src/spaceInvaders/core/states/State.cpp
+        src/spaceInvaders/utilities/Utils.cpp
+        src/spaceInvaders/input/Input.cpp)
+
+
+set(HEADER_FILES
+        src/spaceInvaders/core/states/State.h
+        src/spaceInvaders/utilities/Utils.h
+        src/spaceInvaders/input/Input.h)
+
+add_executable(space_invaders src/main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
 # SFML
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
