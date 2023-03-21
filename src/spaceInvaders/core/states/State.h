@@ -29,8 +29,9 @@ protected:
 
 public:
     State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states) noexcept;
+    virtual ~State() = default;
 
-    virtual void update() = 0;
+    virtual void update(const float& dt) = 0;
     virtual void updateInput(const float& dt) = 0;
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 

@@ -32,7 +32,7 @@ void Application::update() {
     updateEvents();
 
     if (!states.empty()) {
-        states.top()->update();
+        states.top()->update(deltaTime);
 
         if (states.top()->getEnd()) {
             states.pop();
@@ -73,13 +73,14 @@ void Application::endApplication() {
 }
 
 void Application::initWindow() {
+    // TODO Create window config file to store all of the windows details
     logger.info("Window initialized.", this);
-    window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, "Minesweeper", sf::Style::Titlebar | sf::Style::Close);
+    window = std::make_shared<sf::RenderWindow>(sf::VideoMode{WINDOW_WIDTH, WINDOW_HEIGHT}, "Space Invaders", sf::Style::Titlebar | sf::Style::Close);
 }
 
 void Application::initStates() {
     logger.info("Starting MainMenuState.", this);
-//    states.push(std::make_unique<MainMenuState>());
+    states.push(std::make_unique<MainMenuState>(window, states));
 }
 
 void Application::initKeys() {
