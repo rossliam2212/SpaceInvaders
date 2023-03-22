@@ -29,6 +29,7 @@ private:
     std::stack<std::unique_ptr<State>> states;
     std::map<std::string, int> supportedKeys;
     AssetManager assetManager;
+    SoundManager soundManager;
 
     FixedClock dtClock;
     float deltaTime;

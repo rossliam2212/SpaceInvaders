@@ -4,10 +4,11 @@
 
 #include "State.h"
 
-State::State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager) noexcept
+State::State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : window{window},
       states{states},
       assetManager{assetManager},
+      soundManager{soundManager},
       end{false},
       logger{"logs"} {
     input::Input::Mouse::init(window.get());

@@ -4,8 +4,8 @@
 
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager) noexcept
-    : State(window, states, assetManager) {
+MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : State(window, states, assetManager, soundManager) {
     initBG();
 }
 

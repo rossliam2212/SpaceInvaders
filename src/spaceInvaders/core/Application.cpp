@@ -18,6 +18,7 @@ Application::Application() noexcept
     initKeys();
     initWindow();
     initStates();
+    soundManager.startSound("badHabit", assetManager.getSound("badHabit"));
 }
 
 void Application::run() {
@@ -62,6 +63,17 @@ void Application::updateEvents() {
         if (event.type == sf::Event::Closed) {
             endApplication();
         }
+
+        // TODO Testing Sound - REMOVE
+        if (event.type == sf::Event::KeyPressed) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+                soundManager.pauseSound("badHabit");
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+                soundManager.playSound("badHabit");
+            }
+        }
     }
 }
 
@@ -80,7 +92,7 @@ void Application::initWindow() {
 
 void Application::initStates() {
     logger.info("Starting MainMenuState.", this);
-    states.push(std::make_unique<MainMenuState>(window, states, assetManager));
+    states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
 }
 
 void Application::initKeys() {

@@ -14,10 +14,11 @@ private:
     std::unordered_map<std::string, sf::Sound> soundsPLaying;
 
 public:
-    SoundManager() noexcept;
+    SoundManager() noexcept = default;
     ~SoundManager() = default;
 
     void startSound(const std::string& name, const sf::SoundBuffer& soundBuffer);
+
     void playSound(const std::string& name);
     void pauseSound(const std::string& name);
     void stopSound(const std::string& name);

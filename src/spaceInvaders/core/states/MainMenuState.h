@@ -12,7 +12,8 @@ private:
     sf::RectangleShape bg; // TODO Temporary - REMOVE
 
 public:
-    MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager) noexcept;
+    MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,
+                  const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     ~MainMenuState() override = default;
 
     void update(const float& dt) override;
