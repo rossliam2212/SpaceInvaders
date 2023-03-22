@@ -72,6 +72,23 @@ void Application::updateEvents() {
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
                 soundManager.playSound("badHabit");
+                logger.debug("Volume: " + std::to_string(soundManager.getVolume("badHabit")));
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+                soundManager.stopSound("badHabit");
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P)) {
+                soundManager.setSoundVolume("badHabit", 50);
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) {
+                if (soundManager.isSoundPlaying("badHabit")) {
+                    logger.debug("Sound IS playing.", this);
+                } else {
+                    logger.debug("Sound NOT playing.", this);
+                }
             }
         }
     }

@@ -1,1 +1,543 @@
 21/03/23  22:07:23  START  [Application]  Application starting.
+21/03/23  22:54:57  START  [Application]  Application starting.
+21/03/23  22:54:57  INFO   [Application]  Window initialized.
+21/03/23  22:54:57  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:03:43  START  [Application]  Application starting.
+21/03/23  23:03:43  INFO   [Application]  Window initialized.
+21/03/23  23:03:44  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:05:05  START  [Application]  Application starting.
+21/03/23  23:05:05  INFO   [Application]  Window initialized.
+21/03/23  23:05:05  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:05:14  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:05:14  END    [Application]  Application ended.
+21/03/23  23:05:14  INFO   [Application]  ==================================================================================
+21/03/23  23:16:42  START  [Application]  Application starting.
+21/03/23  23:16:42  INFO   [Application]  Window initialized.
+21/03/23  23:16:43  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:16:48  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:16:48  END    [Application]  Application ended.
+21/03/23  23:16:48  INFO   [Application]  ==================================================================================
+21/03/23  23:16:57  START  [Application]  Application starting.
+21/03/23  23:16:57  INFO   [Application]  Window initialized.
+21/03/23  23:16:57  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:17:00  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:17:00  END    [Application]  Application ended.
+21/03/23  23:17:00  INFO   [Application]  ==================================================================================
+21/03/23  23:24:22  START  [Application]  Application starting.
+21/03/23  23:24:22  INFO   [Application]  Window initialized.
+21/03/23  23:24:22  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:24:22  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:24:22  INFO   [Application]  Successfully loaded font assets.
+21/03/23  23:24:29  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:24:29  END    [Application]  Application ended.
+21/03/23  23:24:29  INFO   [Application]  ==================================================================================
+21/03/23  23:27:18  START  [Application]  Application starting.
+21/03/23  23:27:18  INFO   [Application]  Window initialized.
+21/03/23  23:27:18  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:27:18  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:27:18  INFO   [Application]  Successfully loaded font assets.
+21/03/23  23:27:18  INFO   [Application]  Successfully loaded texture assets.
+21/03/23  23:27:18  INFO   [Application]  Successfully loaded sound assets.
+21/03/23  23:27:34  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:27:34  END    [Application]  Application ended.
+21/03/23  23:27:34  INFO   [Application]  ==================================================================================
+21/03/23  23:34:27  START  [Application]  Application starting.
+21/03/23  23:34:27  INFO   [Application]  Window initialized.
+21/03/23  23:34:27  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:34:27  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:34:27  INFO   [Application]  Loading assets...
+21/03/23  23:34:27  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:34:27  INFO   [Application]  Successfully loaded textures.
+21/03/23  23:34:27  INFO   [Application]  Successfully loaded sounds.
+21/03/23  23:34:34  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:34:34  END    [Application]  Application ended.
+21/03/23  23:34:34  INFO   [Application]  ==================================================================================
+21/03/23  23:34:54  START  [Application]  Application starting.
+21/03/23  23:34:54  INFO   [Application]  Window initialized.
+21/03/23  23:34:54  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:34:54  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:34:54  INFO   [Application]  Loading assets...
+21/03/23  23:34:54  WARN   [Application]  Font assets config file empty. Skipping...
+21/03/23  23:34:54  INFO   [Application]  Successfully loaded textures.
+21/03/23  23:34:54  INFO   [Application]  Successfully loaded sounds.
+21/03/23  23:35:01  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:35:01  END    [Application]  Application ended.
+21/03/23  23:35:01  INFO   [Application]  ==================================================================================
+21/03/23  23:35:38  START  [Application]  Application starting.
+21/03/23  23:35:38  INFO   [Application]  Window initialized.
+21/03/23  23:35:38  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:35:38  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:35:38  INFO   [Application]  Loading assets...
+21/03/23  23:35:38  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:35:38  INFO   [Application]  Successfully loaded textures.
+21/03/23  23:35:38  INFO   [Application]  Successfully loaded sounds.
+21/03/23  23:35:40  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:35:40  END    [Application]  Application ended.
+21/03/23  23:35:40  INFO   [Application]  ==================================================================================
+21/03/23  23:36:22  START  [Application]  Application starting.
+21/03/23  23:36:22  INFO   [Application]  Window initialized.
+21/03/23  23:36:22  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:36:22  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:36:22  INFO   [Application]  Loading assets...
+21/03/23  23:36:22  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:36:22  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:36:22  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:36:38  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:36:38  END    [Application]  Application ended.
+21/03/23  23:36:38  INFO   [Application]  ==================================================================================
+21/03/23  23:36:53  START  [Application]  Application starting.
+21/03/23  23:36:53  INFO   [Application]  Loading assets...
+21/03/23  23:36:53  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:36:53  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:36:53  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:36:53  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:36:53  INFO   [Application]  Window initialized.
+21/03/23  23:36:53  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:37:11  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:37:11  END    [Application]  Application ended.
+21/03/23  23:37:11  INFO   [Application]  ==================================================================================
+21/03/23  23:37:46  START  [Application]  Application starting.
+21/03/23  23:37:46  INFO   [Application]  Loading assets...
+21/03/23  23:37:46  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:37:46  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:37:46  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:37:46  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:37:46  INFO   [Application]  Window initialized.
+21/03/23  23:37:46  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:37:56  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:37:56  END    [Application]  Application ended.
+21/03/23  23:37:56  INFO   [Application]  ==================================================================================
+21/03/23  23:38:16  START  [Application]  Application starting.
+21/03/23  23:38:16  INFO   [Application]  Loading assets...
+21/03/23  23:38:16  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:38:16  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:38:16  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:38:16  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:38:16  INFO   [Application]  Window initialized.
+21/03/23  23:38:16  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:38:21  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:38:21  END    [Application]  Application ended.
+21/03/23  23:38:21  INFO   [Application]  ==================================================================================
+21/03/23  23:41:05  START  [Application]  Application starting.
+21/03/23  23:41:05  INFO   [Application]  Loading assets...
+21/03/23  23:41:05  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:41:05  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:41:05  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:41:05  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:41:05  INFO   [Application]  Window initialized.
+21/03/23  23:41:05  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:41:09  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:41:09  END    [Application]  Application ended.
+21/03/23  23:41:09  INFO   [Application]  ==================================================================================
+21/03/23  23:41:58  START  [Application]  Application starting.
+21/03/23  23:41:58  INFO   [Application]  Loading assets...
+21/03/23  23:41:58  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:41:58  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:41:58  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:41:58  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:41:58  INFO   [Application]  Window initialized.
+21/03/23  23:41:58  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:42:54  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:42:54  END    [Application]  Application ended.
+21/03/23  23:42:54  INFO   [Application]  ==================================================================================
+21/03/23  23:42:56  START  [Application]  Application starting.
+21/03/23  23:42:56  INFO   [Application]  Loading assets...
+21/03/23  23:42:56  INFO   [Application]  Successfully loaded fonts. - 0
+21/03/23  23:42:56  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:42:56  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:42:56  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:42:56  INFO   [Application]  Window initialized.
+21/03/23  23:42:56  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:43:07  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:43:07  END    [Application]  Application ended.
+21/03/23  23:43:07  INFO   [Application]  ==================================================================================
+21/03/23  23:43:35  START  [Application]  Application starting.
+21/03/23  23:43:35  INFO   [Application]  Loading assets...
+21/03/23  23:43:35  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:43:35  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:43:35  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:43:35  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:43:35  INFO   [Application]  Window initialized.
+21/03/23  23:43:35  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:43:57  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:43:57  END    [Application]  Application ended.
+21/03/23  23:43:57  INFO   [Application]  ==================================================================================
+21/03/23  23:43:59  START  [Application]  Application starting.
+21/03/23  23:43:59  INFO   [Application]  Loading assets...
+21/03/23  23:43:59  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:43:59  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:43:59  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:43:59  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:43:59  INFO   [Application]  Window initialized.
+21/03/23  23:43:59  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:44:02  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:44:02  END    [Application]  Application ended.
+21/03/23  23:44:02  INFO   [Application]  ==================================================================================
+21/03/23  23:44:24  START  [Application]  Application starting.
+21/03/23  23:44:24  INFO   [Application]  Loading assets...
+21/03/23  23:44:24  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:44:24  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:44:24  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:44:24  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:44:24  INFO   [Application]  Window initialized.
+21/03/23  23:44:24  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:45:06  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:45:06  END    [Application]  Application ended.
+21/03/23  23:45:06  INFO   [Application]  ==================================================================================
+21/03/23  23:52:24  START  [Application]  Application starting.
+21/03/23  23:52:24  INFO   [Application]  Loading assets...
+21/03/23  23:52:24  INFO   [Application]  Successfully loaded fonts.
+21/03/23  23:52:24  WARN   [Application]  Texture assets config file empty. Skipping...
+21/03/23  23:52:24  WARN   [Application]  Sound assets config file empty. Skipping...
+21/03/23  23:52:24  INFO   [Application]  Successfully initialized supported keys.
+21/03/23  23:52:24  INFO   [Application]  Window initialized.
+21/03/23  23:52:25  INFO   [Application]  Starting MainMenuState.
+21/03/23  23:52:37  INFO   [Application]  Logs written to: '../logs/logs.txt'
+21/03/23  23:52:37  END    [Application]  Application ended.
+21/03/23  23:52:37  INFO   [Application]  ==================================================================================
+22/03/23  00:04:55  START  [Application]  Application starting.
+22/03/23  00:04:55  INFO   [Application]  Loading assets...
+22/03/23  00:04:55  INFO   [Application]  Successfully loaded fonts.
+22/03/23  00:04:55  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  00:04:55  WARN   [Application]  Sound assets config file empty. Skipping...
+22/03/23  00:04:55  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  00:04:55  INFO   [Application]  Window initialized.
+22/03/23  00:04:56  INFO   [Application]  Starting MainMenuState.
+22/03/23  00:05:01  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  00:05:01  END    [Application]  Application ended.
+22/03/23  00:05:01  INFO   [Application]  ==================================================================================
+22/03/23  00:05:10  START  [Application]  Application starting.
+22/03/23  00:05:10  INFO   [Application]  Loading assets...
+22/03/23  00:05:10  INFO   [Application]  Successfully loaded fonts.
+22/03/23  00:05:10  ERROR  [Application]  Failed to open texture assets config file.
+22/03/23  00:08:23  START  [Application]  Application starting.
+22/03/23  00:08:24  INFO   [Application]  Loading assets...
+22/03/23  00:08:24  INFO   [Application]  Successfully loaded fonts.
+22/03/23  00:08:24  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  00:08:24  WARN   [Application]  Sound assets config file empty. Skipping...
+22/03/23  00:08:24  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  00:08:24  INFO   [Application]  Window initialized.
+22/03/23  00:08:24  INFO   [Application]  Starting MainMenuState.
+22/03/23  00:08:30  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  00:08:30  END    [Application]  Application ended.
+22/03/23  00:08:30  INFO   [Application]  ==================================================================================
+22/03/23  11:06:12  START  [Application]  Application starting.
+22/03/23  11:06:12  INFO   [Application]  Loading assets...
+22/03/23  11:06:12  INFO   [Application]  Successfully loaded fonts.
+22/03/23  11:06:12  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  11:06:12  INFO   [Application]  Successfully loaded sounds.
+22/03/23  11:06:12  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  11:06:12  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  11:06:12  INFO   [Application]  Window initialized.
+22/03/23  11:06:12  INFO   [Application]  Starting MainMenuState.
+22/03/23  11:07:04  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  11:07:04  END    [Application]  Application ended.
+22/03/23  11:07:04  INFO   [Application]  ==================================================================================
+22/03/23  11:08:16  START  [Application]  Application starting.
+22/03/23  11:08:16  INFO   [Application]  Loading assets...
+22/03/23  11:08:16  INFO   [Application]  Successfully loaded fonts.
+22/03/23  11:08:16  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  11:08:16  ERROR  [Application]  Failed to open sound assets config file.
+22/03/23  11:10:31  START  [Application]  Application starting.
+22/03/23  11:10:31  INFO   [Application]  Loading assets...
+22/03/23  11:10:31  INFO   [Application]  Successfully loaded fonts.
+22/03/23  11:10:31  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  11:10:31  INFO   [Application]  Successfully loaded sounds.
+22/03/23  11:10:31  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  11:10:31  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  11:10:31  INFO   [Application]  Window initialized.
+22/03/23  11:10:31  INFO   [Application]  Starting MainMenuState.
+22/03/23  11:10:52  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  11:10:52  END    [Application]  Application ended.
+22/03/23  11:10:52  INFO   [Application]  ==================================================================================
+22/03/23  11:11:14  START  [Application]  Application starting.
+22/03/23  11:11:14  INFO   [Application]  Loading assets...
+22/03/23  11:11:14  INFO   [Application]  Successfully loaded fonts.
+22/03/23  11:11:14  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  11:11:14  INFO   [Application]  Successfully loaded sounds.
+22/03/23  11:11:14  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  11:11:14  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  11:11:14  INFO   [Application]  Window initialized.
+22/03/23  11:11:15  INFO   [Application]  Starting MainMenuState.
+22/03/23  11:11:18  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  11:11:18  END    [Application]  Application ended.
+22/03/23  11:11:18  INFO   [Application]  ==================================================================================
+22/03/23  11:11:58  START  [Application]  Application starting.
+22/03/23  11:11:58  INFO   [Application]  Loading assets...
+22/03/23  11:11:58  INFO   [Application]  Successfully loaded fonts.
+22/03/23  11:11:58  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  11:11:58  INFO   [Application]  Successfully loaded sounds.
+22/03/23  11:11:58  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  11:11:58  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  11:11:58  INFO   [Application]  Window initialized.
+22/03/23  11:11:58  INFO   [Application]  Starting MainMenuState.
+22/03/23  11:12:05  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  11:12:05  END    [Application]  Application ended.
+22/03/23  11:12:05  INFO   [Application]  ==================================================================================
+22/03/23  11:12:56  START  [Application]  Application starting.
+22/03/23  11:12:56  INFO   [Application]  Loading assets...
+22/03/23  11:12:56  INFO   [Application]  Successfully loaded fonts.
+22/03/23  11:12:56  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  11:12:56  WARN   [Application]  Sound assets config file empty. Skipping...
+22/03/23  11:12:56  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  11:12:56  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  11:12:56  INFO   [Application]  Window initialized.
+22/03/23  11:12:56  INFO   [Application]  Starting MainMenuState.
+22/03/23  11:13:20  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  11:13:20  END    [Application]  Application ended.
+22/03/23  11:13:20  INFO   [Application]  ==================================================================================
+22/03/23  12:55:25  START  [Application]  Application starting.
+22/03/23  12:55:25  INFO   [Application]  Loading assets...
+22/03/23  12:55:25  INFO   [Application]  Successfully loaded fonts.
+22/03/23  12:55:25  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  12:55:25  WARN   [Application]  Sound assets config file empty. Skipping...
+22/03/23  12:55:25  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  12:55:25  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  12:55:25  INFO   [Application]  Window initialized.
+22/03/23  12:55:25  INFO   [Application]  Starting MainMenuState.
+22/03/23  12:55:33  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  12:55:33  END    [Application]  Application ended.
+22/03/23  12:55:33  INFO   [Application]  ==================================================================================
+22/03/23  13:08:55  START  [Application]  Application starting.
+22/03/23  13:08:55  INFO   [Application]  Loading assets...
+22/03/23  13:08:55  INFO   [Application]  Successfully loaded fonts.
+22/03/23  13:08:55  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  13:08:56  INFO   [Application]  Successfully loaded sounds.
+22/03/23  13:08:56  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  13:08:56  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  13:08:56  INFO   [Application]  Window initialized.
+22/03/23  13:08:56  INFO   [Application]  Starting MainMenuState.
+22/03/23  13:09:05  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  13:09:05  END    [Application]  Application ended.
+22/03/23  13:09:05  INFO   [Application]  ==================================================================================
+22/03/23  13:41:41  START  [Application]  Application starting.
+22/03/23  13:41:41  INFO   [Application]  Loading assets...
+22/03/23  13:41:41  INFO   [Application]  Successfully loaded fonts.
+22/03/23  13:41:41  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  13:41:41  INFO   [Application]  Successfully loaded sounds.
+22/03/23  13:41:41  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  13:41:41  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  13:41:41  INFO   [Application]  Window initialized.
+22/03/23  13:41:42  INFO   [Application]  Starting MainMenuState.
+22/03/23  13:41:52  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  13:41:52  END    [Application]  Application ended.
+22/03/23  13:41:52  INFO   [Application]  ==================================================================================
+22/03/23  13:44:59  START  [Application]  Application starting.
+22/03/23  13:44:59  INFO   [Application]  Loading assets...
+22/03/23  13:44:59  INFO   [Application]  Successfully loaded fonts.
+22/03/23  13:44:59  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  13:45:00  INFO   [Application]  Successfully loaded sounds.
+22/03/23  13:45:00  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  13:45:00  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  13:45:00  INFO   [Application]  Window initialized.
+22/03/23  13:45:00  INFO   [Application]  Starting MainMenuState.
+22/03/23  13:45:13  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  13:45:13  END    [Application]  Application ended.
+22/03/23  13:45:13  INFO   [Application]  ==================================================================================
+22/03/23  13:48:04  START  [Application]  Application starting.
+22/03/23  13:48:04  INFO   [Application]  Loading assets...
+22/03/23  13:48:04  INFO   [Application]  Successfully loaded fonts.
+22/03/23  13:48:04  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  13:48:05  INFO   [Application]  Successfully loaded sounds.
+22/03/23  13:48:05  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  13:48:05  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  13:48:05  INFO   [Application]  Window initialized.
+22/03/23  13:48:05  INFO   [Application]  Starting MainMenuState.
+22/03/23  13:48:16  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  13:48:16  END    [Application]  Application ended.
+22/03/23  13:48:16  INFO   [Application]  ==================================================================================
+22/03/23  13:54:13  START  [Application]  Application starting.
+22/03/23  13:54:13  INFO   [Application]  Loading assets...
+22/03/23  13:54:13  INFO   [Application]  Successfully loaded fonts.
+22/03/23  13:54:13  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  13:54:14  INFO   [Application]  Successfully loaded sounds.
+22/03/23  13:54:14  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  13:54:14  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  13:54:14  INFO   [Application]  Window initialized.
+22/03/23  13:54:14  INFO   [Application]  Starting MainMenuState.
+22/03/23  13:54:27  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  13:54:27  END    [Application]  Application ended.
+22/03/23  13:54:27  INFO   [Application]  ==================================================================================
+22/03/23  14:21:59  START  [Application]  Application starting.
+22/03/23  14:21:59  INFO   [Application]  Loading assets...
+22/03/23  14:21:59  INFO   [Application]  Successfully loaded fonts.
+22/03/23  14:21:59  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  14:22:00  INFO   [Application]  Successfully loaded sounds.
+22/03/23  14:22:00  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  14:22:00  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  14:22:00  INFO   [Application]  Window initialized.
+22/03/23  14:22:00  INFO   [Application]  Starting MainMenuState.
+22/03/23  14:22:07  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  14:22:07  END    [Application]  Application ended.
+22/03/23  14:22:07  INFO   [Application]  ==================================================================================
+22/03/23  15:51:21  START  [Application]  Application starting.
+22/03/23  15:51:21  INFO   [Application]  Loading assets...
+22/03/23  15:51:21  INFO   [Application]  Successfully loaded fonts.
+22/03/23  15:51:21  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  15:51:23  INFO   [Application]  Successfully loaded sounds.
+22/03/23  15:51:23  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  15:51:23  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  15:51:23  INFO   [Application]  Window initialized.
+22/03/23  15:51:24  INFO   [Application]  Starting MainMenuState.
+22/03/23  15:51:28  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  15:51:33  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  15:51:39  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  15:51:39  END    [Application]  Application ended.
+22/03/23  15:51:39  INFO   [Application]  ==================================================================================
+22/03/23  15:52:13  START  [Application]  Application starting.
+22/03/23  15:52:13  INFO   [Application]  Loading assets...
+22/03/23  15:52:13  INFO   [Application]  Successfully loaded fonts.
+22/03/23  15:52:13  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  15:52:15  INFO   [Application]  Successfully loaded sounds.
+22/03/23  15:52:15  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  15:52:15  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  15:52:15  INFO   [Application]  Window initialized.
+22/03/23  15:52:15  INFO   [Application]  Starting MainMenuState.
+22/03/23  15:52:21  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  15:52:22  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  15:52:23  INFO   [SoundManager]  'badHabit' sound => Stopped.
+22/03/23  15:52:25  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:31  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:33  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:33  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:34  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:35  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:35  WARN   [SoundManager]  'badHabit' sound not currently playing.
+22/03/23  15:52:38  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  15:52:38  END    [Application]  Application ended.
+22/03/23  15:52:38  INFO   [Application]  ==================================================================================
+22/03/23  15:56:51  START  [Application]  Application starting.
+22/03/23  15:56:51  INFO   [Application]  Loading assets...
+22/03/23  15:56:51  INFO   [Application]  Successfully loaded fonts.
+22/03/23  15:56:51  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  15:56:53  INFO   [Application]  Successfully loaded sounds.
+22/03/23  15:56:53  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  15:56:53  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  15:56:53  INFO   [Application]  Window initialized.
+22/03/23  15:56:54  INFO   [Application]  Starting MainMenuState.
+22/03/23  15:57:00  DEBUG  []  Sound IS playing.
+22/03/23  15:57:04  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  15:57:05  DEBUG  []  Sound IS playing.
+22/03/23  15:57:10  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  15:57:10  END    [Application]  Application ended.
+22/03/23  15:57:10  INFO   [Application]  ==================================================================================
+22/03/23  15:58:22  START  [Application]  Application starting.
+22/03/23  15:58:22  INFO   [Application]  Loading assets...
+22/03/23  15:58:22  INFO   [Application]  Successfully loaded fonts.
+22/03/23  15:58:22  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  15:58:24  INFO   [Application]  Successfully loaded sounds.
+22/03/23  15:58:24  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  15:58:24  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  15:58:24  INFO   [Application]  Window initialized.
+22/03/23  15:58:24  INFO   [Application]  Starting MainMenuState.
+22/03/23  15:58:28  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  15:58:30  DEBUG  [Application]  Sound NOT playing.
+22/03/23  15:58:33  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  15:58:35  DEBUG  [Application]  Sound IS playing.
+22/03/23  15:58:38  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  15:58:38  DEBUG  [Application]  Sound NOT playing.
+22/03/23  15:58:41  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  15:58:42  DEBUG  [Application]  Sound IS playing.
+22/03/23  15:58:43  INFO   [SoundManager]  'badHabit' sound => Stopped.
+22/03/23  15:58:45  DEBUG  [Application]  Sound NOT playing.
+22/03/23  15:58:56  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  15:58:56  END    [Application]  Application ended.
+22/03/23  15:58:56  INFO   [Application]  ==================================================================================
+22/03/23  16:16:29  START  [Application]  Application starting.
+22/03/23  16:16:29  INFO   [Application]  Loading assets...
+22/03/23  16:16:29  INFO   [Application]  Successfully loaded fonts.
+22/03/23  16:16:29  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  16:16:31  INFO   [Application]  Successfully loaded sounds.
+22/03/23  16:16:31  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  16:16:31  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  16:16:31  INFO   [Application]  Window initialized.
+22/03/23  16:16:31  INFO   [Application]  Starting MainMenuState.
+22/03/23  16:16:34  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:16:35  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:16:35  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:16:35  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:16:35  DEBUG  []  Volume: 0.000000
+22/03/23  16:16:40  WARN   [SoundManager]  'badHabit' sound already playing.
+22/03/23  16:16:40  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:16:40  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:16:40  DEBUG  []  Volume: 0.000000
+22/03/23  16:16:45  WARN   [SoundManager]  'badHabit' sound already playing.
+22/03/23  16:16:45  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:16:45  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:16:45  DEBUG  []  Volume: 0.000000
+22/03/23  16:16:49  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:17:03  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:06  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:07  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:07  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:08  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:08  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:08  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:08  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:08  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:08  WARN   [SoundManager]  'badHabit' sound already paused.
+22/03/23  16:17:10  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:17:10  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:10  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:10  DEBUG  []  Volume: 0.000000
+22/03/23  16:17:14  WARN   [SoundManager]  'badHabit' sound already playing.
+22/03/23  16:17:14  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:14  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:14  DEBUG  []  Volume: 0.000000
+22/03/23  16:17:15  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:17:16  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:17:16  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:16  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:16  DEBUG  []  Volume: 0.000000
+22/03/23  16:17:17  DEBUG  [Application]  Sound IS playing.
+22/03/23  16:17:18  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:17:19  DEBUG  [Application]  Sound NOT playing.
+22/03/23  16:17:21  DEBUG  [Application]  Sound NOT playing.
+22/03/23  16:17:22  DEBUG  [Application]  Sound NOT playing.
+22/03/23  16:17:22  DEBUG  [Application]  Sound NOT playing.
+22/03/23  16:17:22  DEBUG  [Application]  Sound NOT playing.
+22/03/23  16:17:24  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:17:24  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:24  WARN   [SoundManager]  'bahHabit' sound not currently playing.
+22/03/23  16:17:24  DEBUG  []  Volume: 0.000000
+22/03/23  16:17:24  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:17:42  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  16:17:42  END    [Application]  Application ended.
+22/03/23  16:17:42  INFO   [Application]  ==================================================================================
+22/03/23  16:17:58  START  [Application]  Application starting.
+22/03/23  16:17:58  INFO   [Application]  Loading assets...
+22/03/23  16:17:58  INFO   [Application]  Successfully loaded fonts.
+22/03/23  16:17:58  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  16:17:59  INFO   [Application]  Successfully loaded sounds.
+22/03/23  16:17:59  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  16:17:59  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  16:17:59  INFO   [Application]  Window initialized.
+22/03/23  16:17:59  INFO   [Application]  Starting MainMenuState.
+22/03/23  16:18:05  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:18:06  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:18:06  DEBUG  []  Volume: 100.000000
+22/03/23  16:18:12  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:18:13  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:18:13  DEBUG  []  Volume: 100.000000
+22/03/23  16:18:15  DEBUG  [Application]  Sound IS playing.
+22/03/23  16:18:16  INFO   [SoundManager]  'badHabit' sound => Stopped.
+22/03/23  16:18:18  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  16:18:18  END    [Application]  Application ended.
+22/03/23  16:18:18  INFO   [Application]  ==================================================================================
+22/03/23  16:21:02  START  [Application]  Application starting.
+22/03/23  16:21:02  INFO   [Application]  Loading assets...
+22/03/23  16:21:02  INFO   [Application]  Successfully loaded fonts.
+22/03/23  16:21:02  WARN   [Application]  Texture assets config file empty. Skipping...
+22/03/23  16:21:04  INFO   [Application]  Successfully loaded sounds.
+22/03/23  16:21:04  WARN   [Application]  Color assets config file empty. Skipping...
+22/03/23  16:21:04  INFO   [Application]  Successfully initialized supported keys.
+22/03/23  16:21:04  INFO   [Application]  Window initialized.
+22/03/23  16:21:05  INFO   [Application]  Starting MainMenuState.
+22/03/23  16:21:08  INFO   [SoundManager]  'badHabit' sound => Paused.
+22/03/23  16:21:09  INFO   [SoundManager]  'badHabit' sound => Playing.
+22/03/23  16:21:09  DEBUG  []  Volume: 100.000000
+22/03/23  16:21:12  WARN   [SoundManager]  'badHabit' sound already playing.
+22/03/23  16:21:12  DEBUG  []  Volume: 50.000000
+22/03/23  16:21:18  INFO   [Application]  Logs written to: '../logs/logs.txt'
+22/03/23  16:21:18  END    [Application]  Application ended.
+22/03/23  16:21:18  INFO   [Application]  ==================================================================================
