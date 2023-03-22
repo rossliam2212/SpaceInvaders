@@ -10,7 +10,8 @@ set(SOURCE_FILES
         src/spaceInvaders/core/Application.cpp
         src/spaceInvaders/utilities/FixedClock.cpp
         src/spaceInvaders/managers/AssetManager.cpp
-        src/spaceInvaders/core/states/MainMenuState.cpp)
+        src/spaceInvaders/core/states/MainMenuState.cpp
+        src/spaceInvaders/managers/SoundManager.cpp)
 
 
 set(HEADER_FILES
@@ -20,7 +21,8 @@ set(HEADER_FILES
         src/spaceInvaders/core/Application.cpp
         src/spaceInvaders/utilities/FixedClock.h
         src/spaceInvaders/managers/AssetManager.cpp
-        src/spaceInvaders/core/states/MainMenuState.h)
+        src/spaceInvaders/core/states/MainMenuState.h
+        src/spaceInvaders/managers/SoundManager.h)
 
 add_executable(space_invaders src/main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 

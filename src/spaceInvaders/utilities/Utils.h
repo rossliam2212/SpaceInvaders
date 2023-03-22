@@ -33,6 +33,15 @@ namespace utilities {
 
         int randomInt(int min, int max);
 
+        template<typename T>
+        T randomFloat(T min, T max) {
+            std::random_device rd;
+            std::mt19937 mt(rd());
+            std::uniform_real_distribution<T> dist(min, max);
+
+            return dist(mt);
+        }
+
 
         bool isFileEmpty(std::ifstream& file);
     }
