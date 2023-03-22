@@ -113,20 +113,21 @@ void Application::initAssets() {
     // Loading Fonts
     std::ifstream fonts{"../config/fontAssets.ini"};
 
+
+    if (!fonts.is_open()) {
+        logger.error("Failed to open font assets config file.", this);
+        std::exit(-1);
+    }
+
     if (utilities::isFileEmpty(fonts)) {
         logger.warning("Font assets config file empty. Skipping...", this);
     } else {
-        if (!fonts.is_open()) {
-            logger.error("Failed to open font assets config file.", this);
-            std::exit(-1);
-        }
-
         try {
-            std::string assetName;
-            std::string assetLocation;
+            std::string fontName;
+            std::string fontPath;
 
-            while (fonts >> assetName >> assetLocation) {
-                assetManager.loadFont(assetName, assetLocation);
+            while (fonts >> fontName >> fontPath) {
+                assetManager.loadFont(fontName, fontPath);
             }
             logger.info("Successfully loaded fonts.", this);
         } catch (const std::exception& ex) {
@@ -140,20 +141,21 @@ void Application::initAssets() {
     // Loading Textures
     std::ifstream textures{"../config/textureAssets.ini"};
 
+
+    if (!textures.is_open()) {
+        logger.error("Failed to open texture assets config file.", this);
+        std::exit(-1);
+    }
+
     if (utilities::isFileEmpty(textures)) {
         logger.warning("Texture assets config file empty. Skipping...", this);
     } else {
-        if (!textures.is_open()) {
-            logger.error("Failed to open texture assets config file.", this);
-            std::exit(-1);
-        }
-
         try {
-            std::string assetName;
-            std::string assetLocation;
+            std::string textureName;
+            std::string texturePath;
 
-            while (textures >> assetName >> assetLocation) {
-                assetManager.loadTexture(assetName, assetLocation);
+            while (textures >> textureName >> texturePath) {
+                assetManager.loadTexture(textureName, texturePath);
             }
             logger.info("Successfully loaded textures.", this);
         } catch (const std::exception& ex) {
@@ -163,23 +165,24 @@ void Application::initAssets() {
         textures.close();
     }
 
+
     // Loading Sounds
     std::ifstream sounds{"../config/soundAssets.ini"};
+
+    if (!sounds.is_open()) {
+        logger.error("Failed to open sound assets config file.", this);
+        std::exit(-1);
+    }
 
     if (utilities::isFileEmpty(sounds)) {
         logger.warning("Sound assets config file empty. Skipping...", this);
     } else {
-        if (!sounds.is_open()) {
-            logger.error("Failed to open sound assets config file.", this);
-            std::exit(-1);
-        }
-
         try {
-            std::string assetName;
-            std::string assetLocation;
+            std::string soundName;
+            std::string soundPath;
 
-            while (sounds >> assetName >> assetLocation) {
-                assetManager.loadTexture(assetName, assetLocation);
+            while (sounds >> soundName >> soundPath) {
+                assetManager.loadTexture(soundName, soundPath);
             }
             logger.info("Successfully loaded sounds.", this);
         } catch (const std::exception& ex) {
