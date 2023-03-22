@@ -80,11 +80,11 @@ void Application::initWindow() {
 
 void Application::initStates() {
     logger.info("Starting MainMenuState.", this);
-    states.push(std::make_unique<MainMenuState>(window, states));
+    states.push(std::make_unique<MainMenuState>(window, states, assetManager));
 }
 
 void Application::initKeys() {
-    std::ifstream in{"../config/supportedKeys.ini"};
+    std::ifstream in{SUPPORTED_KEYS_CONFIG};
 
     if (!in.is_open()) {
         logger.error("Failed to open supported keys config file.", this);
@@ -106,13 +106,17 @@ void Application::initKeys() {
     in.close();
 }
 
-
 void Application::initAssets() {
     logger.info("Loading assets...", this);
 
-    // Loading Fonts
-    std::ifstream fonts{"../config/fontAssets.ini"};
+    initFontAssets();
+    initTextureAssets();
+    initSoundAssets();
+    initColorAssets();
+}
 
+void Application::initFontAssets() {
+    std::ifstream fonts{FONT_ASSETS_CONFIG};
 
     if (!fonts.is_open()) {
         logger.error("Failed to open font assets config file.", this);
@@ -136,11 +140,10 @@ void Application::initAssets() {
         }
         fonts.close();
     }
+}
 
-
-    // Loading Textures
-    std::ifstream textures{"../config/textureAssets.ini"};
-
+void Application::initTextureAssets() {
+    std::ifstream textures{TEXTURE_ASSETS_CONFIG};
 
     if (!textures.is_open()) {
         logger.error("Failed to open texture assets config file.", this);
@@ -164,10 +167,10 @@ void Application::initAssets() {
         }
         textures.close();
     }
+}
 
-
-    // Loading Sounds
-    std::ifstream sounds{"../config/soundAssets.ini"};
+void Application::initSoundAssets() {
+    std::ifstream sounds{SOUND_ASSETS_CONFIG};
 
     if (!sounds.is_open()) {
         logger.error("Failed to open sound assets config file.", this);
@@ -182,7 +185,7 @@ void Application::initAssets() {
             std::string soundPath;
 
             while (sounds >> soundName >> soundPath) {
-                assetManager.loadTexture(soundName, soundPath);
+                assetManager.loadSound(soundName, soundPath);
             }
             logger.info("Successfully loaded sounds.", this);
         } catch (const std::exception& ex) {
@@ -190,5 +193,35 @@ void Application::initAssets() {
             logger.error("Exception caught: " + exception, this);
         }
         sounds.close();
+    }
+}
+
+void Application::initColorAssets() {
+    std::ifstream colors{COLOR_ASSETS_CONFIG};
+
+    if (!colors.is_open()) {
+        logger.error("Failed to open color assets config file.", this);
+        std::exit(-1);
+    }
+
+    if (utilities::isFileEmpty(colors)) {
+        logger.warning("Color assets config file empty. Skipping...", this);
+    } else {
+        try {
+            std::string colorName;
+            sf::Uint8 r;
+            sf::Uint8 g;
+            sf::Uint8 b;
+            sf::Uint8 alpha;
+
+            while (colors >> colorName >> r >> g >> b >> alpha) {
+                assetManager.loadColor(colorName, sf::Color{r, g, b, alpha});
+            }
+            logger.info("Successfully loaded colors.", this);
+        } catch (const std::exception& ex) {
+            std::string exception{ex.what()};
+            logger.error("Exception caught: " + exception, this);
+        }
+        colors.close();
     }
 }

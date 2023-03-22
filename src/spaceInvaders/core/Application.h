@@ -8,7 +8,6 @@
 #include <Logger.h>
 
 #include "states/MainMenuState.h"
-#include "../managers/AssetManager.h"
 #include "../utilities/FixedClock.h"
 #include "../utilities/Utils.h"
 
@@ -16,6 +15,13 @@ class Application {
 private:
     static constexpr const int WINDOW_HEIGHT{1500};
     static constexpr const int WINDOW_WIDTH{1500};
+
+    static constexpr const char* SUPPORTED_KEYS_CONFIG{"../config/supportedKeys.ini"};
+    static constexpr const char* FONT_ASSETS_CONFIG{"../config/fontAssets.ini"};
+    static constexpr const char* TEXTURE_ASSETS_CONFIG{"../config/textureAssets.ini"};
+    static constexpr const char* SOUND_ASSETS_CONFIG{"../config/soundAssets.ini"};
+    static constexpr const char* COLOR_ASSETS_CONFIG{"../config/colorAssets.ini"};
+
 
     std::shared_ptr<sf::RenderWindow> window;
     sf::Event event;
@@ -46,7 +52,12 @@ private:
     void initWindow();
     void initStates();
     void initKeys();
+
     void initAssets();
+    void initFontAssets();
+    void initTextureAssets();
+    void initSoundAssets();
+    void initColorAssets();
 };
 
 

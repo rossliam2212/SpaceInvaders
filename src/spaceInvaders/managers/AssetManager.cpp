@@ -5,9 +5,7 @@
 #include "AssetManager.h"
 
 void AssetManager::loadTexture(const std::string& name, const std::string& filename) {
-    sf::Texture texture;
-    texture.loadFromFile(filename);
-    textures[name] = texture;
+    textures[name].loadFromFile(filename);
 }
 
 sf::Texture& AssetManager::getTexture(const std::string& name) {
@@ -15,9 +13,7 @@ sf::Texture& AssetManager::getTexture(const std::string& name) {
 }
 
 void AssetManager::loadFont(const std::string& name, const std::string& filename) {
-    sf::Font font;
-    font.loadFromFile(filename);
-    fonts[name] = font;
+    fonts[name].loadFromFile(filename);
 }
 
 sf::Font& AssetManager::getFont(const std::string& name) {
@@ -25,11 +21,17 @@ sf::Font& AssetManager::getFont(const std::string& name) {
 }
 
 void AssetManager::loadSound(const std::string& name, const std::string& filename) {
-    sf::SoundBuffer sound;
-    sound.loadFromFile(filename);
-    sounds[name] = sound;
+    sounds[name].loadFromFile(filename);
 }
 
 sf::SoundBuffer& AssetManager::getSound(const std::string& name) {
     return sounds.at(name);
+}
+
+void AssetManager::loadColor(const std::string& name, sf::Color color) {
+    colors[name] = color;
+}
+
+sf::Color& AssetManager::getColor(const std::string& name) {
+    return colors.at(name);
 }

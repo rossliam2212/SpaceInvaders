@@ -12,6 +12,7 @@
 #include <memory>
 #include <fstream>
 
+#include "../../managers/AssetManager.h"
 #include "../../input/Input.h"
 
 
@@ -19,6 +20,7 @@ class State {
 protected:
     std::shared_ptr<sf::RenderWindow> window;
     std::stack<std::unique_ptr<State>>& states;
+    AssetManager assetManager;
     bool end;
 
     sf::Vector2f mousePosWindow;
@@ -28,7 +30,7 @@ protected:
     logger::Logger logger;
 
 public:
-    State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states) noexcept;
+    State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager) noexcept;
     virtual ~State() = default;
 
     virtual void update(const float& dt) = 0;
