@@ -8,15 +8,10 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <fstream>
+#include <random>
+#include <algorithm>
 
 namespace utilities {
-        float length(const sf::Vector2f& v);
-        sf::Vector2f normalize(const sf::Vector2f& v);
-        float magnitude(const sf::Vector2f& v);
-        float distance(const sf::Vector2f& a, const sf::Vector2f& b);
-        float moveTowards(float current, float target, float delta);
-        float sign(float f);
-
         // Radians to Degrees conversion constant.
         static constexpr float Rad2Deg{57.29578f};
         // Degrees to Radians conversion constant.
@@ -24,6 +19,19 @@ namespace utilities {
 
         double degreesToRadians(double degrees);
         double radiansToDegrees(double radians);
+
+
+        float length(const sf::Vector2f& v);
+        sf::Vector2f normalize(const sf::Vector2f& v);
+        float magnitude(const sf::Vector2f& v);
+        float distance(const sf::Vector2f& a, const sf::Vector2f& b);
+        float lerp(float start, float end, float speed);
+        float clamp(float value, float min, float max);
+        float moveTowards(float current, float target, float delta);
+        float sign(float f);
+
+
+        int randomInt(int min, int max);
 
 
         bool isFileEmpty(std::ifstream& file);

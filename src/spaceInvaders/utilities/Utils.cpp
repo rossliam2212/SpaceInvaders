@@ -24,6 +24,14 @@ namespace utilities {
         return std::sqrt((num1 * num1) + (num2 * num2));
     }
 
+    float lerp(float start, float end, float t) {
+        return (1 - t) * start + t * end;
+    }
+
+    float clamp(float value, float min, float max) {
+        return std::min(std::max(value, min), max);
+    }
+
     float moveTowards(float current, float target, float delta) {
         if (abs(target - current) <= delta)
             return target;
@@ -43,6 +51,13 @@ namespace utilities {
         return  (radians * (180 / M_PI));
     }
 
+    int randomInt(int min, int max) {
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_int_distribution<int> dist(1, max);
+
+        return dist(mt);
+    }
 
     bool isFileEmpty(std::ifstream& file) {
         return file.peek() == std::ifstream::traits_type::eof();
