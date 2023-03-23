@@ -9,6 +9,7 @@
 #include <SFML/Audio.hpp>
 #include <unordered_map>
 #include <string>
+#include <Logger.h>
 
 class AssetManager {
 private:
@@ -17,8 +18,10 @@ private:
     std::unordered_map<std::string, sf::SoundBuffer> sounds;
     std::unordered_map<std::string, sf::Color> colors;
 
+    logger::Logger logger;
+
 public:
-    AssetManager() noexcept = default;
+    AssetManager() noexcept;
     ~AssetManager() = default;
 
     void loadTexture(const std::string& name, const std::string& filename);
@@ -32,6 +35,12 @@ public:
 
     void loadColor(const std::string& name, sf::Color color);
     sf::Color& getColor(const std::string& name);
+
+private:
+    bool isFontLoaded(const std::string& name);
+    bool isTextureLoaded(const std::string& name);
+    bool isSoundLoaded(const std::string& name);
+    bool isColorLoaded(const std::string& name);
 };
 
 

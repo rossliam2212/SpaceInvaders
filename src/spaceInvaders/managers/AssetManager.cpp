@@ -4,34 +4,85 @@
 
 #include "AssetManager.h"
 
+AssetManager::AssetManager() noexcept
+    : logger{"logs"} {
+}
+
 void AssetManager::loadTexture(const std::string& name, const std::string& filename) {
-    textures[name].loadFromFile(filename);
+    if (!isTextureLoaded(name)) {
+        textures[name].loadFromFile(filename);
+    } else {
+        logger.info("'" + name + "' texture already loaded.", this);
+    }
 }
 
 sf::Texture& AssetManager::getTexture(const std::string& name) {
-    return textures.at(name);
+    if (isTextureLoaded(name)) {
+        return textures.at(name);
+    }
+    return textures.begin()->second;
 }
 
 void AssetManager::loadFont(const std::string& name, const std::string& filename) {
-    fonts[name].loadFromFile(filename);
+    if (!isFontLoaded(name)) {
+        fonts[name].loadFromFile(filename);
+    } else {
+        logger.info("'" + name + "' font already loaded.", this);
+    }
 }
 
 sf::Font& AssetManager::getFont(const std::string& name) {
-    return fonts.at(name);
+    if (isFontLoaded(name)) {
+        return fonts.at(name);
+    }
+    return fonts.begin()->second;
 }
 
 void AssetManager::loadSound(const std::string& name, const std::string& filename) {
-    sounds[name].loadFromFile(filename);
+    if (!isSoundLoaded(name)) {
+        sounds[name].loadFromFile(filename);
+    } else {
+        logger.info("'" + name + "' sound already loaded.", this);
+    }
 }
 
 sf::SoundBuffer& AssetManager::getSound(const std::string& name) {
-    return sounds.at(name);
+    if (isSoundLoaded(name)) {
+        return sounds.at(name);
+    }
+    return sounds.begin()->second;
 }
 
 void AssetManager::loadColor(const std::string& name, sf::Color color) {
-    colors[name] = color;
+    if (!isColorLoaded(name)) {
+        colors[name] = color;
+    } else {
+        logger.info("'" + name + "' color already loaded.", this);
+    }
 }
 
 sf::Color& AssetManager::getColor(const std::string& name) {
-    return colors.at(name);
+    if (isColorLoaded(name)) {
+        return colors.at(name);
+    }
+    return colors.begin()->second;
+}
+
+bool AssetManager::isFontLoaded(const std::string& name) {
+    if (fonts.find(name) == std::end(fonts)) {
+        return false;
+    }
+    return true;
+}
+
+bool AssetManager::isTextureLoaded(const std::string& name) {
+    return textures.find(name) != std::end(textures);
+}
+
+bool AssetManager::isSoundLoaded(const std::string& name) {
+    return sounds.find(name) != std::end(sounds);
+}
+
+bool AssetManager::isColorLoaded(const std::string& name) {
+    return colors.find(name) != std::end(colors);
 }
