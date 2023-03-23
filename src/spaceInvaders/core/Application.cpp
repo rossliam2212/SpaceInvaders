@@ -80,7 +80,7 @@ void Application::updateEvents() {
             }
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P)) {
-                soundManager.setSoundVolume("badHabit", 50);
+                soundManager.setSoundVolume("badHabit", 50.f);
             }
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) {
@@ -161,6 +161,7 @@ void Application::initFontAssets() {
 
             while (fonts >> fontName >> fontPath) {
                 assetManager.loadFont(fontName, fontPath);
+                logger.debug("Loading font: " + fontName + " => '" + fontPath + "'", this);
             }
             logger.info("Successfully loaded fonts.", this);
         } catch (const std::exception& ex) {
@@ -188,6 +189,7 @@ void Application::initTextureAssets() {
 
             while (textures >> textureName >> texturePath) {
                 assetManager.loadTexture(textureName, texturePath);
+                logger.debug("Loading font: " + textureName + " => '" + texturePath + "'", this);
             }
             logger.info("Successfully loaded textures.", this);
         } catch (const std::exception& ex) {
@@ -215,6 +217,7 @@ void Application::initSoundAssets() {
 
             while (sounds >> soundName >> soundPath) {
                 assetManager.loadSound(soundName, soundPath);
+                logger.debug("Loading sound: " + soundName + " => '" + soundPath + "'", this);
             }
             logger.info("Successfully loaded sounds.", this);
         } catch (const std::exception& ex) {
@@ -238,13 +241,14 @@ void Application::initColorAssets() {
     } else {
         try {
             std::string colorName;
-            sf::Uint8 r;
-            sf::Uint8 g;
-            sf::Uint8 b;
-            sf::Uint8 alpha;
+            int r;
+            int g;
+            int b;
+            int a;
 
-            while (colors >> colorName >> r >> g >> b >> alpha) {
-                assetManager.loadColor(colorName, sf::Color{r, g, b, alpha});
+            while (colors >> colorName >> r >> g >> b >> a) {
+                assetManager.loadColor(colorName, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});
+                logger.debug("Loading Color: " + colorName + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + ")", this);
             }
             logger.info("Successfully loaded colors.", this);
         } catch (const std::exception& ex) {

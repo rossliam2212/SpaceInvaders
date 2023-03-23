@@ -111,10 +111,13 @@ void SoundManager::stopSoundLoop(const std::string& name) {
 void SoundManager::setSoundVolume(const std::string& name, float volume) {
     if (!checkSound(name)) {
         logger.warning("'" + name + "' sound not currently playing.", this);
-    } else if (volume > MAX_SOUND_VOLUME || volume < MIN_SOUND_VOLUME) {
-        logger.error("Value for sound volume must be between 0 and 100.", this);
-    } else {
+        return;
+    }
+
+    if (volume <= MAX_SOUND_VOLUME && volume >= MIN_SOUND_VOLUME) {
         soundsPLaying.at(name).setVolume(volume);
+    } else {
+        logger.error("Value for sound volume must be between 0 and 100.", this);
     }
 }
 

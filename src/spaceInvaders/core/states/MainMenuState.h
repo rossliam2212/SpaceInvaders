@@ -9,7 +9,9 @@
 
 class MainMenuState : public State {
 private:
-    sf::RectangleShape bg; // TODO Temporary - REMOVE
+    sf::RectangleShape backGround;
+    sf::Sprite logoSprite;
+    sf::Text startText;
 
 public:
     MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,
@@ -21,7 +23,9 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
 private:
-    void initBG(); // TODO Temporary - REMOVE
+    void initBackground();
+    void initSprites();
+    void initText();
 };
 
 
