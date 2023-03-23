@@ -9,10 +9,12 @@ MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, st
     initBackground();
     initSprites();
     initText();
+    initButtons();
 }
 
 void MainMenuState::update(const float& dt) {
     updateMousePositions();
+    updateButtons();
 }
 
 void MainMenuState::updateInput(const float& dt) {
@@ -22,7 +24,25 @@ void MainMenuState::updateInput(const float& dt) {
 void MainMenuState::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(backGround);
     window->draw(logoSprite);
-    window->draw(startText);
+//    window->draw(startText);
+
+    renderButtons(window);
+
+}
+
+void MainMenuState::updateButtons() {
+    startButton->update(mousePosView);
+
+    if (startButton->isPressed() && !startPressed) {
+        logger.info("Start button pressed.");
+        startPressed = true;
+    }
+}
+
+void MainMenuState::renderButtons(std::shared_ptr<sf::RenderWindow> window) {
+    if (startButton->getShouldDisplay()) {
+        startButton->render(window);
+    }
 }
 
 void MainMenuState::initBackground() {
@@ -43,5 +63,9 @@ void MainMenuState::initText() {
     startText.setString("Press Start");
     startText.setCharacterSize(AssetManager::FONT_HEADING_2);
     startText.setFont(assetManager.getFont("BlueSmileFont"));
+}
+
+void MainMenuState::initButtons() {
+    startButton = std::make_unique<Button>(500, 1100, 500, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Press Start", sf::Color{0, 0, 0, 0}, sf::Color{50, 50, 50, 255}, sf::Color::White, true);
 }
 

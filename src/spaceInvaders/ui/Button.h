@@ -34,10 +34,10 @@ private:
     bool display;
 
 public:
-    Button(float x, float y, float width, float height, const sf::Font& font,
+    Button(float x, float y, float width, float height, const sf::Font& font, int fontSize,
            const std::string& text, sf::Color idleColor, sf::Color hoverColor,
            sf::Color activeColor, bool showBG) noexcept;
-    Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Font& font,
+    Button(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Font& font, int fontSize,
            const std::string& text, sf::Color idleColor, sf::Color hoverColor,
            sf::Color activeColor, bool showBG) noexcept;
 
