@@ -12,6 +12,12 @@
 #include <Logger.h>
 
 class AssetManager {
+public:
+    static constexpr const int FONT_PARAGRAPH{35};
+    static constexpr const int FONT_HEADING{90};
+    static constexpr const int FONT_HEADING_2{70};
+    static constexpr const int FONT_HEADING_3{50};
+
 private:
     std::unordered_map<std::string, sf::Texture> textures;
     std::unordered_map<std::string, sf::Font> fonts;

@@ -38,9 +38,10 @@ void MainMenuState::initSprites() {
 }
 
 void MainMenuState::initText() {
+    // TODO Change hard coded values
     startText.setPosition(500, 1100);
     startText.setString("Press Start");
-    startText.setCharacterSize(70);
+    startText.setCharacterSize(AssetManager::FONT_HEADING_2);
     startText.setFont(assetManager.getFont("BlueSmileFont"));
 }
 

@@ -241,10 +241,7 @@ void Application::initColorAssets() {
     } else {
         try {
             std::string colorName;
-            int r;
-            int g;
-            int b;
-            int a;
+            int r, g, b, a;
 
             while (colors >> colorName >> r >> g >> b >> a) {
                 assetManager.loadColor(colorName, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});

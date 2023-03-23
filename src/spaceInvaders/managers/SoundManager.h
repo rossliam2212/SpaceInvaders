@@ -13,7 +13,7 @@
 class SoundManager {
 private:
     static constexpr const float MAX_SOUND_VOLUME{100.f};
-    static constexpr const float MIN_SOUND_VOLUME{100.f};
+    static constexpr const float MIN_SOUND_VOLUME{0.f};
 
     std::unordered_map<std::string, sf::Sound> soundsPLaying;
     logger::Logger logger;
