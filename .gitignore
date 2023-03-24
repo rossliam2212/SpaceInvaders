@@ -45,6 +45,9 @@ cmake-build-*/
 
 .idea/
 build/
+*.psd
+*.ai
+*.aep
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
