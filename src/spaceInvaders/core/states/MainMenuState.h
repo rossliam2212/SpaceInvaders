@@ -26,7 +26,7 @@ public:
 
 private:
     void updateButtons();
-    void renderButtons(std::shared_ptr<sf::RenderWindow> window);
+    void renderButtons(const std::shared_ptr<sf::RenderWindow>& window);
 
     void initBackground();
     void initSprites();

@@ -10,7 +10,6 @@ MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, st
     initSprites();
     initText();
     initButtons();
-    std::cout << states.size() << "\n";
 }
 
 void MainMenuState::update(const float& dt) {
@@ -25,7 +24,6 @@ void MainMenuState::updateInput(const float& dt) {
 void MainMenuState::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(backGround);
     window->draw(logoSprite);
-//    window->draw(startText);
 
     renderButtons(window);
 }
@@ -47,7 +45,7 @@ void MainMenuState::updateButtons() {
     }
 }
 
-void MainMenuState::renderButtons(std::shared_ptr<sf::RenderWindow> window) {
+void MainMenuState::renderButtons(const std::shared_ptr<sf::RenderWindow>& window) {
     for (const auto& btn : buttons) {
         if (btn.second->getShouldDisplay()) {
             btn.second->render(window);
@@ -70,7 +68,7 @@ void MainMenuState::initSprites() {
 void MainMenuState::initText() { }
 
 void MainMenuState::initButtons() {
-    buttons["startBtn"] = std::make_unique<Button>(350, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Start", sf::Color{0, 0, 0, 0}, sf::Color{50, 50, 50, 255}, sf::Color::White, true);
-    buttons["quitBtn"] = std::make_unique<Button>(850, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Quit", sf::Color{0, 0, 0, 0}, sf::Color{50, 50, 50, 255}, sf::Color::White, true);
+    buttons["startBtn"] = std::make_unique<Button>(350, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Start", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
+    buttons["quitBtn"] = std::make_unique<Button>(850, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Quit", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
 }
 

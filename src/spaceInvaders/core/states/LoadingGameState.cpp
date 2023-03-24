@@ -17,34 +17,32 @@ LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& wind
 }
 
 void LoadingGameState::update(const float& dt) {
-
     if (!checkIfAllAssetsLoaded()) {
         for (auto& asset : assets) {
             loadAsset(asset);
         }
     } else {
-        if (allAssetsLoaded) {
-            allAssetsLoaded = false;
-            if (loadNextState) {
-                // TODO Fix LoadingGameState not ending properly.
-                logger.info("Ending state.", this);
-                endState();
-
-                loadNextState = false;
-                logger.info("Starting MainMenuState.", this);
-                states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
-            }
+        if (!loadNextState) {
+            setAllAssetsLoaded();
+            loadNextState = true;
+            logger.info("Starting MainMenuState.", this);
+            states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
         }
+        // TODO Fix LoadingGameState not ending properly.
+        logger.info("Ending state.", this);
+        endState();
     }
 }
 
 void LoadingGameState::updateInput(const float& dt) { }
 
 void LoadingGameState::render(std::shared_ptr<sf::RenderWindow> window) {
-    window->draw(backGround);
-    window->draw(progressBar);
-    window->draw(typeOfAssetsBeingLoaded);
-    window->draw(assetBeingLoaded);
+    if (allAssetsLoaded) {
+        window->draw(backGround);
+        window->draw(progressBar);
+        window->draw(typeOfAssetsBeingLoaded);
+        window->draw(assetBeingLoaded);
+    }
 }
 
 void LoadingGameState::loadAsset(Asset& asset) {
@@ -79,7 +77,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 assetManager.loadColor(name, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});
                 assetsLoaded++;
 
-                logger.debug("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + ")", this);
+                logger.debug("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + "). (" + std::to_string(assetsLoaded) + "/" + std::to_string(asset.numberOfAssets) + ").", this);
 
                 window->clear(sf::Color{43, 43, 43, 255});
                 assetBeingLoaded.setString("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + ")");
@@ -140,17 +138,9 @@ void LoadingGameState::loadAsset(Asset& asset) {
 }
 
 bool LoadingGameState::checkIfAllAssetsLoaded() {
-    for (const auto& asset : assets) {
-        if (!asset.loaded) {
-            return false;
-        }
-    }
-
-    setAllAssetsLoaded();
-
-    loadNextState = true;
-    allAssetsLoaded = true;
-    return true;
+    return std::any_of(std::begin(assets), std::end(assets), [](const Asset& asset) {
+        return asset.loaded;
+    });
 }
 
 void LoadingGameState::setAllAssetsLoaded() {
@@ -162,6 +152,9 @@ void LoadingGameState::setAllAssetsLoaded() {
     window->draw(typeOfAssetsBeingLoaded);
     window->draw(assetBeingLoaded);
     window->display();
+    delayForMilliseconds(500);
+
+    allAssetsLoaded = true;
 }
 
 void LoadingGameState::calculateProgress(int numberOfAssetsLoaded, int totalAssetsToLoad) {
