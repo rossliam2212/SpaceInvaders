@@ -11,8 +11,7 @@ class MainMenuState : public State {
 private:
     sf::RectangleShape backGround;
     sf::Sprite logoSprite;
-    sf::Text startText;
-    std::unique_ptr<Button> startButton;
+    std::unordered_map<std::string, std::unique_ptr<Button>> buttons;
 
     bool startPressed{false};
 

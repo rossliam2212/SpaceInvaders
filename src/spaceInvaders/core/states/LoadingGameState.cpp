@@ -23,13 +23,17 @@ void LoadingGameState::update(const float& dt) {
             loadAsset(asset);
         }
     } else {
-        if (loadNextState) {
-            loadNextState = false;
-            logger.info("Starting MainMenuState.", this);
-            states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
+        if (allAssetsLoaded) {
+            allAssetsLoaded = false;
+            if (loadNextState) {
+                // TODO Fix LoadingGameState not ending properly.
+                logger.info("Ending state.", this);
+                endState();
 
-            logger.info("Ending state.", this);
-            endState();
+                loadNextState = false;
+                logger.info("Starting MainMenuState.", this);
+                states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
+            }
         }
     }
 }
@@ -104,14 +108,14 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 }
 
                 assetsLoaded++;
-                logger.debug("Loading " + asset.name + ": " + name + " => '" + path + "' (" + std::to_string(assetsLoaded) + "/" + std::to_string(asset.numberOfAssets) + ").", this);
+                logger.debug("Loading " + asset.name + ": " + name + " => '" + path + "' (" + std::to_string(assetsLoaded) + "/" + std::to_string((asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets) + ").", this);
 
-                window->clear(sf::Color{43, 43, 43, 255});
+                window->clear(backGroundColor);
                 assetBeingLoaded.setString("Loading " + asset.name + ": " + name + " => '" + path + "'");
                 window->draw(typeOfAssetsBeingLoaded);
                 window->draw(assetBeingLoaded);
 
-                calculateProgress(assetsLoaded, asset.numberOfAssets);
+                calculateProgress(assetsLoaded, (asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets);
                 progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
                 window->draw(progressBar);
                 window->display();
@@ -145,6 +149,7 @@ bool LoadingGameState::checkIfAllAssetsLoaded() {
     setAllAssetsLoaded();
 
     loadNextState = true;
+    allAssetsLoaded = true;
     return true;
 }
 

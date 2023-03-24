@@ -50,6 +50,7 @@ private:
     std::array<Asset, 4> assets;
 
     bool loadNextState{false};
+    bool allAssetsLoaded{false};
 
 public:
     LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,

@@ -10,6 +10,7 @@ MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, st
     initSprites();
     initText();
     initButtons();
+    std::cout << states.size() << "\n";
 }
 
 void MainMenuState::update(const float& dt) {
@@ -27,21 +28,30 @@ void MainMenuState::render(std::shared_ptr<sf::RenderWindow> window) {
 //    window->draw(startText);
 
     renderButtons(window);
-
 }
 
 void MainMenuState::updateButtons() {
-    startButton->update(mousePosView);
+    for (const auto& btn : buttons) {
+        btn.second->update(mousePosView);
+    }
 
-    if (startButton->isPressed() && !startPressed) {
+    if (buttons.at("startBtn")->isPressed() && !startPressed) {
         logger.info("Start button pressed.", this);
         startPressed = true;
+    }
+
+    if (buttons.at("quitBtn")->isPressed() && !startPressed) {
+        logger.info("Ending state.", this);
+        startPressed = true;
+        endState();
     }
 }
 
 void MainMenuState::renderButtons(std::shared_ptr<sf::RenderWindow> window) {
-    if (startButton->getShouldDisplay()) {
-        startButton->render(window);
+    for (const auto& btn : buttons) {
+        if (btn.second->getShouldDisplay()) {
+            btn.second->render(window);
+        }
     }
 }
 
@@ -57,15 +67,10 @@ void MainMenuState::initSprites() {
     logoSprite.setPosition(sf::Vector2f{static_cast<float>(window->getSize().x/2), static_cast<float>(window->getSize().y/2.f)});
 }
 
-void MainMenuState::initText() {
-    // TODO Change hard coded values
-    startText.setPosition(500, 1100);
-    startText.setString("Press Start");
-    startText.setCharacterSize(AssetManager::FONT_HEADING_2);
-    startText.setFont(assetManager.getFont("BlueSmileFont"));
-}
+void MainMenuState::initText() { }
 
 void MainMenuState::initButtons() {
-    startButton = std::make_unique<Button>(500, 1100, 500, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Press Start", sf::Color{0, 0, 0, 0}, sf::Color{50, 50, 50, 255}, sf::Color::White, true);
+    buttons["startBtn"] = std::make_unique<Button>(350, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Start", sf::Color{0, 0, 0, 0}, sf::Color{50, 50, 50, 255}, sf::Color::White, true);
+    buttons["quitBtn"] = std::make_unique<Button>(850, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Quit", sf::Color{0, 0, 0, 0}, sf::Color{50, 50, 50, 255}, sf::Color::White, true);
 }
 
