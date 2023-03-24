@@ -34,7 +34,7 @@ void MainMenuState::updateButtons() {
     startButton->update(mousePosView);
 
     if (startButton->isPressed() && !startPressed) {
-        logger.info("Start button pressed.");
+        logger.info("Start button pressed.", this);
         startPressed = true;
     }
 }

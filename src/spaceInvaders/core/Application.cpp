@@ -61,34 +61,6 @@ void Application::updateEvents() {
         if (event.type == sf::Event::Closed) {
             endApplication();
         }
-
-        // TODO Testing Sound - REMOVE
-        if (event.type == sf::Event::KeyPressed) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-                soundManager.pauseSound("badHabit");
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-                soundManager.playSound("badHabit");
-                logger.debug("Volume: " + std::to_string(soundManager.getVolume("badHabit")));
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-                soundManager.stopSound("badHabit");
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::P)) {
-                soundManager.setSoundVolume("badHabit", 50.f);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R)) {
-                if (soundManager.isSoundPlaying("badHabit")) {
-                    logger.debug("Sound IS playing.", this);
-                } else {
-                    logger.debug("Sound NOT playing.", this);
-                }
-            }
-        }
     }
 }
 
