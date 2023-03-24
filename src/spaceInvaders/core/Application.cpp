@@ -14,17 +14,15 @@ Application::Application() noexcept
       logger{"logs"} {
     logger.start("Application starting.", this);
 
-    initAssets();
-    initKeys();
     initWindow();
+    initKeys();
     initStates();
-    soundManager.startSound("badHabit", assetManager.getSound("badHabit"));
 }
 
 void Application::run() {
     while (window->isOpen()) {
-        update();
         render();
+        update();
     }
 }
 
@@ -108,8 +106,8 @@ void Application::initWindow() {
 }
 
 void Application::initStates() {
-    logger.info("Starting MainMenuState.", this);
-    states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
+    logger.info("Starting LoadingGameState.", this);
+    states.push(std::make_unique<LoadingGameState>(window, states, assetManager, soundManager));
 }
 
 void Application::initKeys() {
@@ -133,125 +131,4 @@ void Application::initKeys() {
         logger.error("Exception caught: " + exception);
     }
     in.close();
-}
-
-void Application::initAssets() {
-    logger.info("Loading assets...", this);
-
-    initFontAssets();
-    initTextureAssets();
-    initSoundAssets();
-    initColorAssets();
-}
-
-void Application::initFontAssets() {
-    std::ifstream fonts{FONT_ASSETS_CONFIG};
-
-    if (!fonts.is_open()) {
-        logger.error("Failed to open font assets config file.", this);
-        std::exit(-1);
-    }
-
-    if (utilities::isFileEmpty(fonts)) {
-        logger.warning("Font assets config file empty. Skipping...", this);
-    } else {
-        try {
-            std::string fontName;
-            std::string fontPath;
-
-            while (fonts >> fontName >> fontPath) {
-                assetManager.loadFont(fontName, fontPath);
-                logger.debug("Loading font: " + fontName + " => '" + fontPath + "'", this);
-            }
-            logger.info("Successfully loaded fonts.", this);
-        } catch (const std::exception& ex) {
-            std::string exception{ex.what()};
-            logger.error("Exception caught: " + exception);
-        }
-        fonts.close();
-    }
-}
-
-void Application::initTextureAssets() {
-    std::ifstream textures{TEXTURE_ASSETS_CONFIG};
-
-    if (!textures.is_open()) {
-        logger.error("Failed to open texture assets config file.", this);
-        std::exit(-1);
-    }
-
-    if (utilities::isFileEmpty(textures)) {
-        logger.warning("Texture assets config file empty. Skipping...", this);
-    } else {
-        try {
-            std::string textureName;
-            std::string texturePath;
-
-            while (textures >> textureName >> texturePath) {
-                assetManager.loadTexture(textureName, texturePath);
-                logger.debug("Loading font: " + textureName + " => '" + texturePath + "'", this);
-            }
-            logger.info("Successfully loaded textures.", this);
-        } catch (const std::exception& ex) {
-            std::string exception{ex.what()};
-            logger.error("Exception caught: " + exception, this);
-        }
-        textures.close();
-    }
-}
-
-void Application::initSoundAssets() {
-    std::ifstream sounds{SOUND_ASSETS_CONFIG};
-
-    if (!sounds.is_open()) {
-        logger.error("Failed to open sound assets config file.", this);
-        std::exit(-1);
-    }
-
-    if (utilities::isFileEmpty(sounds)) {
-        logger.warning("Sound assets config file empty. Skipping...", this);
-    } else {
-        try {
-            std::string soundName;
-            std::string soundPath;
-
-            while (sounds >> soundName >> soundPath) {
-                assetManager.loadSound(soundName, soundPath);
-                logger.debug("Loading sound: " + soundName + " => '" + soundPath + "'", this);
-            }
-            logger.info("Successfully loaded sounds.", this);
-        } catch (const std::exception& ex) {
-            std::string exception{ex.what()};
-            logger.error("Exception caught: " + exception, this);
-        }
-        sounds.close();
-    }
-}
-
-void Application::initColorAssets() {
-    std::ifstream colors{COLOR_ASSETS_CONFIG};
-
-    if (!colors.is_open()) {
-        logger.error("Failed to open color assets config file.", this);
-        std::exit(-1);
-    }
-
-    if (utilities::isFileEmpty(colors)) {
-        logger.warning("Color assets config file empty. Skipping...", this);
-    } else {
-        try {
-            std::string colorName;
-            int r, g, b, a;
-
-            while (colors >> colorName >> r >> g >> b >> a) {
-                assetManager.loadColor(colorName, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});
-                logger.debug("Loading Color: " + colorName + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + ")", this);
-            }
-            logger.info("Successfully loaded colors.", this);
-        } catch (const std::exception& ex) {
-            std::string exception{ex.what()};
-            logger.error("Exception caught: " + exception, this);
-        }
-        colors.close();
-    }
 }

@@ -7,10 +7,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <Logger.h>
+#include <array>
 #include <stack>
 #include <map>
 #include <memory>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
 #include "../../managers/AssetManager.h"
 #include "../../managers/SoundManager.h"
@@ -43,6 +46,7 @@ public:
 
     void endState();
     bool getEnd() const;
+    static void delayForMilliseconds(int milliseconds);
 
 protected:
     void updateMousePositions();

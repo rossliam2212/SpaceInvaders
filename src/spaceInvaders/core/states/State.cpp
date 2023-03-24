@@ -27,3 +27,12 @@ void State::endState() {
 bool State::getEnd() const {
     return end;
 }
+
+void State::delayForMilliseconds(int milliseconds) {
+    if (milliseconds <= 0) {
+//        logger.error("Cannot delay for 0 or negative milliseconds!", this);
+        return;
+    }
+    std::chrono::milliseconds mills{std::chrono::milliseconds{milliseconds}};
+    std::this_thread::sleep_for(mills);
+}

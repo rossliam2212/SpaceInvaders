@@ -7,7 +7,7 @@
 
 #include <Logger.h>
 
-#include "states/MainMenuState.h"
+#include "states/LoadingGameState.h"
 #include "../utilities/FixedClock.h"
 #include "../utilities/Utils.h"
 
