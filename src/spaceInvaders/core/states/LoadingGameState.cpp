@@ -72,23 +72,33 @@ void LoadingGameState::loadAsset(Asset& asset) {
             std::string name;
             int r, g, b, a;
 
-            // TODO Add try catch block
-            while (assetConfigFile >> name >> r >> g >> b >> a) {
-                assetManager.loadColor(name, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});
-                assetsLoaded++;
+            try {
+                while (assetConfigFile >> name >> r >> g >> b >> a) {
+                    assetManager.loadColor(name, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g),
+                                                           static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});
+                    assetsLoaded++;
 
-                logger.debug("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + "). (" + std::to_string(assetsLoaded) + "/" + std::to_string(asset.numberOfAssets) + ").", this);
+                    logger.debug("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) +
+                                 ", " + std::to_string(b) + ", " + std::to_string(a) + "). (" +
+                                 std::to_string(assetsLoaded) + "/" + std::to_string(asset.numberOfAssets) + ").",
+                                 this);
 
-                window->clear(sf::Color{43, 43, 43, 255});
-                assetBeingLoaded.setString("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ", " + std::to_string(a) + ")");
-                window->draw(assetBeingLoaded);
-                window->draw(typeOfAssetsBeingLoaded);
+                    window->clear(sf::Color{43, 43, 43, 255});
+                    assetBeingLoaded.setString(
+                            "Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) +
+                            ", " + std::to_string(b) + ", " + std::to_string(a) + ")");
+                    window->draw(assetBeingLoaded);
+                    window->draw(typeOfAssetsBeingLoaded);
 
-                calculateProgress(assetsLoaded, asset.numberOfAssets);
-                progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
-                window->draw(progressBar);
-                window->display();
+                    calculateProgress(assetsLoaded, asset.numberOfAssets);
+                    progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
+                    window->draw(progressBar);
+                    window->display();
 //                delayForMilliseconds(300);
+                }
+            } catch (const std::exception& ex) {
+                std::string exception{ex.what()};
+                logger.error("Exception caught: " + exception, this);
             }
         }
         // Font, Texture & Sound Assets
@@ -96,29 +106,35 @@ void LoadingGameState::loadAsset(Asset& asset) {
             std::string name;
             std::string path;
 
-            // TODO Add try catch block
-            while (assetConfigFile >> name >> path) {
-                if (asset.name == FONT_ASSETS_NAME) {
-                    assetManager.loadFont(name, path);
-                } else if (asset.name == TEXTURE_ASSETS_NAME) {
-                    assetManager.loadTexture(name, path);
-                } else if (asset.name == SOUND_ASSETS_NAME) {
-                    assetManager.loadSound(name, path);
-                }
+            try {
+                while (assetConfigFile >> name >> path) {
+                    if (asset.name == FONT_ASSETS_NAME) {
+                        assetManager.loadFont(name, path);
+                    } else if (asset.name == TEXTURE_ASSETS_NAME) {
+                        assetManager.loadTexture(name, path);
+                    } else if (asset.name == SOUND_ASSETS_NAME) {
+                        assetManager.loadSound(name, path);
+                    }
 
-                assetsLoaded++;
-                logger.debug("Loading " + asset.name + ": " + name + " => '" + path + "' (" + std::to_string(assetsLoaded) + "/" + std::to_string((asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets) + ").", this);
+                    assetsLoaded++;
+                    logger.debug("Loading " + asset.name + ": " + name + " => '" + path + "' (" +
+                                 std::to_string(assetsLoaded) + "/" +
+                                 std::to_string((asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets) + ").", this);
 
-                window->clear(backGroundColor);
-                assetBeingLoaded.setString("Loading " + asset.name + ": " + name + " => '" + path + "'");
-                window->draw(typeOfAssetsBeingLoaded);
-                window->draw(assetBeingLoaded);
+                    window->clear(backGroundColor);
+                    assetBeingLoaded.setString("Loading " + asset.name + ": " + name + " => '" + path + "'");
+                    window->draw(typeOfAssetsBeingLoaded);
+                    window->draw(assetBeingLoaded);
 
-                calculateProgress(assetsLoaded, (asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets);
-                progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
-                window->draw(progressBar);
-                window->display();
+                    calculateProgress(assetsLoaded, (asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets);
+                    progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
+                    window->draw(progressBar);
+                    window->display();
 //                delayForMilliseconds(300);
+                }
+            } catch (std::exception& ex) {
+                std::string exception{ex.what()};
+                logger.error("Exception caught: " + exception, this);
             }
         }
         asset.loaded = true;

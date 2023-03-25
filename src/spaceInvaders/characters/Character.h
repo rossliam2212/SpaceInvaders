@@ -13,9 +13,13 @@
 #include "../input/Input.h"
 
 class Character : public Entity {
+private:
+    static constexpr const int SPRITE_SCALE_FACTOR{10};
+
 protected:
     static constexpr const int MAX_HEALTH{100};
     static constexpr const int MIN_HEALTH{100};
+    static constexpr const float SPEED_MULTIPLIER{25.f};
 
     sf::Sprite sprite;
 
@@ -43,7 +47,6 @@ public:
     bool isDead() const;
 
 protected:
-    void initSprite(const sf::Texture& texture);
     void initSprite(const std::string& textureName);
 };
 

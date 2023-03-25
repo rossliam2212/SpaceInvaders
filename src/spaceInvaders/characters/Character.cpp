@@ -15,8 +15,8 @@ Character::Character(const std::string& name, const sf::Vector2f& position, floa
 
 void Character::move(const float& dt, float directionX) {
     // Can only move along the x-axis
-    float delta{speed * dt};
-    sprite.move(directionX * delta, sprite.getPosition().y);
+    float delta{speed * dt * SPEED_MULTIPLIER};
+    sprite.move(directionX * delta, 0);
 }
 
 void Character::takeDamage(int damage) {
@@ -43,16 +43,10 @@ bool Character::isDead() const {
     return dead;
 }
 
-void Character::initSprite(const sf::Texture& texture) {
-    // TODO Set sprite texture from asset manager
-    // Set sprite position
-    // Center the origin of the sprite
-}
-
 void Character::initSprite(const std::string& textureName) {
     auto size{assetManager.getTexture(textureName).getSize()};
     sprite.setTexture(assetManager.getTexture(textureName));
     sprite.setOrigin((float)size.x/2 ,(float)size.y/2);
     sprite.setPosition(position);
-    sprite.setScale(10, 10);
+    sprite.setScale(SPRITE_SCALE_FACTOR, SPRITE_SCALE_FACTOR);
 }

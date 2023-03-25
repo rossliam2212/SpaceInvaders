@@ -24,7 +24,7 @@ void GameState::initKeyBinds() {
     std::ifstream gameStateKeyBindsConfig{GAME_STATE_KEY_BINDS};
 
     if (!gameStateKeyBindsConfig.is_open()) {
-        logger.error("Failed to open key binds config.". this);
+        logger.error("Failed to open key binds config.", this);
         std::exit(-1);
     }
 
@@ -42,7 +42,7 @@ void GameState::initKeyBinds() {
             logger.info("Successfully initialized key binds.", this);
         } catch (const std::exception& ex) {
             std::string exception{ex.what()};
-            logger.error("Exception caught: " + exception);
+            logger.error("Exception caught: " + exception, this);
         }
     }
     gameStateKeyBindsConfig.close();

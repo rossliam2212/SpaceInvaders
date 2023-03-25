@@ -18,6 +18,7 @@ void Player::update(const float& dt) {
     position = sprite.getPosition();
 
     getInput(dt);
+    move(dt, moveDirection.x);
 }
 
 void Player::render(std::shared_ptr<sf::RenderWindow> window) {
@@ -26,5 +27,4 @@ void Player::render(std::shared_ptr<sf::RenderWindow> window) {
 
 void Player::getInput(const float& dt) {
     moveDirection.x = input::Input::KeyBoard::getAxis(dt, input::Input::KeyBoard::Axis::Horizontal);
-
 }

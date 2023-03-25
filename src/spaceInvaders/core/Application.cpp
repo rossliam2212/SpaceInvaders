@@ -100,7 +100,7 @@ void Application::initKeys() {
         logger.info("Successfully initialized supported keys.", this);
     } catch (const std::exception& ex) {
         std::string exception{ex.what()};
-        logger.error("Exception caught: " + exception);
+        logger.error("Exception caught: " + exception, this);
     }
     in.close();
 }
