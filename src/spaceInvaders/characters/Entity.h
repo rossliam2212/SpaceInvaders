@@ -14,6 +14,7 @@ private:
     static constexpr const char* DEFAULT_NAME{"Default"};
     static constexpr const float DEFAULT_POSITION_X{0.f};
     static constexpr const float DEFAULT_POSITION_Y{0.f};
+
 protected:
     std::string name;
     sf::Vector2f position;

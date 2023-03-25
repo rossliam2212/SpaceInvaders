@@ -65,7 +65,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
         window->draw(assetBeingLoaded);
         window->display();
         asset.loaded = true; // Stops an infinite loop from happening.
-//        delayForMilliseconds(5000);
+        delayForMilliseconds(5000);
 
     } else {
         // Color Assets
@@ -88,7 +88,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
                 window->draw(progressBar);
                 window->display();
-//                delayForMilliseconds(300);
+                delayForMilliseconds(300);
             }
         }
         // Font, Texture & Sound Assets
@@ -117,7 +117,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
                 window->draw(progressBar);
                 window->display();
-//                delayForMilliseconds(300);
+                delayForMilliseconds(300);
             }
         }
         asset.loaded = true;
@@ -132,7 +132,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
         window->draw(typeOfAssetsBeingLoaded);
         window->draw(assetBeingLoaded);
         window->display();
-//        delayForMilliseconds(500);
+        delayForMilliseconds(500);
     }
     assetConfigFile.close();
 }
@@ -176,7 +176,7 @@ void LoadingGameState::initBackground() {
 }
 
 void LoadingGameState::initFont() {
-    if (!font.loadFromFile("../assets/fonts/BluesSmile.ttf")) {
+    if (!font.loadFromFile("../assets/fonts/Pixellari.ttf")) {
         logger.error("Failed to load starting font.", this);
         std::exit(-1);
     }
@@ -186,13 +186,13 @@ void LoadingGameState::initFont() {
 void LoadingGameState::initText() {
     typeOfAssetsBeingLoaded.setFillColor(sf::Color::White);
     typeOfAssetsBeingLoaded.setPosition(200, 550);
-    typeOfAssetsBeingLoaded.setCharacterSize(AssetManager::FONT_PARAGRAPH);
+    typeOfAssetsBeingLoaded.setCharacterSize(AssetManager::FONT_HEADING_3);
     typeOfAssetsBeingLoaded.setFont(font);
     typeOfAssetsBeingLoaded.setString("Loading: Font Assets...");
 
     assetBeingLoaded.setFillColor(sf::Color::White);
     assetBeingLoaded.setPosition(200, 700);
-    assetBeingLoaded.setCharacterSize(AssetManager::FONT_SMALL);
+    assetBeingLoaded.setCharacterSize(AssetManager::FONT_PARAGRAPH);
     assetBeingLoaded.setFont(font);
     assetBeingLoaded.setString("Loading: ");
 }

@@ -45,5 +45,7 @@ bool Character::isDead() const {
 }
 
 void Character::initSprite() {
-
+    // TODO Set sprite texture from asset manager
+    // Set sprite position
+    // Center the origin of the sprite
 }

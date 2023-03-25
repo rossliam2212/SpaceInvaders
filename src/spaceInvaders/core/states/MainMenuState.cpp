@@ -59,7 +59,7 @@ void MainMenuState::initBackground() {
 }
 
 void MainMenuState::initSprites() {
-    logoSprite.setTexture(assetManager.getTexture("mainMenuLogo"));
+    logoSprite.setTexture(assetManager.getTexture("mainMenuLogoPixel"));
     sf::Vector2f spriteSize(logoSprite.getGlobalBounds().width, logoSprite.getGlobalBounds().height);
     logoSprite.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
     logoSprite.setPosition(sf::Vector2f{static_cast<float>(window->getSize().x/2), static_cast<float>(window->getSize().y/2.f)});
@@ -68,7 +68,7 @@ void MainMenuState::initSprites() {
 void MainMenuState::initText() { }
 
 void MainMenuState::initButtons() {
-    buttons["startBtn"] = std::make_unique<Button>(350, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Start", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
-    buttons["quitBtn"] = std::make_unique<Button>(850, 1100, 300, 100, assetManager.getFont("BlueSmileFont"), AssetManager::FONT_HEADING_2, "Quit", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
+    buttons["startBtn"] = std::make_unique<Button>(350, 1100, 300, 100, assetManager.getFont("PixelFont"), AssetManager::FONT_HEADING_2, "Start", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
+    buttons["quitBtn"] = std::make_unique<Button>(850, 1100, 300, 100, assetManager.getFont("PixelFont"), AssetManager::FONT_HEADING_2, "Quit", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
 }
 
