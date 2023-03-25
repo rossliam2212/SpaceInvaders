@@ -28,7 +28,6 @@ void LoadingGameState::update(const float& dt) {
             logger.info("Starting MainMenuState.", this);
             states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
         }
-        // TODO Fix LoadingGameState not ending properly.
         logger.info("Ending state.", this);
         endState();
     }
@@ -65,7 +64,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
         window->draw(assetBeingLoaded);
         window->display();
         asset.loaded = true; // Stops an infinite loop from happening.
-        delayForMilliseconds(5000);
+//        delayForMilliseconds(5000);
 
     } else {
         // Color Assets
@@ -88,7 +87,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
                 window->draw(progressBar);
                 window->display();
-                delayForMilliseconds(300);
+//                delayForMilliseconds(300);
             }
         }
         // Font, Texture & Sound Assets
@@ -117,7 +116,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH * progress, PROGRESS_BAR_HEIGHT));
                 window->draw(progressBar);
                 window->display();
-                delayForMilliseconds(300);
+//                delayForMilliseconds(300);
             }
         }
         asset.loaded = true;
@@ -132,7 +131,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
         window->draw(typeOfAssetsBeingLoaded);
         window->draw(assetBeingLoaded);
         window->display();
-        delayForMilliseconds(500);
+//        delayForMilliseconds(500);
     }
     assetConfigFile.close();
 }

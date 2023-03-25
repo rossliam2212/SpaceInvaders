@@ -5,7 +5,7 @@
 #ifndef SPACE_INVADERS_MAINMENUSTATE_H
 #define SPACE_INVADERS_MAINMENUSTATE_H
 
-#include "State.h"
+#include "GameState.h"
 
 class MainMenuState : public State {
 private:

@@ -15,7 +15,8 @@ set(SOURCE_FILES
         src/spaceInvaders/ui/Button.cpp
         src/spaceInvaders/core/states/LoadingGameState.cpp
         src/spaceInvaders/characters/Entity.cpp
-        src/spaceInvaders/characters/Character.cpp)
+        src/spaceInvaders/characters/Character.cpp
+        src/spaceInvaders/core/states/GameState.cpp)
 
 
 set(HEADER_FILES
@@ -30,7 +31,8 @@ set(HEADER_FILES
         src/spaceInvaders/ui/Button.h
         src/spaceInvaders/core/states/LoadingGameState.h
         src/spaceInvaders/characters/Entity.h
-        src/spaceInvaders/characters/Character.h)
+        src/spaceInvaders/characters/Character.h
+        src/spaceInvaders/core/states/GameState.h)
 
 add_executable(space_invaders src/main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 
