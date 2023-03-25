@@ -17,17 +17,12 @@ private:
     static constexpr const int WINDOW_WIDTH{1500};
 
     static constexpr const char* SUPPORTED_KEYS_CONFIG{"../config/supportedKeys.ini"};
-    static constexpr const char* FONT_ASSETS_CONFIG{"../config/fontAssets.ini"};
-    static constexpr const char* TEXTURE_ASSETS_CONFIG{"../config/textureAssets.ini"};
-    static constexpr const char* SOUND_ASSETS_CONFIG{"../config/soundAssets.ini"};
-    static constexpr const char* COLOR_ASSETS_CONFIG{"../config/colorAssets.ini"};
-
 
     std::shared_ptr<sf::RenderWindow> window;
     sf::Event event;
 
     std::stack<std::unique_ptr<State>> states;
-    std::map<std::string, int> supportedKeys;
+    std::unordered_map<std::string, int> supportedKeys;
     AssetManager assetManager;
     SoundManager soundManager;
 

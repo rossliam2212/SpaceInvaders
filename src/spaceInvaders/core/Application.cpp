@@ -79,7 +79,7 @@ void Application::initWindow() {
 
 void Application::initStates() {
     logger.info("Starting LoadingGameState.", this);
-    states.push(std::make_unique<LoadingGameState>(window, states, assetManager, soundManager));
+    states.push(std::make_unique<LoadingGameState>(window, states, supportedKeys, assetManager, soundManager));
 }
 
 void Application::initKeys() {

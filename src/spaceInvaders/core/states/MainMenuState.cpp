@@ -4,8 +4,8 @@
 
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : State(window, states, assetManager, soundManager) {
+MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : State(window, states, supportedKeys, assetManager, soundManager) {
     initBackground();
     initSprites();
     initText();
@@ -34,11 +34,12 @@ void MainMenuState::updateButtons() {
     }
 
     if (buttons.at("startBtn")->isPressed() && !startPressed) {
-        logger.info("Start button pressed.", this);
+        logger.info("Starting GameState.", this);
+        states.push(std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager));
         startPressed = true;
     }
 
-    if (buttons.at("quitBtn")->isPressed() && !startPressed) {
+    if (buttons.at("quitBtn")->isPressed()) {
         logger.info("Ending state.", this);
         startPressed = true;
         endState();

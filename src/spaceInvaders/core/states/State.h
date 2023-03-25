@@ -27,6 +27,8 @@ class State {
 protected:
     std::shared_ptr<sf::RenderWindow> window;
     std::stack<std::unique_ptr<State>>& states;
+    std::unordered_map<std::string, int> supportedKeys;
+    std::unordered_map<std::string, int> keyBinds;
     AssetManager assetManager;
     SoundManager soundManager;
     bool end;
@@ -39,7 +41,8 @@ protected:
 
 public:
     State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,
-          const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+          const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager,
+          const SoundManager& soundManager) noexcept;
     virtual ~State() = default;
 
     virtual void update(const float& dt) = 0;

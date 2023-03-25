@@ -7,7 +7,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <iostream>
 
@@ -18,8 +18,8 @@ namespace input {
     public:
         class KeyBoard {
         private:
-            static std::map<std::string, int>* supportedKeys;
-            static std::map<std::string, int>* keyBinds;
+            static std::unordered_map<std::string, int>* supportedKeys;
+            static std::unordered_map<std::string, int>* keyBinds;
             static float slidingV;
             static float slidingH;
 
@@ -29,7 +29,7 @@ namespace input {
                 Vertical
             };
 
-            static void init(std::map<std::string, int>* mySupportedKeys, std::map<std::string, int>* myKeyBinds);
+            static void init(std::unordered_map<std::string, int>* mySupportedKeys, std::unordered_map<std::string, int>* myKeyBinds);
             static float getAxis(const float& dt, Axis axis);
             static float getAxis(const float& dt, const std::string&& axis);
 

@@ -10,6 +10,7 @@
 #include "Entity.h"
 #include "../managers/SoundManager.h"
 #include "../managers/AssetManager.h"
+#include "../input/Input.h"
 
 class Character : public Entity {
 protected:
@@ -26,7 +27,7 @@ protected:
     SoundManager soundManager;
 
 public:
-    Character(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager);
+    Character(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     ~Character() override = default;
 
     virtual void update(const float& dt) = 0;
@@ -41,8 +42,9 @@ public:
     float getSpeed() const;
     bool isDead() const;
 
-private:
-    void initSprite();
+protected:
+    void initSprite(const sf::Texture& texture);
+    void initSprite(const std::string& textureName);
 };
 
 

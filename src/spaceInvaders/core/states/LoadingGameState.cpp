@@ -4,8 +4,8 @@
 
 #include "LoadingGameState.h"
 
-LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : State(window, states, assetManager, soundManager),
+LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : State(window, states, supportedKeys, assetManager, soundManager),
       progress{0.f},
       backGroundColor{sf::Color{43, 43, 43, 255}},
       assets{} {
@@ -26,7 +26,7 @@ void LoadingGameState::update(const float& dt) {
             setAllAssetsLoaded();
             loadNextState = true;
             logger.info("Starting MainMenuState.", this);
-            states.push(std::make_unique<MainMenuState>(window, states, assetManager, soundManager));
+            states.push(std::make_unique<MainMenuState>(window, states, supportedKeys, assetManager, soundManager));
         }
         logger.info("Ending state.", this);
         endState();
@@ -72,6 +72,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
             std::string name;
             int r, g, b, a;
 
+            // TODO Add try catch block
             while (assetConfigFile >> name >> r >> g >> b >> a) {
                 assetManager.loadColor(name, sf::Color{static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a)});
                 assetsLoaded++;
@@ -95,6 +96,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
             std::string name;
             std::string path;
 
+            // TODO Add try catch block
             while (assetConfigFile >> name >> path) {
                 if (asset.name == FONT_ASSETS_NAME) {
                     assetManager.loadFont(name, path);

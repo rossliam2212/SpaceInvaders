@@ -9,12 +9,12 @@ namespace input {
     // ***** Key Board Class *****
     // ***************************
 
-    std::map<std::string, int>* Input::KeyBoard::supportedKeys;
-    std::map<std::string, int>* Input::KeyBoard::keyBinds;
+    std::unordered_map<std::string, int>* Input::KeyBoard::supportedKeys;
+    std::unordered_map<std::string, int>* Input::KeyBoard::keyBinds;
     float Input::KeyBoard::slidingV;
     float Input::KeyBoard::slidingH;
 
-    void Input::KeyBoard::init(std::map<std::string, int>* mySupportedKeys, std::map<std::string, int>* myKeyBinds) {
+    void Input::KeyBoard::init(std::unordered_map<std::string, int>* mySupportedKeys, std::unordered_map<std::string, int>* myKeyBinds) {
         supportedKeys = mySupportedKeys;
         keyBinds = myKeyBinds;
     }
