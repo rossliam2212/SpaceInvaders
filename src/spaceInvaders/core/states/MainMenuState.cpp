@@ -17,10 +17,6 @@ void MainMenuState::update(const float& dt) {
     updateButtons();
 }
 
-void MainMenuState::updateInput(const float& dt) {
-
-}
-
 void MainMenuState::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(backGround);
     window->draw(logoSprite);

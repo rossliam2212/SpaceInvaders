@@ -14,8 +14,6 @@ void GameState::update(const float& dt) {
     player.update(dt);
 }
 
-void GameState::updateInput(const float& dt) { }
-
 void GameState::render(std::shared_ptr<sf::RenderWindow> window) {
     player.render(window);
 }

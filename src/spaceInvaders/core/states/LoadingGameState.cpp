@@ -33,8 +33,6 @@ void LoadingGameState::update(const float& dt) {
     }
 }
 
-void LoadingGameState::updateInput(const float& dt) { }
-
 void LoadingGameState::render(std::shared_ptr<sf::RenderWindow> window) {
     if (allAssetsLoaded) {
         window->draw(backGround);

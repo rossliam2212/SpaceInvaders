@@ -20,7 +20,6 @@ public:
     ~GameState() override = default;
 
     void update(const float& dt) override;
-    void updateInput(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
 private:

@@ -46,7 +46,6 @@ public:
     virtual ~State() = default;
 
     virtual void update(const float& dt) = 0;
-    virtual void updateInput(const float& dt) = 0;
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
     void endState();
