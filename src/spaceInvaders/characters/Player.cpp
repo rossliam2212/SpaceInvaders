@@ -6,11 +6,12 @@
 
 Player::Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : Character(PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager) {
+    initSprite("playerShipGrayCenter");
 }
 
 Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager} {
-    initSprite("playerShipGrayLeft");
+    initSprite("playerShipGrayCenter");
 }
 
 Player::Player(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept

@@ -19,6 +19,14 @@ void Character::move(const float& dt, float directionX) {
     sprite.move(directionX * delta, 0);
 }
 
+void Character::increaseHealth(int healthIncrease) {
+    if ((health + healthIncrease) > MAX_HEALTH) {
+        health = MAX_HEALTH;
+    } else {
+        health += healthIncrease;
+    }
+}
+
 void Character::takeDamage(int damage) {
     health -= damage;
 

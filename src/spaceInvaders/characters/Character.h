@@ -19,7 +19,7 @@ private:
 protected:
     static constexpr const int MAX_HEALTH{100};
     static constexpr const int MIN_HEALTH{100};
-    static constexpr const float SPEED_MULTIPLIER{25.f};
+    static constexpr const float SPEED_MULTIPLIER{50.f};
 
     sf::Sprite sprite;
 
@@ -39,6 +39,7 @@ public:
 
     void move(const float& dt, float directionX);
 
+    void increaseHealth(int healthIncrease);
     void takeDamage(int damage);
     void kill();
 
