@@ -5,14 +5,16 @@
 #ifndef SPACE_INVADERS_WEAPON_H
 #define SPACE_INVADERS_WEAPON_H
 
-#include <SFML/Graphics.hpp>
 #include <vector>
-#include <memory>
+
+#include "../managers/AssetManager.h"
+#include "Bullet.h"
+#include "../managers/SoundManager.h"
 
 class Weapon {
 private:
-    // Bullet sprite/texture
-    // vector of bullets
+    sf::Sprite bulletSprite;
+    std::vector<std::unique_ptr<Bullet>> bullets;
 
     sf::Vector2f shootPosition;
 
@@ -21,9 +23,13 @@ private:
     float fireRate;
     float timeSinceLastShot;
 
+    AssetManager assetManager;
+    SoundManager soundManager;
 
 public:
-    Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition) noexcept;
+    Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition,
+           const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    virtual ~Weapon() = default;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
@@ -34,6 +40,9 @@ public:
     float getBulletSpeed() const;
     float getFireRate() const;
     sf::Vector2f getShootPosition() const;
+
+protected:
+    void initBulletSprite(const std::string& textureName);
 };
 
 

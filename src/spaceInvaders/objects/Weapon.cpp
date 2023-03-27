@@ -4,12 +4,14 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition) noexcept
+Weapon::Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : damage{damage},
       bulletSpeed{bulletSpeed},
       fireRate{fireRate},
       shootPosition{shootPosition},
-      timeSinceLastShot{} {
+      timeSinceLastShot{},
+      assetManager{assetManager},
+      soundManager{soundManager} {
 }
 
 void Weapon::update(const float& dt) {
@@ -42,4 +44,8 @@ float Weapon::getFireRate() const {
 
 sf::Vector2f Weapon::getShootPosition() const {
     return shootPosition;
+}
+
+void Weapon::initBulletSprite(const std::string& textureName) {
+
 }
