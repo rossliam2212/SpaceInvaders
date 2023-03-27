@@ -16,7 +16,7 @@ Character::Character(const std::string& name, const sf::Vector2f& position, floa
 void Character::move(const float& dt, float directionX) {
     // Can only move along the x-axis
     float delta{speed * dt * SPEED_MULTIPLIER};
-    sprite.move(directionX * delta, 0);
+    sprite.move(directionX * delta, DIRECTION_Y);
 }
 
 void Character::increaseHealth(int healthIncrease) {
@@ -51,10 +51,11 @@ bool Character::isDead() const {
     return dead;
 }
 
-void Character::initSprite(const std::string& textureName) {
-    auto size{assetManager.getTexture(textureName).getSize()};
-    sprite.setTexture(assetManager.getTexture(textureName));
-//    sprite.setOrigin((float)size.x/2 ,(float)size.y/2);
-    sprite.setPosition(position);
-    sprite.setScale(SPRITE_SCALE_FACTOR, SPRITE_SCALE_FACTOR);
-}
+// TODO Remove - May not be needed
+//void Character::initSprite(const std::string& textureName) {
+//    auto size{assetManager.getTexture(textureName).getSize()};
+//    sprite.setTexture(assetManager.getTexture(textureName));
+////    sprite.setOrigin((float)size.x/2 ,(float)size.y/2);
+//    sprite.setPosition(position);
+//    sprite.setScale(SPRITE_SCALE_UP_FACTOR, SPRITE_SCALE_UP_FACTOR);
+//}

@@ -16,8 +16,8 @@ enum Move {
 class Player : public Character {
 private:
     static constexpr const char* PLAYER_NAME{"Player"};
-    static constexpr const float START_POSITION_X{100.f};
-    static constexpr const float START_POSITION_Y{100.f};
+    static constexpr const float START_POSITION_X{750.f};
+    static constexpr const float START_POSITION_Y{1200.f};
     static constexpr const float PLAYER_SPEED{5.f};
 
     sf::Vector2f moveDirection;

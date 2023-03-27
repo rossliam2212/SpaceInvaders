@@ -5,34 +5,29 @@
 #include "Player.h"
 
 Player::Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : Character{PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager}{
-    initSprite("playerShipGrayCenterSheet");
+    : Character{PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager},
+      moveState{still} {
     initAnimations();
 }
 
 Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager} {
-    initSprite("playerShipGrayCenterSheet");
+    : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager},
+      moveState{still} {
     initAnimations();
-
 }
 
 Player::Player(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : Character{name, position, speed, assetManager, soundManager} {
-    initSprite("playerShipGrayCenterSheet");
+    : Character{name, position, speed, assetManager, soundManager},
+      moveState{still} {
     initAnimations();
 }
 
 void Player::update(const float& dt) {
-    // TODO Dont loop over the animation map, check which direction player is moving and then change sprite
-//    for (const auto& animation : animations) {
-//        animation.second->update(dt);
-//        sprite = animation.second->getSprite();
-//    }
 
+    // TODO Change this to include both the left and right animations when they are added
     if (!animations.empty()) {
         animations.at(still)->update(dt);
-        sprite=animations.at(still)->getSprite();
+        sprite = animations.at(still)->getSprite();
     }
 
     position = sprite.getPosition();
@@ -61,8 +56,15 @@ void Player::checkForSpriteChange() {
 }
 
 void Player::initAnimations() {
-    // TODO Make constants for Animation members - frame duration etc.
-    // Center
-    animations[still] = std::make_unique<Animation>(sprite, 1, 4, 0.1f);
+    sprite.setTexture(assetManager.getTexture("playerShipGrayCenterSheet"));
+    sprite.setPosition(position);
+    sprite.setScale(SPRITE_SCALE_UP_FACTOR, SPRITE_SCALE_UP_FACTOR);
 
+    // TODO Make Animations for left and right
+    // Center
+    animations[still] = std::make_unique<Animation>(sprite, 1, 4, Animation::FRAME_DURATION);
+
+    // Left
+
+    // Right
 }

@@ -9,6 +9,9 @@
 #include <memory>
 
 class Animation {
+public:
+    static constexpr const float FRAME_DURATION{0.1f};
+
 private:
     sf::Sprite& sprite;
     int rows;
