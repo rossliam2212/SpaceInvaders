@@ -10,7 +10,7 @@
 
 class Animation {
 private:
-    sf::Sprite spriteSheet;
+    sf::Sprite& sprite;
     int rows;
     int cols;
     float timeElapsed;
@@ -18,15 +18,19 @@ private:
     int currentFrameIndex;
 
 public:
-    Animation(const sf::Sprite& spriteSheet, int rows, int cols, int frameDuration);
+    Animation(sf::Sprite& spriteSheet, int rows, int cols, float frameDuration) noexcept;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
 
+    sf::Sprite getSprite();
     void setSpeed(float speed);
     float getSpeed() const;
 
     int getCurrentFrameIndex() const;
+
+private:
+    void setUpSprite();
 };
 
 

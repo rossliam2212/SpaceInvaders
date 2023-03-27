@@ -54,7 +54,7 @@ bool Character::isDead() const {
 void Character::initSprite(const std::string& textureName) {
     auto size{assetManager.getTexture(textureName).getSize()};
     sprite.setTexture(assetManager.getTexture(textureName));
-    sprite.setOrigin((float)size.x/2 ,(float)size.y/2);
+//    sprite.setOrigin((float)size.x/2 ,(float)size.y/2);
     sprite.setPosition(position);
     sprite.setScale(SPRITE_SCALE_FACTOR, SPRITE_SCALE_FACTOR);
 }

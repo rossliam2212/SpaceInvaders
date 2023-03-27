@@ -5,18 +5,19 @@
 #ifndef SPACE_INVADERS_CHARACTER_H
 #define SPACE_INVADERS_CHARACTER_H
 
+#include <unordered_map>
+#include <vector>
 #include <memory>
 
 #include "Entity.h"
+#include "../objects/Animation.h"
 #include "../managers/SoundManager.h"
 #include "../managers/AssetManager.h"
 #include "../input/Input.h"
 
 class Character : public Entity {
-private:
-    static constexpr const int SPRITE_SCALE_FACTOR{10};
-
 protected:
+    static constexpr const int SPRITE_SCALE_FACTOR{10};
     static constexpr const int MAX_HEALTH{100};
     static constexpr const int MIN_HEALTH{100};
     static constexpr const float SPEED_MULTIPLIER{50.f};

@@ -7,6 +7,12 @@
 
 #include "Character.h"
 
+enum Move {
+    still = 0,
+    left,
+    right
+};
+
 class Player : public Character {
 private:
     static constexpr const char* PLAYER_NAME{"Player"};
@@ -15,6 +21,9 @@ private:
     static constexpr const float PLAYER_SPEED{5.f};
 
     sf::Vector2f moveDirection;
+    Move moveState{still};
+
+    std::unordered_map<Move, std::unique_ptr<Animation>> animations;
 
 public:
     Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
@@ -28,6 +37,8 @@ public:
 private:
     void getInput(const float& dt);
     void checkForSpriteChange();
+
+    void initAnimations();
 };
 
 

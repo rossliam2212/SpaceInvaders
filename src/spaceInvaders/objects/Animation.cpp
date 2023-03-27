@@ -4,16 +4,35 @@
 
 #include "Animation.h"
 
-Animation::Animation(const sf::Sprite& spriteSheet, int rows, int cols, int frameDuration) {
-
+Animation::Animation(sf::Sprite& spriteSheet, int rows, int cols, float frameDuration) noexcept
+    : sprite{spriteSheet},
+      rows{rows},
+      cols{cols},
+      timeElapsed{},
+      frameDuration{frameDuration},
+      currentFrameIndex{} {
+    setUpSprite();
 }
 
 void Animation::update(const float& dt) {
-
+    timeElapsed += dt;
+    if (timeElapsed >= frameDuration) {
+        currentFrameIndex = (currentFrameIndex + 1) % (rows * cols);
+        int frameWidth = (int)sprite.getTexture()->getSize().x / cols;
+        int frameHeight = (int)sprite.getTexture()->getSize().y / rows;
+        int frameX = (currentFrameIndex % cols) * frameWidth;
+        int frameY = (currentFrameIndex / cols) * frameHeight;
+        sprite.setTextureRect(sf::IntRect(frameX, frameY, frameWidth, frameHeight));
+        timeElapsed = 0;
+    }
 }
 
 void Animation::render(std::shared_ptr<sf::RenderWindow> window) {
+    window->draw(sprite);
+}
 
+sf::Sprite Animation::getSprite() {
+    return sprite;
 }
 
 void Animation::setSpeed(float speed) {
@@ -26,4 +45,14 @@ float Animation::getSpeed() const {
 
 int Animation::getCurrentFrameIndex() const {
     return currentFrameIndex;
+}
+
+void Animation::setUpSprite() {
+    int x{(int)sprite.getTexture()->getSize().x};
+    int frameWidth{x / cols};
+
+    int y{(int)sprite.getTexture()->getSize().y};
+    int frameHeight{y / rows};
+
+    sprite.setTextureRect(sf::IntRect{0, 0, frameWidth, frameHeight});
 }
