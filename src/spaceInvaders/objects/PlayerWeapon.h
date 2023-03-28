@@ -10,16 +10,16 @@
 
 class PlayerWeapon : public Weapon {
 private:
-    static constexpr const float PLAYER_WEAPON_FIRE_RATE{0.5f};
+    static constexpr const float PLAYER_WEAPON_SHOOT_COOL_DOWN{1.f};
 
 public:
-    PlayerWeapon(const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    PlayerWeapon(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     ~PlayerWeapon() override = default;
 
     void update(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
-    void shoot() override;
+    void shoot(const sf::Vector2f& shootPosition) override;
 };
 
 

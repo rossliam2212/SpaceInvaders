@@ -30,6 +30,9 @@ private:
     std::unique_ptr<PlayerWeapon> weapon;
     sf::Vector2f shootPosition;
 
+    // TODO Initialize this in the constructor
+    bool isShootPressed;
+
 public:
     Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     Player(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
@@ -40,7 +43,12 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
 private:
+    void shoot();
+    void updateWeapons(const float& dt);
+
     void getInput(const float& dt);
+
+    void updateAnimations(const float& dt);
     void checkForSpriteChange();
 
     void initAnimations();

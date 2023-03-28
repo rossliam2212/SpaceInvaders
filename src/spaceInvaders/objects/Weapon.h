@@ -13,26 +13,29 @@ class Weapon {
 protected:
     std::vector<std::unique_ptr<Bullet>> bullets;
 
-    sf::Vector2f shootPosition;
-
-    float fireRate;
-    float timeSinceLastShot;
+    float shootCoolDown;
+    bool isShooting;
+    bool shootCoolDownTimer;
 
     AssetManager assetManager;
     SoundManager soundManager;
 
 public:
-    Weapon(float fireRate, const sf::Vector2f& shootPosition,
-           const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    Weapon(float shootCoolDown, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     virtual ~Weapon() = default;
 
     virtual void update(const float& dt) = 0;
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
-    virtual void shoot() = 0;
+    virtual void shoot(const sf::Vector2f& shootPosition) = 0;
 
-    float getFireRate() const;
-    sf::Vector2f getShootPosition() const;
+    float getShootCoolDown() const;
+
+    bool getIsShooting() const;
+    void setIsShooting(bool shooting);
+
+    bool getShootCoolDownTimer() const;
+    void setShootCoolDownTimer(bool timer);
 };
 
 

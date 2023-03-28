@@ -4,18 +4,30 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : fireRate{fireRate},
-      shootPosition{shootPosition},
-      timeSinceLastShot{},
+Weapon::Weapon(float shootCoolDown, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : shootCoolDown{shootCoolDown},
+      isShooting{false},
+      shootCoolDownTimer{false},
       assetManager{assetManager},
       soundManager{soundManager} {
 }
 
-float Weapon::getFireRate() const {
-    return fireRate;
+float Weapon::getShootCoolDown() const {
+    return shootCoolDown;
 }
 
-sf::Vector2f Weapon::getShootPosition() const {
-    return shootPosition;
+bool Weapon::getIsShooting() const {
+    return isShooting;
+}
+
+void Weapon::setIsShooting(bool shooting) {
+    isShooting = shooting;
+}
+
+bool Weapon::getShootCoolDownTimer() const {
+    return shootCoolDownTimer;
+}
+
+void Weapon::setShootCoolDownTimer(bool timer) {
+    shootCoolDownTimer = timer;
 }

@@ -4,11 +4,20 @@
 
 #include "PlayerWeapon.h"
 
-PlayerWeapon::PlayerWeapon(const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : Weapon{PLAYER_WEAPON_FIRE_RATE, shootPosition, assetManager, soundManager} {
+PlayerWeapon::PlayerWeapon(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : Weapon{PLAYER_WEAPON_SHOOT_COOL_DOWN, assetManager, soundManager} {
 }
 
 void PlayerWeapon::update(const float& dt) {
+    if (shootCoolDownTimer) {
+        shootCoolDown -= dt;
+        if (shootCoolDown <= 0.f) {
+            isShooting = false;
+            shootCoolDownTimer = false;
+            shootCoolDown = PLAYER_WEAPON_SHOOT_COOL_DOWN;
+        }
+    }
+
     for (const auto& bullet : bullets) {
         bullet->update(dt);
     }
@@ -20,12 +29,14 @@ void PlayerWeapon::render(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
-void PlayerWeapon::shoot() {
+void PlayerWeapon::shoot(const sf::Vector2f& shootPosition) {
     // TODO Add shoot sound
-    if (timeSinceLastShot >= 1.f / fireRate) {
-        bullets.emplace_back(std::make_unique<PlayerBullet>(shootPosition, assetManager, soundManager));
-        fireRate = 0.f;
-    }
-
     // TODO Add ability to shoot rockets
+
+    if (!isShooting) {
+        isShooting = true;
+
+        // Create instance of bullet
+        shootCoolDownTimer = true;
+    }
 }
