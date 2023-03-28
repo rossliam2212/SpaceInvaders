@@ -34,6 +34,7 @@ public:
     int getDamage() const;
     bool isAlive() const;
     sf::Vector2f getPosition() const;
+    sf::FloatRect getHitBox() const;
 
 protected:
     void initSprite(const std::string& textureName);

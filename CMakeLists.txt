@@ -16,6 +16,7 @@ set(SOURCE_FILES
         src/spaceInvaders/characters/Entity.cpp
         src/spaceInvaders/characters/Character.cpp
         src/spaceInvaders/characters/Player.cpp
+        src/spaceInvaders/characters/Enemy.cpp
 
         src/spaceInvaders/objects/Animation.cpp
         src/spaceInvaders/objects/Weapon.cpp
@@ -44,6 +45,7 @@ set(HEADER_FILES
         src/spaceInvaders/characters/Entity.h
         src/spaceInvaders/characters/Character.h
         src/spaceInvaders/characters/Player.h
+        src/spaceInvaders/characters/Enemy.h
 
         src/spaceInvaders/objects/Animation.h
         src/spaceInvaders/objects/Weapon.h

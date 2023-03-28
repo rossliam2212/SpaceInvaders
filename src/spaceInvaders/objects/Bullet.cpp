@@ -24,6 +24,10 @@ sf::Vector2f Bullet::getPosition() const {
     return sprite.getPosition();
 }
 
+sf::FloatRect Bullet::getHitBox() const {
+    return sprite.getGlobalBounds();
+}
+
 void Bullet::initSprite(const std::string& textureName) {
     sprite.setTexture(assetManager.getTexture(textureName));
     sprite.setPosition(spawnPosition);

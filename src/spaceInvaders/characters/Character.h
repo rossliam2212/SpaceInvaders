@@ -49,8 +49,7 @@ public:
     float getSpeed() const;
     bool isDead() const;
 
-protected:
-//    void initSprite(const std::string& textureName);
+    sf::FloatRect getHitBox() const;
 };
 
 

@@ -45,7 +45,7 @@ void Player::render(std::shared_ptr<sf::RenderWindow> window) {
 }
 
 void Player::shoot() {
-    // Picks which side of the top of the players ship to shoot from.
+    // Randomly picks which side of the top of the players ship to shoot from.
     int tmp{utilities::randomInt(1, 10)};
     if (tmp > 5) {
         shootPosition = sf::Vector2f{position.x + SHOOT_POSITION_OFFSET_LEFT, position.y};

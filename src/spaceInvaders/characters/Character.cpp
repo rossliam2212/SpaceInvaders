@@ -51,11 +51,6 @@ bool Character::isDead() const {
     return dead;
 }
 
-// TODO Remove - May not be needed
-//void Character::initSprite(const std::string& textureName) {
-//    auto size{assetManager.getTexture(textureName).getSize()};
-//    sprite.setTexture(assetManager.getTexture(textureName));
-////    sprite.setOrigin((float)size.x/2 ,(float)size.y/2);
-//    sprite.setPosition(position);
-//    sprite.setScale(SPRITE_SCALE_UP_FACTOR, SPRITE_SCALE_UP_FACTOR);
-//}
+sf::FloatRect Character::getHitBox() const {
+    return sprite.getGlobalBounds();
+}
