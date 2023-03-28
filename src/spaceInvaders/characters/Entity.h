@@ -19,6 +19,8 @@ protected:
     std::string name;
     sf::Vector2f position;
 
+    logger::Logger logger;
+
 public:
     Entity() noexcept;
     Entity(const std::string& name, const sf::Vector2f& position) noexcept;

@@ -8,8 +8,7 @@
 #include "Character.h"
 #include "../objects/PlayerWeapon.h"
 
-// TODO Rename to "MoveState"
-enum Move {
+enum MoveState {
     still = 0,
     left,
     right
@@ -23,10 +22,10 @@ private:
     static constexpr const float PLAYER_SPEED{5.f};
 
     sf::Vector2f moveDirection;
-    Move moveState{still};
+    MoveState moveState{still};
 
     // TODO Add animation for player death
-    std::unordered_map<Move, std::unique_ptr<Animation>> animations;
+    std::unordered_map<MoveState, std::unique_ptr<Animation>> animations;
 
     std::unique_ptr<PlayerWeapon> weapon;
     sf::Vector2f shootPosition;

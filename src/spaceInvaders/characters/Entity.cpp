@@ -6,7 +6,8 @@
 
 Entity::Entity() noexcept
     : name{DEFAULT_NAME},
-      position{DEFAULT_POSITION_X, DEFAULT_POSITION_Y} {
+      position{DEFAULT_POSITION_X, DEFAULT_POSITION_Y},
+      logger{"logs"} {
 }
 
 Entity::Entity(const std::string& name, const sf::Vector2f& position) noexcept

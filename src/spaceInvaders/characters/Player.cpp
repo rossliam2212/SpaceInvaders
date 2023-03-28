@@ -7,6 +7,7 @@
 Player::Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : Character{PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager},
       moveState{still} {
+    logger.info("Player initialized.", this);
     initAnimations();
     initWeapon();
 }
@@ -14,6 +15,7 @@ Player::Player(const AssetManager& assetManager, const SoundManager& soundManage
 Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager},
       moveState{still} {
+    logger.info("Player initialized.", this);
     initAnimations();
     initWeapon();
 }
@@ -21,6 +23,7 @@ Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, c
 Player::Player(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : Character{name, position, speed, assetManager, soundManager},
       moveState{still} {
+    logger.info("Player initialized.", this);
     initAnimations();
     initWeapon();
 }

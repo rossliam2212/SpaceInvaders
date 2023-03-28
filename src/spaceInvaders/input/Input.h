@@ -29,6 +29,7 @@ namespace input {
                 Vertical
             };
 
+            // TODO Add isKeyPressed check function
             static void init(std::unordered_map<std::string, int>* mySupportedKeys, std::unordered_map<std::string, int>* myKeyBinds);
             static float getAxis(const float& dt, Axis axis);
             static float getAxis(const float& dt, const std::string&& axis);
