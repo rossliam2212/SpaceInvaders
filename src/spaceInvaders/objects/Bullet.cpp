@@ -20,6 +20,10 @@ bool Bullet::isAlive() const {
     return alive;
 }
 
+void Bullet::setIsAlive(bool isAlive) {
+    alive = isAlive;
+}
+
 sf::Vector2f Bullet::getPosition() const {
     return sprite.getPosition();
 }

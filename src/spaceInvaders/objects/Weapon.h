@@ -5,6 +5,7 @@
 #ifndef SPACE_INVADERS_WEAPON_H
 #define SPACE_INVADERS_WEAPON_H
 
+#include <algorithm>
 #include <vector>
 
 #include "Bullet.h"
@@ -29,7 +30,9 @@ public:
 
     virtual void shoot(const sf::Vector2f& shootPosition) = 0;
 
-    std::vector<std::unique_ptr<Bullet>>& getBullets();
+//    void cleanUpBullets();
+
+    std::vector<Bullet*> getBullets();
     float getShootCoolDown() const;
 
     bool getIsShooting() const;

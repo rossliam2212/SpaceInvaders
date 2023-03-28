@@ -38,6 +38,39 @@ void EnemyManager::checkCollisions() {
     // Get player bullet sprite
     // Get enemy sprite
     // Check if their boundaries intersect
+    auto playerBullets{player->getWeapon()->getBullets()};
+
+    for (auto& enemy : enemies) {
+        sf::FloatRect enemyHitBox{enemy->getHitBox()};
+
+        for (auto& bullet : playerBullets) {
+            if (!bullet->isAlive()) {
+                continue;
+            }
+
+            sf::FloatRect bulletHitBox{bullet->getHitBox()};
+
+            if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
+                // TODO Deal damage to enemy
+                bullet->setIsAlive(false);
+                enemy->takeDamage(bullet->getDamage());
+
+                // TODO Fix this enemy clean up function not working
+//                cleanUpEnemies();
+
+                // TODO Fix this weapon bullet clean up function not working
+//                player->getWeapon()->cleanUpBullets();
+
+                logger.debug("ENEMY HIT => " + enemy->getName(), this);
+            }
+        }
+    }
+}
+
+void EnemyManager::cleanUpEnemies() {
+    enemies.erase(std::remove_if(std::begin(enemies), std::end(enemies), [](const auto& e) {
+        return e->isDead();
+    }), std::end(enemies));
 }
 
 void EnemyManager::initEnemies() {

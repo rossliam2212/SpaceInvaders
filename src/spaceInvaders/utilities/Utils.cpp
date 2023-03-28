@@ -43,6 +43,11 @@ namespace utilities {
         return f >= 0 ? 1 : -1;
     }
 
+    bool checkCollision(sf::FloatRect& first, sf::FloatRect& second) {
+        return first.intersects(second);
+    }
+
+
     double degreesToRadians(double degrees) {
         return (degrees * (M_PI / 180));
     }

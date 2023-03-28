@@ -33,6 +33,7 @@ public:
 
     int getDamage() const;
     bool isAlive() const;
+    void setIsAlive(bool isAlive);
     sf::Vector2f getPosition() const;
     sf::FloatRect getHitBox() const;
 

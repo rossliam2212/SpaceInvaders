@@ -110,7 +110,7 @@ void Player::initWeapon() {
     weapon = std::make_unique<PlayerWeapon>(assetManager, soundManager);
 }
 
-std::unique_ptr<PlayerWeapon>& Player::getWeapon() {
-    return weapon;
+PlayerWeapon* Player::getWeapon() {
+    return weapon.get();
 }
 

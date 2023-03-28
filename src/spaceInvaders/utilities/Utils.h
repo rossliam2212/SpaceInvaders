@@ -30,6 +30,7 @@ namespace utilities {
         float moveTowards(float current, float target, float delta);
         float sign(float f);
 
+        bool checkCollision(sf::FloatRect& first, sf::FloatRect& second);
 
         int randomInt(int min, int max);
 
