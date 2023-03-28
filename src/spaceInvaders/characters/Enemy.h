@@ -8,7 +8,7 @@
 #include "Character.h"
 
 class Enemy : public Character {
-private:
+protected:
     static constexpr const float DEFAULT_ENEMY_MOVE_SPEED{1.f};
 
     bool isShooting;
@@ -21,6 +21,9 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     void shoot();
+
+protected:
+    void initSprite(const std::string& textureName);
 };
 
 

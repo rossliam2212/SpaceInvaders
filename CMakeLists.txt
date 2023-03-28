@@ -12,11 +12,13 @@ set(SOURCE_FILES
 
         src/spaceInvaders/managers/AssetManager.cpp
         src/spaceInvaders/managers/SoundManager.cpp
+        src/spaceInvaders/managers/EnemyManager.cpp
 
         src/spaceInvaders/characters/Entity.cpp
         src/spaceInvaders/characters/Character.cpp
         src/spaceInvaders/characters/Player.cpp
         src/spaceInvaders/characters/Enemy.cpp
+        src/spaceInvaders/characters/enemies/BlueEnemy.cpp
 
         src/spaceInvaders/objects/Animation.cpp
         src/spaceInvaders/objects/Weapon.cpp
@@ -39,13 +41,15 @@ set(HEADER_FILES
         src/spaceInvaders/core/states/MainMenuState.h
         src/spaceInvaders/core/states/GameState.h
 
-        src/spaceInvaders/managers/AssetManager.cpp
+        src/spaceInvaders/managers/AssetManager.h
         src/spaceInvaders/managers/SoundManager.h
+        src/spaceInvaders/managers/EnemyManager.h
 
         src/spaceInvaders/characters/Entity.h
         src/spaceInvaders/characters/Character.h
         src/spaceInvaders/characters/Player.h
         src/spaceInvaders/characters/Enemy.h
+        src/spaceInvaders/characters/enemies/BlueEnemy.h
 
         src/spaceInvaders/objects/Animation.h
         src/spaceInvaders/objects/Weapon.h

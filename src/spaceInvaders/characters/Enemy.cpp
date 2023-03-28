@@ -20,3 +20,7 @@ void Enemy::render(std::shared_ptr<sf::RenderWindow> window) {
 void Enemy::shoot() {
 
 }
+
+void Enemy::initSprite(const std::string& textureName) {
+
+}
