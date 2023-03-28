@@ -19,13 +19,17 @@ void PlayerWeapon::update(const float& dt) {
     }
 
     for (const auto& bullet : bullets) {
-        bullet->update(dt);
+        if (bullet->isAlive()) {
+            bullet->update(dt);
+        }
     }
 }
 
 void PlayerWeapon::render(std::shared_ptr<sf::RenderWindow> window) {
     for (const auto& bullet : bullets) {
-        bullet->render(window);
+        if (bullet->isAlive()) {
+            bullet->render(window);
+        }
     }
 }
 

@@ -18,14 +18,13 @@ protected:
     sf::Vector2f spawnPosition;
 
     int damage;
-    float lifeTime;
-    float timeAlive;
+    bool alive;
 
     AssetManager assetManager;
     SoundManager soundManager;
 
 public:
-    Bullet(int damage, float lifeTime, const sf::Vector2f& spawnPosition,
+    Bullet(int damage, const sf::Vector2f& spawnPosition,
            const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     virtual ~Bullet() = default;
 
@@ -33,12 +32,12 @@ public:
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
     int getDamage() const;
-    float getLifeTime() const;
-    float getTimeAlive() const;
     bool isAlive() const;
+    sf::Vector2f getPosition() const;
 
 protected:
     void initSprite(const std::string& textureName);
+    void checkForBulletOffScreen();
 };
 
 

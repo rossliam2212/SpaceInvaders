@@ -12,7 +12,6 @@ private:
     static constexpr const int PLAYER_BULLET_DAMAGE{5};
     static constexpr const float PLAYER_BULLET_SPEED_MULTIPLIER{25.f};
     static constexpr const float PLAYER_BULLET_SPEED{30.f};
-    static constexpr const float PLAYER_BULLET_LIFE_TIME{10.f};
 
 public:
     PlayerBullet(const sf::Vector2f& spawnPosition, const AssetManager& assetManager,const SoundManager& soundManager) noexcept;
