@@ -14,7 +14,10 @@
 
 class EnemyManager {
 private:
-    static constexpr const int MAX_NUMBER_OF_BLUE_ENEMIES{5};
+    static constexpr const float START_POSITION_X{100.f};
+    static constexpr const float START_POSITION_Y{100.f};
+
+    static constexpr const int MAX_NUMBER_OF_BLUE_ENEMIES{12};
     static constexpr const int MAX_NUMBER_OF_GREEN_ENEMIES{5};
     static constexpr const int MAX_NUMBER_OF_YELLOW_ENEMIES{5};
     static constexpr const int MAX_NUMBER_OF_PURPLE_ENEMIES{5};
