@@ -10,6 +10,7 @@
 #include <vector>
 #include <Logger.h>
 
+#include "../characters/Player.h"
 #include "../characters/enemies/BlueEnemy.h"
 
 class EnemyManager {
@@ -21,6 +22,8 @@ private:
     static constexpr const int MAX_NUMBER_OF_GREEN_ENEMIES{5};
     static constexpr const int MAX_NUMBER_OF_YELLOW_ENEMIES{5};
     static constexpr const int MAX_NUMBER_OF_PURPLE_ENEMIES{5};
+
+    Player* player;
 
     std::vector<std::unique_ptr<Enemy>> enemies;
     int numberOfBlueEnemies;
@@ -34,12 +37,13 @@ private:
     logger::Logger logger;
 
 public:
-    EnemyManager(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    EnemyManager(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
 
 private:
+    void checkCollisions();
     void initEnemies();
 };
 

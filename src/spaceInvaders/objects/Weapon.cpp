@@ -12,6 +12,10 @@ Weapon::Weapon(float shootCoolDown, const AssetManager& assetManager, const Soun
       soundManager{soundManager} {
 }
 
+std::vector<std::unique_ptr<Bullet>>& Weapon::getBullets() {
+    return bullets;
+}
+
 float Weapon::getShootCoolDown() const {
     return shootCoolDown;
 }

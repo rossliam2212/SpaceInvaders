@@ -29,6 +29,7 @@ public:
 
     virtual void shoot(const sf::Vector2f& shootPosition) = 0;
 
+    std::vector<std::unique_ptr<Bullet>>& getBullets();
     float getShootCoolDown() const;
 
     bool getIsShooting() const;

@@ -4,8 +4,9 @@
 
 #include "EnemyManager.h"
 
-EnemyManager::EnemyManager(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : assetManager{assetManager},
+EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : player{player},
+      assetManager{assetManager},
       soundManager{soundManager},
       logger{"logs"},
       numberOfBlueEnemies{},
@@ -16,6 +17,8 @@ EnemyManager::EnemyManager(const AssetManager& assetManager, const SoundManager&
 }
 
 void EnemyManager::update(const float& dt) {
+    checkCollisions();
+
     for (const auto& enemy : enemies) {
         if (!enemy->isDead()) {
             enemy->update(dt);
@@ -31,9 +34,13 @@ void EnemyManager::render(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
-void EnemyManager::initEnemies() {
-//    enemies.emplace_back(std::make_unique<BlueEnemy>(sf::Vector2f{100, 100}, assetManager, soundManager));
+void EnemyManager::checkCollisions() {
+    // Get player bullet sprite
+    // Get enemy sprite
+    // Check if their boundaries intersect
+}
 
+void EnemyManager::initEnemies() {
     float x = START_POSITION_X;
     float y = START_POSITION_Y;
 

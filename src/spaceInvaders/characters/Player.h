@@ -46,6 +46,8 @@ public:
     void update(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
+    std::unique_ptr<PlayerWeapon>& getWeapon();
+
 private:
     void shoot();
     void updateWeapons(const float& dt);
