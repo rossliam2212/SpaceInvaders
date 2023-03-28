@@ -7,6 +7,7 @@
 
 #include "Character.h"
 #include "../objects/PlayerWeapon.h"
+#include "../utilities/Utils.h"
 
 enum MoveState {
     still = 0,
@@ -20,6 +21,9 @@ private:
     static constexpr const float START_POSITION_X{750.f};
     static constexpr const float START_POSITION_Y{1200.f};
     static constexpr const float PLAYER_SPEED{5.f};
+
+    static constexpr const float SHOOT_POSITION_OFFSET_LEFT{30.f};
+    static constexpr const float SHOOT_POSITION_OFFSET_RIGHT{40.f};
 
     sf::Vector2f moveDirection;
     MoveState moveState{still};

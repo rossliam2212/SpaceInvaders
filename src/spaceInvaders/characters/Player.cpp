@@ -40,13 +40,19 @@ void Player::update(const float& dt) {
 }
 
 void Player::render(std::shared_ptr<sf::RenderWindow> window) {
+    weapon->render(window);
     window->draw(sprite);
 }
 
 void Player::shoot() {
-    logger.debug("Shoot Pressed", this);
+    // Picks which side of the top of the players ship to shoot from.
+    int tmp{utilities::randomInt(1, 10)};
+    if (tmp > 5) {
+        shootPosition = sf::Vector2f{position.x + SHOOT_POSITION_OFFSET_LEFT, position.y};
+    } else {
+        shootPosition = sf::Vector2f{position.x + SHOOT_POSITION_OFFSET_RIGHT, position.y};
+    }
 
-    // TODO Change shoot position
     weapon->shoot(shootPosition);
 }
 

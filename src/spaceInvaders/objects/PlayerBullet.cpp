@@ -12,7 +12,7 @@ PlayerBullet::PlayerBullet(const sf::Vector2f& spawnPosition, const AssetManager
 void PlayerBullet::update(const float& dt) {
     // Player bullets only shoot upwards
     float delta{PLAYER_BULLET_SPEED * dt * PLAYER_BULLET_SPEED_MULTIPLIER};
-    sprite.move(0, delta);
+    sprite.move(0, -delta);
     timeAlive += dt;
 }
 
