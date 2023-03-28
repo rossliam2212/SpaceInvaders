@@ -13,6 +13,10 @@ protected:
 
     bool isShooting;
 
+    bool drawExplosion{false};
+    sf::Sprite explosion;
+    std::unique_ptr<Animation> explosionAnimation;
+
 public:
     Enemy(const std::string& name, const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     ~Enemy() override = default;
@@ -21,9 +25,11 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     void shoot();
+    void takeDamage(int damage) override;
 
 protected:
     void initSprite(const std::string& textureName);
+    void initAnimation();
 };
 
 

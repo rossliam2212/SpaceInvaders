@@ -30,7 +30,7 @@ public:
 
     virtual void shoot(const sf::Vector2f& shootPosition) = 0;
 
-//    void cleanUpBullets();
+    void cleanUpBullets();
 
     std::vector<Bullet*> getBullets();
     float getShootCoolDown() const;

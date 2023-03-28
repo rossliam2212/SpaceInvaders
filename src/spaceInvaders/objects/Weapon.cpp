@@ -13,11 +13,11 @@ Weapon::Weapon(float shootCoolDown, const AssetManager& assetManager, const Soun
 }
 
 // TODO Fix this function
-//void Weapon::cleanUpBullets() {
-//    bullets.erase(std::remove_if(std::begin(bullets), std::end(bullets), [](const auto& e) {
-//        return e->isAlive();
-//    }), std::end(bullets));
-//}
+void Weapon::cleanUpBullets() {
+    bullets.erase(std::remove_if(std::begin(bullets), std::end(bullets), [](const auto& e) {
+        return e->isAlive();
+    }), std::end(bullets));
+}
 
 std::vector<Bullet*> Weapon::getBullets() {
     std::vector<Bullet*> tmp;

@@ -42,7 +42,7 @@ public:
     void move(const float& dt, float directionX);
 
     void increaseHealth(int healthIncrease);
-    void takeDamage(int damage);
+    virtual void takeDamage(int damage);
     void kill();
 
     int getHealth() const;

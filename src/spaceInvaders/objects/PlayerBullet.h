@@ -9,7 +9,7 @@
 
 class PlayerBullet : public Bullet {
 private:
-    static constexpr const int PLAYER_BULLET_DAMAGE{120};
+    static constexpr const int PLAYER_BULLET_DAMAGE{100};
     static constexpr const float PLAYER_BULLET_SPEED_MULTIPLIER{25.f};
     static constexpr const float PLAYER_BULLET_SPEED{30.f};
 
