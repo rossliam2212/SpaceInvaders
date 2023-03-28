@@ -19,6 +19,9 @@ set(SOURCE_FILES
         src/spaceInvaders/characters/Player.cpp
         src/spaceInvaders/characters/Enemy.cpp
         src/spaceInvaders/characters/enemies/BlueEnemy.cpp
+        src/spaceInvaders/characters/enemies/YellowEnemy.cpp
+        src/spaceInvaders/characters/enemies/GreenEnemy.cpp
+        src/spaceInvaders/characters/enemies/PurpleEnemy.cpp
 
         src/spaceInvaders/objects/Animation.cpp
         src/spaceInvaders/objects/Weapon.cpp
@@ -50,6 +53,9 @@ set(HEADER_FILES
         src/spaceInvaders/characters/Player.h
         src/spaceInvaders/characters/Enemy.h
         src/spaceInvaders/characters/enemies/BlueEnemy.h
+        src/spaceInvaders/characters/enemies/YellowEnemy.h
+        src/spaceInvaders/characters/enemies/GreenEnemy.h
+        src/spaceInvaders/characters/enemies/PurpleEnemy.h
 
         src/spaceInvaders/objects/Animation.h
         src/spaceInvaders/objects/Weapon.h

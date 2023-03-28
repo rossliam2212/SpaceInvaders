@@ -14,7 +14,6 @@ private:
 public:
     BlueEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     ~BlueEnemy() override = default;
-
 };
 
 
