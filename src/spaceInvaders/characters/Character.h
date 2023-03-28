@@ -20,7 +20,6 @@ protected:
     static constexpr const int MAX_HEALTH{100};
     static constexpr const int MIN_HEALTH{100};
     static constexpr const float SPEED_MULTIPLIER{50.f};
-    static constexpr const int SPRITE_SCALE_UP_FACTOR{10};
 
     static constexpr const float DIRECTION_Y{0.f};
 

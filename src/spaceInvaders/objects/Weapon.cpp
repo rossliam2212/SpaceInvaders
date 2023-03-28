@@ -4,9 +4,8 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : damage{damage},
-      bulletSpeed{bulletSpeed},
+Weapon::Weapon(float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : bulletSpeed{bulletSpeed},
       fireRate{fireRate},
       shootPosition{shootPosition},
       timeSinceLastShot{},
@@ -14,25 +13,12 @@ Weapon::Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f
       soundManager{soundManager} {
 }
 
-void Weapon::update(const float& dt) {
-
-}
-
-void Weapon::render(std::shared_ptr<sf::RenderWindow> window) {
-
-}
-
-void Weapon::shoot() {
-    if (timeSinceLastShot >= 1.f / fireRate) {
-
-        fireRate = 0.f;
-    }
-}
-
-
-int Weapon::getDamage() const {
-    return damage;
-}
+//void Weapon::shoot() {
+//    if (timeSinceLastShot >= 1.f / fireRate) {
+//
+//        fireRate = 0.f;
+//    }
+//}
 
 float Weapon::getBulletSpeed() const {
     return bulletSpeed;
@@ -44,8 +30,4 @@ float Weapon::getFireRate() const {
 
 sf::Vector2f Weapon::getShootPosition() const {
     return shootPosition;
-}
-
-void Weapon::initBulletSprite(const std::string& textureName) {
-
 }

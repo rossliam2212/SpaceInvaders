@@ -7,24 +7,38 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <string>
+
+#include "../managers/AssetManager.h"
+#include "../managers/SoundManager.h"
 
 class Bullet {
-private:
+protected:
     sf::Sprite sprite;
+    sf::Vector2f spawnPosition;
 
     int damage;
     float lifeTime;
     float timeAlive;
 
+    AssetManager assetManager;
+    SoundManager soundManager;
+
 public:
-    Bullet();
+    Bullet(int damage, float lifeTime, const sf::Vector2f& spawnPosition,
+           const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     virtual ~Bullet() = default;
 
-    void update(const float& dt);
-    void render(std::shared_ptr<sf::RenderWindow> window);
+    virtual void update(const float& dt) = 0;
+    virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
     int getDamage() const;
+    float getLifeTime() const;
+    float getTimeAlive() const;
     bool isAlive() const;
+
+protected:
+    void initSprite(const std::string& textureName);
 };
 
 

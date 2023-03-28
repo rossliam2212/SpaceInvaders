@@ -19,6 +19,9 @@ public:
     static constexpr const int FONT_HEADING_2{70};
     static constexpr const int FONT_HEADING_3{50};
 
+    static constexpr const int SPRITE_SCALE_UP_FACTOR{10};
+
+
 private:
     std::unordered_map<std::string, sf::Texture> textures;
     std::unordered_map<std::string, sf::Font> fonts;

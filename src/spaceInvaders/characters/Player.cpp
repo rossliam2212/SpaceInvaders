@@ -58,7 +58,7 @@ void Player::checkForSpriteChange() {
 void Player::initAnimations() {
     sprite.setTexture(assetManager.getTexture("playerShipGrayCenterSheet"));
     sprite.setPosition(position);
-    sprite.setScale(SPRITE_SCALE_UP_FACTOR, SPRITE_SCALE_UP_FACTOR);
+    sprite.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 
     // TODO Make Animations for left and right
     // Center

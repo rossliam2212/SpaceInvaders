@@ -7,18 +7,14 @@
 
 #include <vector>
 
-#include "../managers/AssetManager.h"
 #include "Bullet.h"
-#include "../managers/SoundManager.h"
 
 class Weapon {
-private:
-    sf::Sprite bulletSprite;
+protected:
     std::vector<std::unique_ptr<Bullet>> bullets;
 
     sf::Vector2f shootPosition;
 
-    int damage;
     float bulletSpeed;
     float fireRate;
     float timeSinceLastShot;
@@ -27,22 +23,18 @@ private:
     SoundManager soundManager;
 
 public:
-    Weapon(int damage, float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition,
+    Weapon(float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition,
            const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     virtual ~Weapon() = default;
 
-    void update(const float& dt);
-    void render(std::shared_ptr<sf::RenderWindow> window);
+    virtual void update(const float& dt) = 0;
+    virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
-    void shoot();
+    virtual void shoot() = 0;
 
-    int getDamage() const;
     float getBulletSpeed() const;
     float getFireRate() const;
     sf::Vector2f getShootPosition() const;
-
-protected:
-    void initBulletSprite(const std::string& textureName);
 };
 
 
