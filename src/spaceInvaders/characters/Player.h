@@ -6,7 +6,9 @@
 #define SPACE_INVADERS_PLAYER_H
 
 #include "Character.h"
+#include "../objects/PlayerWeapon.h"
 
+// TODO Rename to "MoveState"
 enum Move {
     still = 0,
     left,
@@ -23,7 +25,11 @@ private:
     sf::Vector2f moveDirection;
     Move moveState{still};
 
+    // TODO Add animation for player death
     std::unordered_map<Move, std::unique_ptr<Animation>> animations;
+
+    std::unique_ptr<PlayerWeapon> weapon;
+    sf::Vector2f shootPosition;
 
 public:
     Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
@@ -39,6 +45,7 @@ private:
     void checkForSpriteChange();
 
     void initAnimations();
+    void initWeapon();
 };
 
 

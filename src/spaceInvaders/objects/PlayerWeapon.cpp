@@ -4,8 +4,8 @@
 
 #include "PlayerWeapon.h"
 
-PlayerWeapon::PlayerWeapon(float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : Weapon{PLAYER_WEAPON_BULLET_SPEED, PLAYER_WEAPON_FIRE_RATE, shootPosition, assetManager, soundManager} {
+PlayerWeapon::PlayerWeapon(const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : Weapon{PLAYER_WEAPON_FIRE_RATE, shootPosition, assetManager, soundManager} {
 }
 
 void PlayerWeapon::update(const float& dt) {

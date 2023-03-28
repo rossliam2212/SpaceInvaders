@@ -10,11 +10,12 @@ PlayerBullet::PlayerBullet(const sf::Vector2f& spawnPosition, const AssetManager
 }
 
 void PlayerBullet::update(const float& dt) {
-    // TODO Move the bullet
-//    sprite.move();
+    // Player bullets only shoot upwards
+    float delta{PLAYER_BULLET_SPEED * dt * PLAYER_BULLET_SPEED_MULTIPLIER};
+    sprite.move(0, delta);
     timeAlive += dt;
 }
 
 void PlayerBullet::render(std::shared_ptr<sf::RenderWindow> window) {
-
+    window->draw(sprite);
 }

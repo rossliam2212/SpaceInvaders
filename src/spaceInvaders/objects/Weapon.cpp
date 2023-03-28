@@ -4,24 +4,12 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : bulletSpeed{bulletSpeed},
-      fireRate{fireRate},
+Weapon::Weapon(float fireRate, const sf::Vector2f& shootPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+    : fireRate{fireRate},
       shootPosition{shootPosition},
       timeSinceLastShot{},
       assetManager{assetManager},
       soundManager{soundManager} {
-}
-
-//void Weapon::shoot() {
-//    if (timeSinceLastShot >= 1.f / fireRate) {
-//
-//        fireRate = 0.f;
-//    }
-//}
-
-float Weapon::getBulletSpeed() const {
-    return bulletSpeed;
 }
 
 float Weapon::getFireRate() const {

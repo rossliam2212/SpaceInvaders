@@ -15,7 +15,6 @@ protected:
 
     sf::Vector2f shootPosition;
 
-    float bulletSpeed;
     float fireRate;
     float timeSinceLastShot;
 
@@ -23,7 +22,7 @@ protected:
     SoundManager soundManager;
 
 public:
-    Weapon(float bulletSpeed, float fireRate, const sf::Vector2f& shootPosition,
+    Weapon(float fireRate, const sf::Vector2f& shootPosition,
            const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     virtual ~Weapon() = default;
 
@@ -32,7 +31,6 @@ public:
 
     virtual void shoot() = 0;
 
-    float getBulletSpeed() const;
     float getFireRate() const;
     sf::Vector2f getShootPosition() const;
 };
