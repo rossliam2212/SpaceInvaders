@@ -93,6 +93,7 @@ void EnemyManager::cleanUpEnemies() {
 }
 
 void EnemyManager::initEnemies() {
+    // TODO Make this more efficient
     auto startTime{std::chrono::steady_clock::now()};
     enemies.reserve(MAX_NUMBER_OF_BLUE_ENEMIES +
                     MAX_NUMBER_OF_GREEN_ENEMIES +
@@ -141,16 +142,15 @@ void EnemyManager::initEnemies() {
         x += GAP_BETWEEN_ENEMIES_X;
         numberOfPurpleEnemies++;
     }
-    logger.info("Blue enemies initialized.", this)
-    ;
+    logger.info("Blue enemies initialized.", this);
+
     auto endTime = std::chrono::steady_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    logger.fatal("Execution time: " + std::to_string(duration.count()), this);
+    logger.timing("initEnemies", duration.count(), this);
 }
 
 void EnemyManager::initAnimation() {
     explosion.setTexture(assetManager.getTexture("explosion"));
-//    explosion.setOrigin((float)explosion.getTexture()->getSize().x/2, (float)explosion.getTexture()->getSize().y/2);
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 
     explosionAnimation = std::make_unique<Animation>(explosion, 1, 3, 0.1f, false);

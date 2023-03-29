@@ -8,10 +8,9 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include <array>
 #include <Logger.h>
-
 #include <chrono>
-#include <thread>
 
 #include "../characters/Player.h"
 #include "../characters/enemies/BlueEnemy.h"
