@@ -99,7 +99,7 @@ void Player::initAnimations() {
 
     // TODO Make Animations for left and right
     // Center
-    animations[still] = std::make_unique<Animation>(sprite, 1, 4, Animation::FRAME_DURATION);
+    animations[still] = std::make_unique<Animation>(sprite, 1, 4, Animation::FRAME_DURATION, true);
 
     // Left
 

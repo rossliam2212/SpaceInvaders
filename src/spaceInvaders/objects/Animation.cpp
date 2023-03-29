@@ -4,13 +4,14 @@
 
 #include "Animation.h"
 
-Animation::Animation(sf::Sprite& spriteSheet, int rows, int cols, float frameDuration) noexcept
+Animation::Animation(sf::Sprite& spriteSheet, int rows, int cols, float frameDuration, bool loop) noexcept
     : sprite{spriteSheet},
       rows{rows},
       cols{cols},
       timeElapsed{},
       frameDuration{frameDuration},
-      currentFrameIndex{} {
+      currentFrameIndex{},
+      loop{loop} {
     setUpSprite();
 }
 

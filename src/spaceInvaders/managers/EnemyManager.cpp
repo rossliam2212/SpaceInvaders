@@ -14,25 +14,51 @@ EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, con
       numberOfYellowEnemies{},
       numberOfPurpleEnemies{} {
     initEnemies();
+    initAnimation();
 }
 
 void EnemyManager::update(const float& dt) {
     cleanUpEnemies();
     checkCollisions();
 
+    if (explosionPlaying) {
+        explosionAnimation->update(dt);
+    }
+
+    if (explosionTimer) {
+        explosionCoolDown -= dt;
+        if (explosionCoolDown <= 0.f) {
+            explosionPlaying = false;
+            explosionTimer = false;
+            explosionCoolDown = 0.5f;
+        }
+    }
+
     for (const auto& enemy : enemies) {
         if (!enemy->isDead()) {
             enemy->update(dt);
+        } else {
+            explosionPlaying = true;
+            createExplosion(enemy->getPosition());
         }
     }
 }
 
 void EnemyManager::render(std::shared_ptr<sf::RenderWindow> window) {
+    if (explosionPlaying) {
+        window->draw(explosion);
+    }
+
     for (const auto& enemy : enemies) {
         if (!enemy->isDead()) {
             enemy->render(window);
         }
     }
+}
+
+void EnemyManager::createExplosion(const sf::Vector2f& position) {
+    explosion.setPosition(position);
+    explosionTimer = true;
 }
 
 void EnemyManager::checkCollisions() {
@@ -67,6 +93,12 @@ void EnemyManager::cleanUpEnemies() {
 }
 
 void EnemyManager::initEnemies() {
+    auto startTime{std::chrono::steady_clock::now()};
+    enemies.reserve(MAX_NUMBER_OF_BLUE_ENEMIES +
+                    MAX_NUMBER_OF_GREEN_ENEMIES +
+                    MAX_NUMBER_OF_YELLOW_ENEMIES +
+                    MAX_NUMBER_OF_PURPLE_ENEMIES);
+
     // Purple Enemies
     float x = START_POSITION_X;
     float y = START_POSITION_Y;
@@ -109,6 +141,18 @@ void EnemyManager::initEnemies() {
         x += GAP_BETWEEN_ENEMIES_X;
         numberOfPurpleEnemies++;
     }
-    logger.info("Blue enemies initialized.", this);
+    logger.info("Blue enemies initialized.", this)
+    ;
+    auto endTime = std::chrono::steady_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    logger.fatal("Execution time: " + std::to_string(duration.count()), this);
+}
+
+void EnemyManager::initAnimation() {
+    explosion.setTexture(assetManager.getTexture("explosion"));
+//    explosion.setOrigin((float)explosion.getTexture()->getSize().x/2, (float)explosion.getTexture()->getSize().y/2);
+    explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
+
+    explosionAnimation = std::make_unique<Animation>(explosion, 1, 3, 0.1f, false);
 }
 

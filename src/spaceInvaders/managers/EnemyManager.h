@@ -10,6 +10,9 @@
 #include <vector>
 #include <Logger.h>
 
+#include <chrono>
+#include <thread>
+
 #include "../characters/Player.h"
 #include "../characters/enemies/BlueEnemy.h"
 #include "../characters/enemies/PurpleEnemy.h"
@@ -29,6 +32,11 @@ private:
     static constexpr const int MAX_NUMBER_OF_PURPLE_ENEMIES{9};
 
     Player* player;
+    sf::Sprite explosion;
+    std::unique_ptr<Animation> explosionAnimation;
+    bool explosionPlaying{false};
+    bool explosionTimer{false};
+    float explosionCoolDown{0.5f};
 
     std::vector<std::unique_ptr<Enemy>> enemies;
     int numberOfBlueEnemies;
@@ -48,9 +56,12 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window);
 
 private:
+    void createExplosion(const sf::Vector2f& position);
+
     void checkCollisions();
     void cleanUpEnemies();
     void initEnemies();
+    void initAnimation();
 };
 
 

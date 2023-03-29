@@ -20,8 +20,10 @@ private:
     float frameDuration;
     int currentFrameIndex;
 
+    bool loop;
+
 public:
-    Animation(sf::Sprite& spriteSheet, int rows, int cols, float frameDuration) noexcept;
+    Animation(sf::Sprite& spriteSheet, int rows, int cols, float frameDuration, bool loop) noexcept;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
