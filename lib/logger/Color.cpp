@@ -2,7 +2,7 @@
 // Created by Liam Ross on 12/03/2023.
 //
 
-#include "include/Color.h"
+#include "Color.h"
 
 namespace logger {
     std::map<logger::RecordColor, std::string> Color::colors;
@@ -31,6 +31,7 @@ namespace logger {
         recordColors[Severity::warning] = colors[yellow];
         recordColors[Severity::error] = colors[red];
         recordColors[Severity::fatal] = colors[redBG];
+        recordColors[Severity::timing] = colors[magentaBG];
     }
 
     void Color::changeRecordColor(Severity severity, RecordColor color) {

@@ -5,6 +5,7 @@
 #ifndef LOGGER_LOGGER_H
 #define LOGGER_LOGGER_H
 
+#include <iostream>
 #include <typeinfo>
 
 #include "Outputter.h"
@@ -26,43 +27,49 @@ namespace logger {
         template<typename T>
         void start(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::start, className});
+            log({message, logger::start, className, false, Record::NO_EXECUTION_TIME});
         }
 
         template<typename T>
         void end(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::end, className});
+            log({message, logger::end, className, false, Record::NO_EXECUTION_TIME});
         }
 
         template<typename T>
         void info(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::info, className});
+            log({message, logger::info, className, false, Record::NO_EXECUTION_TIME});
         }
 
         template<typename T>
         void debug(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::debug, className});
+            log({message, logger::debug, className, false, Record::NO_EXECUTION_TIME});
         }
 
         template<typename T>
         void warning(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::warning, className});
+            log({message, logger::warning, className, false, Record::NO_EXECUTION_TIME});
         }
 
         template<typename T>
         void error(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::error, className});
+            log({message, logger::error, className, false, Record::NO_EXECUTION_TIME});
         }
 
         template<typename T>
         void fatal(const std::string& message, const T& type) {
             std::string className{getClassName(type)};
-            log({message, logger::fatal, className});
+            log({message, logger::fatal, className, false, Record::NO_EXECUTION_TIME});
+        }
+
+        template<typename T>
+        void timing(const std::string& functionName, long executionTime, const T& type) {
+            std::string className{getClassName(type)};
+            log({functionName, logger::timing, className, true, executionTime});
         }
 
         void start(const std::string& message);
@@ -72,6 +79,7 @@ namespace logger {
         void warning(const std::string& message);
         void error(const std::string& message);
         void fatal(const std::string& message);
+        void timing(const std::string& functionName, long executionTime);
 
         static void changeRecordColor(Severity severity, RecordColor color);
 

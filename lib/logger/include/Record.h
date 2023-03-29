@@ -22,11 +22,15 @@ namespace logger {
         debug,
         warning,
         error,
-        fatal
+        fatal,
+        timing
     };
 
     class Record {
         friend std::ostream& operator<<(std::ostream& os, const Record& record);
+
+    public:
+        static constexpr const long NO_EXECUTION_TIME{0};
 
     private:
         std::string clasName;
@@ -34,9 +38,12 @@ namespace logger {
         std::string message;
         Severity severity;
 
+        bool isTiming;
+        long executionTime;
+
     public:
-        Record(const std::string& message, Severity severity);
-        Record(const std::string& message, Severity severity, const std::string& className);
+        Record(const std::string& message, Severity severity, bool timing, long executionTime);
+        Record(const std::string& message, Severity severity, const std::string& className, bool timing, long executionTime);
 
         static std::string getSeverityText(Severity s) ;
         static std::string getColor(Severity s) ;
@@ -45,6 +52,8 @@ namespace logger {
         Date getTime() const;
         std::string getMessage() const;
         Severity getSeverity() const;
+        bool getIsTiming() const;
+        long getExecutionTime() const;
     };
 }
 

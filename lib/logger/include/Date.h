@@ -2,8 +2,8 @@
 // Created by Liam Ross on 15/02/2023.
 //
 
-#ifndef LOGGER_TIME_H
-#define LOGGER_TIME_H
+#ifndef LOGGER_DATE_H
+#define LOGGER_DATE_H
 
 #include <string>
 #include <sstream>
@@ -17,4 +17,4 @@ namespace logger {
 }
 
 
-#endif //LOGGER_TIME_H
+#endif //DATE_TIME_H

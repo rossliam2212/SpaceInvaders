@@ -2,7 +2,7 @@
 // Created by Liam Ross on 10/03/2023.
 //
 
-#include "include/Formatter.h"
+#include "Formatter.h"
 
 namespace logger {
     std::string Formatter::formatConsole(const Record& record) {
@@ -12,9 +12,15 @@ namespace logger {
         ss << std::setw(MAX_SEVERITY_TEXT_LENGTH) << std::left << Record::getSeverityText(record.getSeverity());
 
         if (record.getClassName().empty())
-            ss << " []  " << record.getMessage();
+            ss << " []  ";
         else
-            ss << " [" << record.getClassName() << "]  " << record.getMessage();
+            ss << " [" << record.getClassName() << "]  ";
+
+        if (record.getIsTiming()) {
+            ss << "Execution time of function '" << record.getMessage() << "()' : " << record.getExecutionTime() << "ms";
+        } else {
+            ss << record.getMessage();
+        }
 
         ss << Color::getColors()[RecordColor::white];
         ss << Color::getColors()[RecordColor::reset];
@@ -28,9 +34,15 @@ namespace logger {
         ss << std::setw(MAX_SEVERITY_TEXT_LENGTH) << std::left << Record::getSeverityText(record.getSeverity());
 
         if (record.getClassName().empty())
-            ss << " []  " << record.getMessage();
+            ss << " []  ";
         else
-            ss << " [" << record.getClassName() << "]  " << record.getMessage();
+            ss << " [" << record.getClassName() << "]  ";
+
+        if (record.getIsTiming()) {
+            ss << "Execution time of function '" << record.getMessage() << "()' : " << record.getExecutionTime() << "ms";
+        } else {
+            ss << record.getMessage();
+        }
 
         return ss.str();
     }

@@ -2,21 +2,25 @@
 // Created by Liam Ross on 15/02/2023.
 //
 
-#include "include/Record.h"
+#include "Record.h"
 
 namespace logger {
-    Record::Record(const std::string& message, Severity severity)
+    Record::Record(const std::string& message, Severity severity, bool timing, long executionTime)
         : clasName{""},
           message{message},
           severity{severity},
-          d{} {
+          d{},
+          isTiming{timing},
+          executionTime{executionTime} {
     }
 
-    Record::Record(const std::string& message, logger::Severity severity, const std::string& className)
+    Record::Record(const std::string& message, logger::Severity severity, const std::string& className, bool timing, long executionTime)
         :  clasName{className},
            message{message},
            severity{severity},
-           d{} {
+           d{},
+           isTiming{timing},
+           executionTime{executionTime} {
     }
 
     std::string Record::getSeverityText(Severity s) {
@@ -35,6 +39,8 @@ namespace logger {
                 return "ERROR";
             case fatal:
                 return "FATAL";
+            case timing:
+                return "TIME";
         }
     }
 
@@ -53,6 +59,8 @@ namespace logger {
                 return Color::getRecordColors()[Severity::error];
             case fatal:
                 return Color::getRecordColors()[Severity::fatal];
+            case timing:
+                return Color::getRecordColors()[Severity::timing];
         }
     }
 
@@ -70,6 +78,14 @@ namespace logger {
 
     Severity Record::getSeverity() const {
         return severity;
+    }
+
+    bool Record::getIsTiming() const {
+        return isTiming;
+    }
+
+    long Record::getExecutionTime() const {
+        return executionTime;
     }
 
     std::ostream& operator<<(std::ostream& os, const Record& record) {
