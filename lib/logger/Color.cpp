@@ -2,7 +2,7 @@
 // Created by Liam Ross on 12/03/2023.
 //
 
-#include "Color.h"
+#include "include/Color.h"
 
 namespace logger {
     std::map<logger::RecordColor, std::string> Color::colors;

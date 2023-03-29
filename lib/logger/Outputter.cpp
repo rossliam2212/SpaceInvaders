@@ -2,7 +2,7 @@
 // Created by Liam Ross on 15/02/2023.
 //
 
-#include "Outputter.h"
+#include "include/Outputter.h"
 
 namespace logger {
     Outputter::Outputter(std::string  fileName)

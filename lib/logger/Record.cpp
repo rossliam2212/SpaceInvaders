@@ -2,7 +2,7 @@
 // Created by Liam Ross on 15/02/2023.
 //
 
-#include "Record.h"
+#include "include/Record.h"
 
 namespace logger {
     Record::Record(const std::string& message, Severity severity, bool timing, long executionTime)

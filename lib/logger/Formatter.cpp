@@ -2,7 +2,7 @@
 // Created by Liam Ross on 10/03/2023.
 //
 
-#include "Formatter.h"
+#include "include/Formatter.h"
 
 namespace logger {
     std::string Formatter::formatConsole(const Record& record) {

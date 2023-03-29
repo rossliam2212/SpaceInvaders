@@ -2,7 +2,7 @@
 // Created by Liam Ross on 15/02/2023.
 //
 
-#include "Logger.h"
+#include "include/Logger.h"
 
 namespace logger {
     Logger::Logger()
