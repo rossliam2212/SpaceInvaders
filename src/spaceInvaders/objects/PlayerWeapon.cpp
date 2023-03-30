@@ -17,6 +17,7 @@ void PlayerWeapon::update(const float& dt) {
             isShooting = false;
             shootCoolDownTimer = false;
             shootCoolDown = PLAYER_WEAPON_SHOOT_COOL_DOWN;
+            soundManager.stopSound("playerShootingBulletSound");
         }
     }
 
@@ -36,11 +37,13 @@ void PlayerWeapon::render(std::shared_ptr<sf::RenderWindow> window) {
 }
 
 void PlayerWeapon::shoot(const sf::Vector2f& shootPosition) {
-    // TODO Add shoot sound
     // TODO Add ability to shoot rockets
 
     if (!isShooting) {
         isShooting = true;
+
+        soundManager.startSound("playerShootingBulletSound", assetManager.getSound("playerShootingBulletSound"));
+
         bullets.emplace_back(std::make_unique<PlayerBullet>(shootPosition, assetManager, soundManager));
         shootCoolDownTimer = true;
     }

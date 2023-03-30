@@ -36,6 +36,8 @@ void EnemyManager::update(const float& dt) {
             explosionPlaying = false;
             explosionTimer = false;
             explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
+
+            soundManager.stopSound("explosionSound");
         }
     }
 
@@ -65,6 +67,8 @@ void EnemyManager::render(std::shared_ptr<sf::RenderWindow> window) {
 void EnemyManager::createExplosion(const sf::Vector2f& position) {
     explosion.setPosition(position);
     explosionTimer = true;
+
+    soundManager.startSound("explosionSound", assetManager.getSound("explosionSound"));
 }
 
 void EnemyManager::checkCollisions() {
