@@ -11,6 +11,7 @@ class Enemy : public Character {
 protected:
     static constexpr const float DEFAULT_ENEMY_MOVE_SPEED{1.f};
 
+    int scoreWorth;
     bool isShooting;
 
     bool drawExplosion{false};
@@ -18,7 +19,7 @@ protected:
     std::unique_ptr<Animation> explosionAnimation;
 
 public:
-    Enemy(const std::string& name, const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    Enemy(const std::string& name, const sf::Vector2f& position, int scoreWorth, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
     ~Enemy() override = default;
 
     void update(const float& dt) override;
@@ -30,6 +31,8 @@ public:
     void shoot();
     // TODO May not need
     void takeDamage(int damage) override;
+
+    int getScoreWorth() const;
 
 protected:
     void initSprite(const std::string& textureName);

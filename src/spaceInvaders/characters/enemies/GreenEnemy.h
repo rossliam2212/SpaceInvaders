@@ -10,6 +10,7 @@
 class GreenEnemy : public Enemy {
 private:
     static constexpr const char* GREEN_ENEMY_NAME{"Green Enemy"};
+    static constexpr const int GREEN_ENEMY_SCORE_WORTH{30};
 
 public:
     GreenEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;

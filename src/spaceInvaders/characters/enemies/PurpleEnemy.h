@@ -10,6 +10,7 @@
 class PurpleEnemy : public Enemy {
 private:
     static constexpr const char* PURPLE_ENEMY_NAME{"Purple Enemy"};
+    static constexpr const int PURPLE_ENEMY_SCORE_WORTH{40};
 
 public:
     PurpleEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;

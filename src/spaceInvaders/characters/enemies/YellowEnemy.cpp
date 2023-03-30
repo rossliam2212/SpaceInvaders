@@ -5,6 +5,6 @@
 #include "YellowEnemy.h"
 
 YellowEnemy::YellowEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-    : Enemy{YELLOW_ENEMY_NAME, position, assetManager, soundManager} {
+    : Enemy{YELLOW_ENEMY_NAME, position, YELLOW_ENEMY_SCORE_WORTH, assetManager, soundManager} {
     initSprite("yellowEnemyShip");
 }

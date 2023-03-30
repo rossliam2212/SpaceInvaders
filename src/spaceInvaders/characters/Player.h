@@ -34,6 +34,7 @@ private:
     std::unique_ptr<PlayerWeapon> weapon;
     sf::Vector2f shootPosition;
 
+    int score;
     bool isShootPressed;
 
 public:
@@ -46,6 +47,8 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     PlayerWeapon* getWeapon();
+    void increaseScore(int scoreAmount);
+    int getScore() const;
 
 private:
     void shoot();

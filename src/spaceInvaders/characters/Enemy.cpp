@@ -4,8 +4,9 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(const std::string& name, const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Enemy::Enemy(const std::string& name, const sf::Vector2f& position, int scoreWorth, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : Character{name, position, DEFAULT_ENEMY_MOVE_SPEED, assetManager, soundManager},
+      scoreWorth{scoreWorth},
       isShooting{false},
       explosion{} {
 }
@@ -40,6 +41,10 @@ void Enemy::shoot() {
 
 void Enemy::takeDamage(int damage) {
     Character::takeDamage(damage);
+}
+
+int Enemy::getScoreWorth() const {
+    return scoreWorth;
 }
 
 void Enemy::initSprite(const std::string& textureName) {

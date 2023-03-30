@@ -142,6 +142,7 @@ void EnemyManager::checkCollisions() {
                 if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
                     bullet->setIsAlive(false);
                     enemy->takeDamage(bullet->getDamage());
+                    player->increaseScore(enemy->getScoreWorth());
                     logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
                 }
             }

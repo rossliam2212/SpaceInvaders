@@ -5,6 +5,6 @@
 #include "PurpleEnemy.h"
 
 PurpleEnemy::PurpleEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
-        : Enemy{PURPLE_ENEMY_NAME, position, assetManager, soundManager} {
+        : Enemy{PURPLE_ENEMY_NAME, position, PURPLE_ENEMY_SCORE_WORTH, assetManager, soundManager} {
     initSprite("purpleEnemyShip");
 }
