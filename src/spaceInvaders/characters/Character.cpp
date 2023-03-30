@@ -54,3 +54,7 @@ bool Character::isDead() const {
 sf::FloatRect Character::getHitBox() const {
     return sprite.getGlobalBounds();
 }
+
+sf::Vector2u Character::getSize() const {
+    return sprite.getTexture()->getSize();
+}

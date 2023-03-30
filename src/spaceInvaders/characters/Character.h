@@ -50,6 +50,7 @@ public:
     bool isDead() const;
 
     sf::FloatRect getHitBox() const;
+    sf::Vector2u getSize() const;
 };
 
 

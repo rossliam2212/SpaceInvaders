@@ -24,6 +24,9 @@ public:
     void update(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
+    void moveX(const float& dt, float directionX);
+    void moveY(const float& dt, float directionY);
+
     void shoot();
     // TODO May not need
     void takeDamage(int damage) override;

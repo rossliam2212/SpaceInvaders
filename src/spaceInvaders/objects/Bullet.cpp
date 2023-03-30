@@ -43,7 +43,7 @@ void Bullet::checkForBulletOffScreen() {
     sf::FloatRect screenBounds{0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 
     // If the bullet isn't within the screen bounds, then it is not alive
-    if (!bulletBounds.intersects(screenBounds)) {
+    if (!utilities::checkCollision(bulletBounds, screenBounds)) {
         alive = false;
     }
 }

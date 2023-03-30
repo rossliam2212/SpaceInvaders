@@ -6,6 +6,7 @@
 
 EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : player{player},
+      direction{moveRight},
       assetManager{assetManager},
       soundManager{soundManager},
       logger{"logs"},
@@ -21,8 +22,11 @@ EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, con
 }
 
 void EnemyManager::update(const float& dt) {
+    moveEnemiesX(dt);
     cleanUpEnemies();
     checkCollisions();
+
+    direction = getDirection(dt);
 
     // Only update the animation when an enemy is killed
     if (explosionPlaying) {
@@ -41,13 +45,15 @@ void EnemyManager::update(const float& dt) {
         }
     }
 
-    for (const auto& enemy : enemies) {
-        if (!enemy->isDead()) {
-            enemy->update(dt);
-        } else {
-            // If the enemy is dead, then play the explosion animation at the dead enemies position
-            explosionPlaying = true;
-            createExplosion(enemy->getPosition());
+    if (!allEnemiesDead()) {
+        for (const auto& enemy: enemies) {
+            if (!enemy->isDead()) {
+                enemy->update(dt);
+            } else {
+                // If the enemy is dead, then play the explosion animation at the dead enemies position
+                explosionPlaying = true;
+                createExplosion(enemy->getPosition());
+            }
         }
     }
 }
@@ -57,11 +63,55 @@ void EnemyManager::render(std::shared_ptr<sf::RenderWindow> window) {
         window->draw(explosion);
     }
 
-    for (const auto& enemy : enemies) {
-        if (!enemy->isDead()) {
-            enemy->render(window);
+    if (!allEnemiesDead()) {
+        for (const auto& enemy: enemies) {
+            if (!enemy->isDead()) {
+                enemy->render(window);
+            }
         }
     }
+}
+
+void EnemyManager::moveEnemiesX(const float& dt) {
+    if (!allEnemiesDead()) {
+        for (const auto& enemy : enemies) {
+            if (direction == moveRight) {
+                enemy->moveX(dt, ENEMY_MOVE_X_SPEED);
+            } else if (direction == moveLeft) {
+                enemy->moveX(dt, -ENEMY_MOVE_X_SPEED);
+            }
+        }
+    }
+}
+
+void EnemyManager::moveEnemiesY(const float& dt) {
+    for (const auto& enemy : enemies) {
+//        sf::Vector2f pos{enemy->getPosition()};
+//        sf::Vector2f newPos{sf::Vector2f{pos.x, pos.y + 20.f}};
+//        enemy->setPosition(newPos);
+        enemy->moveY(dt, ENEMY_MOVE_Y_SPEED);
+    }
+}
+
+MoveDirection EnemyManager::getDirection(const float& dt) {
+    if (!allEnemiesDead()) {
+        for (const auto& enemy: enemies) {
+            // TODO Fix this so the enemies don't go off screen
+            sf::FloatRect enemyBounds{enemy->getHitBox()};
+            sf::FloatRect screenBounds{0, 0, static_cast<float>(1500 - enemy->getSize().x), 1500};
+
+            if (!utilities::checkCollision(enemyBounds, screenBounds)) {
+                if (direction == moveRight) {
+                    moveEnemiesY(dt);
+                    return moveLeft;
+                } else {
+                    moveEnemiesY(dt);
+                    return moveRight;
+                }
+            }
+        }
+    }
+    return direction;
 }
 
 void EnemyManager::createExplosion(const sf::Vector2f& position) {
@@ -75,25 +125,32 @@ void EnemyManager::checkCollisions() {
     // Get player bullet sprite
     // Get enemy sprite
     // Check if their boundaries intersect
-    auto playerBullets{player->getWeapon()->getBullets()};
 
-    for (auto& enemy : enemies) {
-        sf::FloatRect enemyHitBox{enemy->getHitBox()};
+    if (!allEnemiesDead() && player != nullptr) {
+        auto playerBullets{player->getWeapon()->getBullets()};
 
-        for (auto& bullet : playerBullets) {
-            if (!bullet->isAlive()) {
-                continue;
-            }
+        for (const auto& enemy: enemies) {
+            sf::FloatRect enemyHitBox{enemy->getHitBox()};
 
-            sf::FloatRect bulletHitBox{bullet->getHitBox()};
+            for (const auto& bullet: playerBullets) {
+                if (!bullet->isAlive()) {
+                    continue;
+                }
 
-            if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
-                bullet->setIsAlive(false);
-                enemy->takeDamage(bullet->getDamage());
-                logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
+                sf::FloatRect bulletHitBox{bullet->getHitBox()};
+
+                if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
+                    bullet->setIsAlive(false);
+                    enemy->takeDamage(bullet->getDamage());
+                    logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
+                }
             }
         }
     }
+}
+
+bool EnemyManager::allEnemiesDead() {
+    return enemies.empty();
 }
 
 void EnemyManager::cleanUpEnemies() {
@@ -114,8 +171,8 @@ void EnemyManager::initEnemies() {
                     MAX_NUMBER_OF_PURPLE_ENEMIES);
 
     // Purple Enemies
-    float x = START_POSITION_X;
-    float y = START_POSITION_Y;
+    float x = ENEMY_START_POSITION_X;
+    float y = ENEMY_START_POSITION_Y;
 
     for (auto i = 0; i < MAX_NUMBER_OF_PURPLE_ENEMIES; ++i) {
         enemies.emplace_back(std::make_unique<PurpleEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
@@ -125,7 +182,7 @@ void EnemyManager::initEnemies() {
     logger.info("Purple enemies initialized.", this);
 
     // Green Enemies
-    x = START_POSITION_X;
+    x = ENEMY_START_POSITION_X;
     y += GAP_BETWEEN_ENEMIES_Y;
 
     for (auto i = 0; i < MAX_NUMBER_OF_GREEN_ENEMIES; ++i) {
@@ -136,7 +193,7 @@ void EnemyManager::initEnemies() {
     logger.info("Purple enemies initialized.", this);
 
     // Yellow Enemies
-    x = START_POSITION_X;
+    x = ENEMY_START_POSITION_X;
     y += GAP_BETWEEN_ENEMIES_Y;
 
     for (auto i = 0; i < MAX_NUMBER_OF_YELLOW_ENEMIES; ++i) {
@@ -147,7 +204,7 @@ void EnemyManager::initEnemies() {
     logger.info("Yellow enemies initialized.", this);
 
     // Blue Enemies
-    x = START_POSITION_X;
+    x = ENEMY_START_POSITION_X;
     y += GAP_BETWEEN_ENEMIES_Y;
 
     for (auto i = 0; i < MAX_NUMBER_OF_BLUE_ENEMIES; ++i) {
@@ -166,6 +223,6 @@ void EnemyManager::initAnimation() {
     explosion.setTexture(assetManager.getTexture("explosion"));
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 
-    explosionAnimation = std::make_unique<Animation>(explosion, 1, 3, 0.1f, false);
+    explosionAnimation = std::make_unique<Animation>(explosion, 1, 3, Animation::FRAME_DURATION, false);
 }
 
