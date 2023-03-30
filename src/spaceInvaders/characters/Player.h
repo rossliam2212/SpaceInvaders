@@ -33,9 +33,10 @@ private:
 
     std::unique_ptr<PlayerWeapon> weapon;
     sf::Vector2f shootPosition;
-
-    int score;
     bool isShootPressed;
+
+    // TODO Add stats for number of each type of enemy killed
+    int score;
 
 public:
     Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;

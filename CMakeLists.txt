@@ -34,7 +34,8 @@ set(SOURCE_FILES
 
         src/spaceInvaders/input/Input.cpp
 
-        src/spaceInvaders/ui/Button.cpp)
+        src/spaceInvaders/ui/Button.cpp
+        src/spaceInvaders/ui/GameStateUI.cpp)
 
 
 set(HEADER_FILES
@@ -68,7 +69,8 @@ set(HEADER_FILES
 
         src/spaceInvaders/input/Input.h
 
-        src/spaceInvaders/ui/Button.h)
+        src/spaceInvaders/ui/Button.h
+        src/spaceInvaders/ui/GameStateUI.h)
 
 add_executable(space_invaders src/main.cpp ${SOURCE_FILES} ${HEADER_FILES})
 

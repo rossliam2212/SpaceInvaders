@@ -26,7 +26,7 @@ enum MoveDirection {
 class EnemyManager {
 private:
     static constexpr const float ENEMY_START_POSITION_X{50.f};
-    static constexpr const float ENEMY_START_POSITION_Y{100.f};
+    static constexpr const float ENEMY_START_POSITION_Y{150.f};
     static constexpr const float GAP_BETWEEN_ENEMIES_X{100.f};
     static constexpr const float GAP_BETWEEN_ENEMIES_Y{100.f};
 

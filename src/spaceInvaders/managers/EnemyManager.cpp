@@ -84,12 +84,15 @@ void EnemyManager::moveEnemiesX(const float& dt) {
     }
 }
 
+// TODO Not Working - FIX
 void EnemyManager::moveEnemiesY(const float& dt) {
-    for (const auto& enemy : enemies) {
+    if (!allEnemiesDead()) {
+        for (const auto& enemy: enemies) {
 //        sf::Vector2f pos{enemy->getPosition()};
 //        sf::Vector2f newPos{sf::Vector2f{pos.x, pos.y + 20.f}};
 //        enemy->setPosition(newPos);
-        enemy->moveY(dt, ENEMY_MOVE_Y_SPEED);
+            enemy->moveY(dt, ENEMY_MOVE_Y_SPEED);
+        }
     }
 }
 
@@ -129,7 +132,7 @@ void EnemyManager::checkCollisions() {
     if (!allEnemiesDead() && player != nullptr) {
         auto playerBullets{player->getWeapon()->getBullets()};
 
-        for (const auto& enemy: enemies) {
+        for (const auto& enemy : enemies) {
             sf::FloatRect enemyHitBox{enemy->getHitBox()};
 
             for (const auto& bullet: playerBullets) {

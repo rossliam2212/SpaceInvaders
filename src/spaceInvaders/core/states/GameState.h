@@ -7,13 +7,15 @@
 
 #include "State.h"
 #include "../../managers/EnemyManager.h"
-#include "../../characters/Player.h"
+#include "../../ui/GameStateUI.h"
 
 class GameState : public State {
 private:
     static constexpr const char* GAME_STATE_KEY_BINDS{"../config/gameStateKeyBinds.ini"};
     Player player;
     EnemyManager enemyManager;
+
+    GameStateUI ui;
 
 public:
     GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,

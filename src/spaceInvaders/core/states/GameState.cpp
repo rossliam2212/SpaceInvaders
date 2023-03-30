@@ -7,18 +7,21 @@
 GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : State(window, states, supportedKeys, assetManager, soundManager),
       player{assetManager, soundManager},
-      enemyManager{&player, assetManager, soundManager} {
+      enemyManager{&player, assetManager, soundManager},
+      ui{&player, assetManager, soundManager} {
     initKeyBinds();
 }
 
 void GameState::update(const float& dt) {
     player.update(dt);
     enemyManager.update(dt);
+    ui.update(dt);
 }
 
 void GameState::render(std::shared_ptr<sf::RenderWindow> window) {
     player.render(window);
     enemyManager.render(window);
+    ui.render(window);
 }
 
 void GameState::initKeyBinds() {
