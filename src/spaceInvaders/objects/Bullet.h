@@ -13,6 +13,10 @@
 #include "../managers/SoundManager.h"
 
 class Bullet {
+private:
+    static constexpr const int WINDOW_WIDTH{1500};
+    static constexpr const int WINDOW_HEIGHT{1500};
+
 protected:
     sf::Sprite sprite;
     sf::Vector2f spawnPosition;

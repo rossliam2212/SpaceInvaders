@@ -4,10 +4,9 @@
 
 #include "GameState.h"
 
-// TODO Change hard coded position for player
 GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
     : State(window, states, supportedKeys, assetManager, soundManager),
-      player{sf::Vector2f{750, 1200}, assetManager, soundManager},
+      player{assetManager, soundManager},
       enemyManager{&player, assetManager, soundManager} {
     initKeyBinds();
 }

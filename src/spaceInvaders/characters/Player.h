@@ -34,7 +34,6 @@ private:
     std::unique_ptr<PlayerWeapon> weapon;
     sf::Vector2f shootPosition;
 
-    // TODO Initialize this in the constructor
     bool isShootPressed;
 
 public:

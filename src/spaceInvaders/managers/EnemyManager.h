@@ -30,13 +30,14 @@ private:
     static constexpr const int MAX_NUMBER_OF_YELLOW_ENEMIES{9};
     static constexpr const int MAX_NUMBER_OF_PURPLE_ENEMIES{9};
 
+    static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
+
     Player* player;
     sf::Sprite explosion;
     std::unique_ptr<Animation> explosionAnimation;
-    // TODO Initialize these in constructor
-    bool explosionPlaying{false};
-    bool explosionTimer{false};
-    float explosionCoolDown{0.5f};
+    bool explosionPlaying;
+    bool explosionTimer;
+    float explosionCoolDown;
 
     std::vector<std::unique_ptr<Enemy>> enemies;
     // TODO May not need these

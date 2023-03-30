@@ -12,10 +12,9 @@ Weapon::Weapon(float shootCoolDown, const AssetManager& assetManager, const Soun
       soundManager{soundManager} {
 }
 
-// TODO Fix this function
 void Weapon::cleanUpBullets() {
     bullets.erase(std::remove_if(std::begin(bullets), std::end(bullets), [](const auto& e) {
-        return e->isAlive();
+        return !e->isAlive();
     }), std::end(bullets));
 }
 

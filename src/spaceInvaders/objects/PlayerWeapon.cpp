@@ -9,7 +9,7 @@ PlayerWeapon::PlayerWeapon(const AssetManager& assetManager, const SoundManager&
 }
 
 void PlayerWeapon::update(const float& dt) {
-//    cleanUpBullets();
+    cleanUpBullets();
 
     if (shootCoolDownTimer) {
         shootCoolDown -= dt;

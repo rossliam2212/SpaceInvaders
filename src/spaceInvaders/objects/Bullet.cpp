@@ -40,9 +40,9 @@ void Bullet::initSprite(const std::string& textureName) {
 
 void Bullet::checkForBulletOffScreen() {
     sf::FloatRect bulletBounds{sprite.getGlobalBounds()};
-    // TODO Make these constants
-    sf::FloatRect screenBounds{0, 0, 1500, 1500};
+    sf::FloatRect screenBounds{0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 
+    // If the bullet isn't within the screen bounds, then it is not alive
     if (!bulletBounds.intersects(screenBounds)) {
         alive = false;
     }

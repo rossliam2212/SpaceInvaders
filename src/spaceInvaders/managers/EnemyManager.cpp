@@ -9,6 +9,9 @@ EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, con
       assetManager{assetManager},
       soundManager{soundManager},
       logger{"logs"},
+      explosionPlaying{false},
+      explosionTimer{false},
+      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
       numberOfBlueEnemies{},
       numberOfGreenEnemies{},
       numberOfYellowEnemies{},
@@ -21,17 +24,18 @@ void EnemyManager::update(const float& dt) {
     cleanUpEnemies();
     checkCollisions();
 
+    // Only update the animation when an enemy is killed
     if (explosionPlaying) {
         explosionAnimation->update(dt);
     }
 
-    // TODO Add constants for these
+    // Displays the explosion animation for a certain amount of time.
     if (explosionTimer) {
         explosionCoolDown -= dt;
         if (explosionCoolDown <= 0.f) {
             explosionPlaying = false;
             explosionTimer = false;
-            explosionCoolDown = 0.5f;
+            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
         }
     }
 
@@ -39,6 +43,7 @@ void EnemyManager::update(const float& dt) {
         if (!enemy->isDead()) {
             enemy->update(dt);
         } else {
+            // If the enemy is dead, then play the explosion animation at the dead enemies position
             explosionPlaying = true;
             createExplosion(enemy->getPosition());
         }
@@ -88,6 +93,7 @@ void EnemyManager::checkCollisions() {
 }
 
 void EnemyManager::cleanUpEnemies() {
+    // If an enemy is dead, then they are removed from the enemies vector
     enemies.erase(std::remove_if(std::begin(enemies), std::end(enemies), [](const auto& e) {
         return e->isDead();
     }), std::end(enemies));
