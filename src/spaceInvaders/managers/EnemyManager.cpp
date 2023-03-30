@@ -25,6 +25,7 @@ void EnemyManager::update(const float& dt) {
         explosionAnimation->update(dt);
     }
 
+    // TODO Add constants for these
     if (explosionTimer) {
         explosionCoolDown -= dt;
         if (explosionCoolDown <= 0.f) {
@@ -94,6 +95,8 @@ void EnemyManager::cleanUpEnemies() {
 
 void EnemyManager::initEnemies() {
     // TODO Make this more efficient
+
+    // Testing execution time
     auto startTime{std::chrono::steady_clock::now()};
     enemies.reserve(MAX_NUMBER_OF_BLUE_ENEMIES +
                     MAX_NUMBER_OF_GREEN_ENEMIES +

@@ -25,11 +25,11 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     void shoot();
+    // TODO May not need
     void takeDamage(int damage) override;
 
 protected:
     void initSprite(const std::string& textureName);
-    void initAnimation();
 };
 
 

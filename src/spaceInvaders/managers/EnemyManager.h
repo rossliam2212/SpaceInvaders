@@ -33,11 +33,13 @@ private:
     Player* player;
     sf::Sprite explosion;
     std::unique_ptr<Animation> explosionAnimation;
+    // TODO Initialize these in constructor
     bool explosionPlaying{false};
     bool explosionTimer{false};
     float explosionCoolDown{0.5f};
 
     std::vector<std::unique_ptr<Enemy>> enemies;
+    // TODO May not need these
     int numberOfBlueEnemies;
     int numberOfGreenEnemies;
     int numberOfYellowEnemies;
