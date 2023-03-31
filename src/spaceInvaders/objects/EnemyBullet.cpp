@@ -4,9 +4,9 @@
 
 #include "EnemyBullet.h"
 
-EnemyBullet::EnemyBullet(const sf::Vector2f& spawnPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+EnemyBullet::EnemyBullet(const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Bullet{ENEMY_BULLET_DAMAGE, spawnPosition, assetManager, soundManager} {
-    initSprite("enemyBullet");
+    initSprite(assetManager.getTexture("enemyBullet"));
 }
 
 void EnemyBullet::update(const float& dt) {

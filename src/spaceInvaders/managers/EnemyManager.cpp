@@ -4,7 +4,14 @@
 
 #include "EnemyManager.h"
 
-EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+const std::vector<std::tuple<std::string, int>> EnemyManager::data {
+        {"Purple", MAX_NUMBER_OF_PURPLE_ENEMIES},
+        {"Green", MAX_NUMBER_OF_GREEN_ENEMIES},
+        {"Yellow", MAX_NUMBER_OF_YELLOW_ENEMIES},
+        {"Blue", MAX_NUMBER_OF_BLUE_ENEMIES}
+};
+
+EnemyManager::EnemyManager(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : player{player},
       direction{moveRight},
       assetManager{assetManager},
@@ -47,7 +54,7 @@ void EnemyManager::update(const float& dt) {
         if (shootCoolDown <= 0.f) {
             shooting = false;
             shootingTimer = false;
-            shootCoolDown = 1.f;
+            shootCoolDown = 3.f;
         }
     }
 
@@ -194,46 +201,26 @@ void EnemyManager::initEnemies() {
                     MAX_NUMBER_OF_YELLOW_ENEMIES +
                     MAX_NUMBER_OF_PURPLE_ENEMIES);
 
-    // Purple Enemies
-    float x = ENEMY_START_POSITION_X;
-    float y = ENEMY_START_POSITION_Y;
+    float x{ENEMY_START_POSITION_X};
+    float y{ENEMY_START_POSITION_Y};
 
-    for (auto i = 0; i < MAX_NUMBER_OF_PURPLE_ENEMIES; ++i) {
-        enemies.emplace_back(std::make_unique<PurpleEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-        x += GAP_BETWEEN_ENEMIES_X;
+    for (const auto& [name, number] : data) {
+        x = ENEMY_START_POSITION_X;
+        for (auto i = 0; i < number; ++i) {
+            if (name == "Blue") {
+                enemies.emplace_back(std::make_unique<BlueEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
+            } else if (name == "Yellow") {
+                enemies.emplace_back(std::make_unique<YellowEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
+            } else if (name == "Green") {
+                enemies.emplace_back(std::make_unique<GreenEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
+            } else {
+                enemies.emplace_back(std::make_unique<PurpleEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
+            }
+            x += GAP_BETWEEN_ENEMIES_X;
+        }
+        y += GAP_BETWEEN_ENEMIES_Y;
+        logger.info(name + " enemies initialized", this);
     }
-    logger.info("Purple enemies initialized.", this);
-
-    // Green Enemies
-    x = ENEMY_START_POSITION_X;
-    y += GAP_BETWEEN_ENEMIES_Y;
-
-    for (auto i = 0; i < MAX_NUMBER_OF_GREEN_ENEMIES; ++i) {
-        enemies.emplace_back(std::make_unique<GreenEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-        x += GAP_BETWEEN_ENEMIES_X;
-    }
-    logger.info("Purple enemies initialized.", this);
-
-    // Yellow Enemies
-    x = ENEMY_START_POSITION_X;
-    y += GAP_BETWEEN_ENEMIES_Y;
-
-    for (auto i = 0; i < MAX_NUMBER_OF_YELLOW_ENEMIES; ++i) {
-        enemies.emplace_back(std::make_unique<YellowEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-        x += GAP_BETWEEN_ENEMIES_X;
-    }
-    logger.info("Yellow enemies initialized.", this);
-
-    // Blue Enemies
-    x = ENEMY_START_POSITION_X;
-    y += GAP_BETWEEN_ENEMIES_Y;
-
-    for (auto i = 0; i < MAX_NUMBER_OF_BLUE_ENEMIES; ++i) {
-        enemies.emplace_back(std::make_unique<BlueEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-        x += GAP_BETWEEN_ENEMIES_X;
-    }
-    logger.info("Blue enemies initialized.", this);
-
     auto endTime = std::chrono::steady_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
     logger.timing("initEnemies", duration.count(), this);

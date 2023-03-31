@@ -13,7 +13,7 @@ private:
     static constexpr const int BLUE_ENEMY_SCORE_WORTH{10};
 
 public:
-    BlueEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    BlueEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~BlueEnemy() override = default;
 };
 

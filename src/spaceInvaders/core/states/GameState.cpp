@@ -4,7 +4,7 @@
 
 #include "GameState.h"
 
-GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : State(window, states, supportedKeys, assetManager, soundManager),
       player{assetManager, soundManager},
       enemyManager{&player, assetManager, soundManager},
@@ -41,7 +41,7 @@ void GameState::initKeyBinds() {
             std::string key;
 
             while (gameStateKeyBindsConfig >> action >> key) {
-                keyBinds[action]=supportedKeys.at(key);
+                keyBinds[action] = supportedKeys.at(key);
             }
             logger.info("Successfully initialized key binds.", this);
         } catch (const std::exception& ex) {

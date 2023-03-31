@@ -4,7 +4,7 @@
 
 #include "GameStateUI.h"
 
-GameStateUI::GameStateUI(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+GameStateUI::GameStateUI(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : player{player},
       assetManager{assetManager},
       soundManager{soundManager} {

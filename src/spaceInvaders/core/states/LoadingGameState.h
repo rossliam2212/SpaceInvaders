@@ -49,13 +49,14 @@ private:
 
     std::array<Asset, 4> assets;
 
+    // TODO Initialize this on constructor
     bool loadNextState{false};
     bool allAssetsLoaded{false};
 
 public:
     LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,
-                     const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager,
-                     const SoundManager& soundManager) noexcept;
+                     const std::unordered_map<std::string, int>& supportedKeys, AssetManager& assetManager,
+                     SoundManager& soundManager) noexcept;
     ~LoadingGameState() override = default;
 
     void update(const float& dt) override;

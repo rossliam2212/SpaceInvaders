@@ -4,36 +4,36 @@
 
 #include "Player.h"
 
-Player::Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Player::Player(AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Character{PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager},
       moveState{still},
+      weapon{assetManager, soundManager},
       score{},
       isShootPressed{false} {
     logger.info("Player initialized.", this);
     initAnimations();
-    initWeapon();
     initStats();
 }
 
-Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Player::Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager},
       moveState{still},
+      weapon{assetManager, soundManager},
       score{},
       isShootPressed{false} {
     logger.info("Player initialized.", this);
     initAnimations();
-    initWeapon();
     initStats();
 }
 
-Player::Player(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Player::Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Character{name, position, speed, assetManager, soundManager},
       moveState{still},
+      weapon{assetManager, soundManager},
       score{},
       isShootPressed{false} {
     logger.info("Player initialized.", this);
     initAnimations();
-    initWeapon();
     initStats();
 }
 
@@ -46,7 +46,7 @@ void Player::update(const float& dt) {
 }
 
 void Player::render(std::shared_ptr<sf::RenderWindow> window) {
-    weapon->render(window);
+    weapon.render(window);
     window->draw(sprite);
 }
 
@@ -59,12 +59,12 @@ void Player::shoot() {
         shootPosition = sf::Vector2f{position.x + SHOOT_POSITION_OFFSET_RIGHT, position.y};
     }
 
-    weapon->shoot(shootPosition);
+    weapon.shoot(shootPosition);
 }
 
 void Player::updateWeapons(const float& dt) {
-    weapon->update(dt);
-    isShootPressed = weapon->getIsShooting();
+    weapon.update(dt);
+    isShootPressed = weapon.getIsShooting();
 }
 
 void Player::getInput(const float& dt) {
@@ -112,10 +112,6 @@ void Player::initAnimations() {
     // Right
 }
 
-void Player::initWeapon() {
-    weapon = std::make_unique<PlayerWeapon>(assetManager, soundManager);
-}
-
 void Player::initStats() {
     killStats["Blue Enemy"] = 0;
     killStats["Yellow Enemy"] = 0;
@@ -124,7 +120,7 @@ void Player::initStats() {
 }
 
 PlayerWeapon* Player::getWeapon() {
-    return weapon.get();
+    return &weapon;
 }
 
 void Player::updateKillStats(const std::string& enemyKilled) {

@@ -51,8 +51,9 @@ private:
 
     bool shooting{false};
     bool shootingTimer{false};
-    float shootCoolDown{1.f};
+    float shootCoolDown{3.f};
 
+    static const std::vector<std::tuple<std::string, int>> data;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
     AssetManager assetManager;
@@ -61,7 +62,7 @@ private:
     logger::Logger logger;
 
 public:
-    EnemyManager(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    EnemyManager(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);

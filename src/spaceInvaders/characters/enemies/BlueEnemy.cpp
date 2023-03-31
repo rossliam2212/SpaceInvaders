@@ -4,7 +4,7 @@
 
 #include "BlueEnemy.h"
 
-BlueEnemy::BlueEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+BlueEnemy::BlueEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Enemy{BLUE_ENEMY_NAME, position, BLUE_ENEMY_SCORE_WORTH, assetManager, soundManager} {
-    initSprite("blueEnemyShip");
+    initSprite(assetManager.getTexture("blueEnemyShip"));
 }

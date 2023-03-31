@@ -4,7 +4,7 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(float shootCoolDown, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Weapon::Weapon(float shootCoolDown, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : shootCoolDown{shootCoolDown},
       isShooting{false},
       shootCoolDownTimer{false},

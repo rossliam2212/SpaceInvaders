@@ -4,7 +4,7 @@
 
 #include "Bullet.h"
 
-Bullet::Bullet(int damage, const sf::Vector2f& spawnPosition, const AssetManager& assetManager,const SoundManager& soundManager) noexcept
+Bullet::Bullet(int damage, const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : spawnPosition{spawnPosition},
       damage{damage},
       alive{true},
@@ -32,8 +32,8 @@ sf::FloatRect Bullet::getHitBox() const {
     return sprite.getGlobalBounds();
 }
 
-void Bullet::initSprite(const std::string& textureName) {
-    sprite.setTexture(assetManager.getTexture(textureName));
+void Bullet::initSprite(const sf::Texture& texture) {
+    sprite.setTexture(texture);
     sprite.setPosition(spawnPosition);
     sprite.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 }

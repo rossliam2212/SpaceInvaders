@@ -4,7 +4,7 @@
 
 #include "EnemyWeapon.h"
 
-EnemyWeapon::EnemyWeapon(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+EnemyWeapon::EnemyWeapon(AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Weapon{ENEMY_WEAPON_SHOOT_COOL_DOWN, assetManager, soundManager} {
 }
 

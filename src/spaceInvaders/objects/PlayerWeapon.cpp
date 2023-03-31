@@ -4,7 +4,7 @@
 
 #include "PlayerWeapon.h"
 
-PlayerWeapon::PlayerWeapon(const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+PlayerWeapon::PlayerWeapon(AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Weapon{PLAYER_WEAPON_SHOOT_COOL_DOWN, assetManager, soundManager} {
 }
 

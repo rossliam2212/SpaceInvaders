@@ -29,8 +29,7 @@ protected:
     SoundManager soundManager;
 
 public:
-    Bullet(int damage, const sf::Vector2f& spawnPosition,
-           const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    Bullet(int damage, const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     virtual ~Bullet() = default;
 
     virtual void update(const float& dt) = 0;
@@ -43,7 +42,7 @@ public:
     sf::FloatRect getHitBox() const;
 
 protected:
-    void initSprite(const std::string& textureName);
+    void initSprite(const sf::Texture& texture);
     void checkForBulletOffScreen();
 };
 

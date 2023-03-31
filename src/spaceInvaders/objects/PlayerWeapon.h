@@ -13,7 +13,7 @@ private:
     static constexpr const float PLAYER_WEAPON_SHOOT_COOL_DOWN{1.f};
 
 public:
-    PlayerWeapon(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    PlayerWeapon(AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~PlayerWeapon() override = default;
 
     void update(const float& dt) override;

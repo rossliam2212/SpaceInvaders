@@ -22,7 +22,7 @@ protected:
     SoundManager soundManager;
 
 public:
-    Weapon(float shootCoolDown, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    Weapon(float shootCoolDown, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     virtual ~Weapon() = default;
 
     virtual void update(const float& dt) = 0;

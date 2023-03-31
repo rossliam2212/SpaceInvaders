@@ -4,16 +4,17 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(const std::string& name, const sf::Vector2f& position, int scoreWorth, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Enemy::Enemy(const std::string& name, const sf::Vector2f& position, int scoreWorth, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Character{name, position, DEFAULT_ENEMY_MOVE_SPEED, assetManager, soundManager},
+      weapon{assetManager, soundManager},
       scoreWorth{scoreWorth},
       isShooting{false},
       explosion{} {
-    initWeapon();
 }
 
 void Enemy::update(const float& dt) {
     position = sprite.getPosition();
+    weapon.update(dt);
 
     if (isDead()) {
         if (!drawExplosion) {
@@ -24,6 +25,7 @@ void Enemy::update(const float& dt) {
 
 void Enemy::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(sprite);
+    weapon.render(window);
 }
 
 void Enemy::moveX(const float& dt, float directionX) {
@@ -37,7 +39,7 @@ void Enemy::moveY(const float& dt, float directionY) {
 }
 
 void Enemy::shoot(const sf::Vector2f& shootPosition) {
-    weapon->shoot(shootPosition);
+    weapon.shoot(shootPosition);
 }
 
 void Enemy::takeDamage(int damage) {
@@ -48,12 +50,9 @@ int Enemy::getScoreWorth() const {
     return scoreWorth;
 }
 
-void Enemy::initSprite(const std::string& textureName) {
-    sprite.setTexture(assetManager.getTexture(textureName));
+void Enemy::initSprite(const sf::Texture& texture) {
+    sprite.setTexture(texture);
     sprite.setPosition(position);
     sprite.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 }
 
-void Enemy::initWeapon() {
-    weapon = std::make_unique<EnemyWeapon>(assetManager, soundManager);
-}

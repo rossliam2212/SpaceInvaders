@@ -4,9 +4,9 @@
 
 #include "PlayerBullet.h"
 
-PlayerBullet::PlayerBullet(const sf::Vector2f& spawnPosition, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+PlayerBullet::PlayerBullet(const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Bullet{PLAYER_BULLET_DAMAGE, spawnPosition, assetManager, soundManager} {
-    initSprite("playerBullet");
+    initSprite(assetManager.getTexture("playerBullet"));
 }
 
 void PlayerBullet::update(const float& dt) {

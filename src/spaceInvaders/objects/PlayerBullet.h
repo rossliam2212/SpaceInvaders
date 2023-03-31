@@ -14,7 +14,7 @@ private:
     static constexpr const float PLAYER_BULLET_SPEED{30.f};
 
 public:
-    PlayerBullet(const sf::Vector2f& spawnPosition, const AssetManager& assetManager,const SoundManager& soundManager) noexcept;
+    PlayerBullet(const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~PlayerBullet() override = default;
 
     void update(const float& dt) override;

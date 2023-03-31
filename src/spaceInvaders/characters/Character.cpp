@@ -4,7 +4,7 @@
 
 #include "Character.h"
 
-Character::Character(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+Character::Character(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : Entity{name, position},
       assetManager{assetManager},
       soundManager{soundManager},

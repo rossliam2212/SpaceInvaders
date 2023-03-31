@@ -13,7 +13,7 @@ private:
     static constexpr const int YELLOW_ENEMY_SCORE_WORTH{20};
 
 public:
-    YellowEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    YellowEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~YellowEnemy() override = default;
 };
 

@@ -33,7 +33,7 @@ protected:
     SoundManager soundManager;
 
 public:
-    Character(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    Character(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~Character() override = default;
 
     virtual void update(const float& dt) = 0;

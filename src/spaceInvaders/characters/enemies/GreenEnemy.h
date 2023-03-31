@@ -13,7 +13,7 @@ private:
     static constexpr const int GREEN_ENEMY_SCORE_WORTH{30};
 
 public:
-    GreenEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    GreenEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~GreenEnemy() override = default;
 };
 

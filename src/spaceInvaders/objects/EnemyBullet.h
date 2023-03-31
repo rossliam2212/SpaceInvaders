@@ -14,7 +14,7 @@ private:
     static constexpr const float ENEMY_BULLET_SPEED{30.f};
 
 public:
-    EnemyBullet(const sf::Vector2f& spawnPosition, const AssetManager& assetManager,const SoundManager& soundManager) noexcept;
+    EnemyBullet(const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~EnemyBullet() override = default;
 
     void update(const float& dt) override;

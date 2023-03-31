@@ -13,7 +13,7 @@ private:
     static constexpr const int PURPLE_ENEMY_SCORE_WORTH{40};
 
 public:
-    PurpleEnemy(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    PurpleEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~PurpleEnemy() override = default;
 };
 

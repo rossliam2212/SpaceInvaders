@@ -18,7 +18,7 @@ private:
     sf::Text scoreText;
 
 public:
-    GameStateUI(Player* player, const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
+    GameStateUI(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);

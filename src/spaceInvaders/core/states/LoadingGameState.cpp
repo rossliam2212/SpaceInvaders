@@ -4,7 +4,7 @@
 
 #include "LoadingGameState.h"
 
-LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
+LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : State(window, states, supportedKeys, assetManager, soundManager),
       progress{0.f},
       backGroundColor{sf::Color{43, 43, 43, 255}},
