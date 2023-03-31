@@ -207,15 +207,7 @@ void EnemyManager::initEnemies() {
     for (const auto& [name, number] : data) {
         x = ENEMY_START_POSITION_X;
         for (auto i = 0; i < number; ++i) {
-            if (name == "Blue") {
-                enemies.emplace_back(std::make_unique<BlueEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-            } else if (name == "Yellow") {
-                enemies.emplace_back(std::make_unique<YellowEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-            } else if (name == "Green") {
-                enemies.emplace_back(std::make_unique<GreenEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-            } else {
-                enemies.emplace_back(std::make_unique<PurpleEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
-            }
+            enemies.emplace_back(EnemyFactory::createEnemy(name, sf::Vector2f{x, y}, assetManager, soundManager));
             x += GAP_BETWEEN_ENEMIES_X;
         }
         y += GAP_BETWEEN_ENEMIES_Y;

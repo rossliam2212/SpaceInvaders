@@ -9,9 +9,9 @@
 #include <memory>
 #include <string>
 
-#include "../managers/AssetManager.h"
-#include "../managers/SoundManager.h"
-#include "../utilities/Utils.h"
+#include "../../managers/AssetManager.h"
+#include "../../managers/SoundManager.h"
+#include "../../utilities/Utils.h"
 
 class Bullet {
 private:

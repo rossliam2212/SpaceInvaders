@@ -13,10 +13,7 @@
 #include <chrono>
 
 #include "../characters/Player.h"
-#include "../characters/enemies/BlueEnemy.h"
-#include "../characters/enemies/PurpleEnemy.h"
-#include "../characters/enemies/YellowEnemy.h"
-#include "../characters/enemies/GreenEnemy.h"
+#include "EnemyFactory.h"
 
 enum MoveDirection {
     moveLeft = 0,

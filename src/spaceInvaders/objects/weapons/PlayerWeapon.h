@@ -6,7 +6,7 @@
 #define SPACE_INVADERS_PLAYERWEAPON_H
 
 #include "Weapon.h"
-#include "PlayerBullet.h"
+#include "../bullets/PlayerBullet.h"
 
 class PlayerWeapon : public Weapon {
 private:

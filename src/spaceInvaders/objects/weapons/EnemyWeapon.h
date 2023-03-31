@@ -6,7 +6,7 @@
 #define SPACE_INVADERS_ENEMYWEAPON_H
 
 #include "Weapon.h"
-#include "EnemyBullet.h"
+#include "../bullets/EnemyBullet.h"
 
 class EnemyWeapon : public Weapon {
 private:

@@ -6,7 +6,7 @@
 #define SPACE_INVADERS_ENEMY_H
 
 #include "Character.h"
-#include "../objects/EnemyWeapon.h"
+#include "../objects/weapons/EnemyWeapon.h"
 
 class Enemy : public Character {
 protected:

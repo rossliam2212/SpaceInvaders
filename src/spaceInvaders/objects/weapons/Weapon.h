@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "Bullet.h"
+#include "../bullets/Bullet.h"
 
 class Weapon {
 protected:

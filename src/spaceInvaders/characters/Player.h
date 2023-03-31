@@ -6,7 +6,7 @@
 #define SPACE_INVADERS_PLAYER_H
 
 #include "Character.h"
-#include "../objects/PlayerWeapon.h"
+#include "../objects/weapons/PlayerWeapon.h"
 #include "../utilities/Utils.h"
 
 enum MoveState {
