@@ -214,7 +214,7 @@ void EnemyManager::initEnemies() {
     for (const auto& [name, number] : data) {
         x = ENEMY_START_POSITION_X;
         for (auto i = 0; i < number; ++i) {
-            enemies.emplace_back(EnemyFactory::createEnemy(name, sf::Vector2f{x, y}, assetManager, soundManager));
+            enemies.emplace_back(enemyFactory.createEnemy(name, sf::Vector2f{x, y}, assetManager, soundManager));
             x += GAP_BETWEEN_ENEMIES_X;
         }
         y += GAP_BETWEEN_ENEMIES_Y;

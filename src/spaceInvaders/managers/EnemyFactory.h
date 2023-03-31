@@ -13,8 +13,22 @@
 #include "../characters/enemies/GreenEnemy.h"
 
 class EnemyFactory {
+private:
+    using CreateFunc = std::unique_ptr<Enemy> (*)(const sf::Vector2f&, AssetManager&, SoundManager&);
+
+    std::unordered_map<std::string, CreateFunc> createFunctions;
+
 public:
-    static std::unique_ptr<Enemy> createEnemy(const std::string& enemyType, const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) ;
+    EnemyFactory();
+    std::unique_ptr<Enemy> createEnemy(const std::string& name, const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager);
+
+private:
+    void registerCreateFunc(const std::string& name, CreateFunc func);
+
+    static std::unique_ptr<Enemy> createBlueEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager);
+    static std::unique_ptr<Enemy> createGreenEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager);
+    static std::unique_ptr<Enemy> createYellowEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager);
+    static std::unique_ptr<Enemy> createPurpleEnemy(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager);
 };
 
 

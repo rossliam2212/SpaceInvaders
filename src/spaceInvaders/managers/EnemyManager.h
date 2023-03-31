@@ -53,6 +53,7 @@ private:
     bool shootingTimer;
     float shootCoolDown;
 
+    EnemyFactory enemyFactory;
     static const std::vector<std::tuple<std::string, int>> data;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
