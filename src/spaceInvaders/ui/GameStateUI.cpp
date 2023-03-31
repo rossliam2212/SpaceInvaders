@@ -9,26 +9,61 @@ GameStateUI::GameStateUI(Player* player, AssetManager& assetManager, SoundManage
       assetManager{assetManager},
       soundManager{soundManager} {
     initText();
+    initSprites();
 }
 
 void GameStateUI::update(const float& dt) {
     scoreText.setString("Score: " + std::to_string(player->getScore()));
-    healthText.setString("Health: " + std::to_string(player->getHealth()));
+
+    calculateHealthBarValue();
+    healthBarBackground.setSize(sf::Vector2f{BAR_LENGTH * healthBarValue, BAR_HEIGHT});
 }
 
 void GameStateUI::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(scoreText);
-    window->draw(healthText);
+
+    window->draw(heartIcon);
+    window->draw(healthBarBackground);
+    window->draw(healthBar);
+
+    window->draw(shieldIcon);
+    window->draw(shieldBar);
+}
+
+void GameStateUI::calculateHealthBarValue() {
+    healthBarValue = (float)player->getHealth() / (float)player->getMaxHealth();
+}
+
+void GameStateUI::calculateShieldBarValue() {
+
 }
 
 void GameStateUI::initText() {
     scoreText.setCharacterSize(50);
-    scoreText.setPosition(sf::Vector2f{100, 50});
+    scoreText.setPosition(sf::Vector2f{100, 35});
     scoreText.setFont(assetManager.getFont("PixelFont"));
     scoreText.setFillColor(assetManager.getColor("white"));
+}
 
-    healthText.setCharacterSize(50);
-    healthText.setPosition(sf::Vector2f{500, 50});
-    healthText.setFont(assetManager.getFont("PixelFont"));
-    healthText.setFillColor(assetManager.getColor("white"));
+void GameStateUI::initSprites() {
+    heartIcon.setTexture(assetManager.getTexture("heartIcon"));
+    heartIcon.setPosition(sf::Vector2f{500, UI_Y_POS});
+    heartIcon.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+
+    healthBar.setTexture(assetManager.getTexture("barWhite"));
+    healthBar.setPosition(sf::Vector2f{575, UI_Y_POS});
+    healthBar.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+
+    healthBarBackground.setPosition(585, UI_Y_POS);
+    healthBarBackground.setSize(sf::Vector2f{BAR_LENGTH, BAR_HEIGHT});
+//    healthBarBackground.setFillColor(assetManager.getColor("healthBarColor"));
+    healthBarBackground.setFillColor(sf::Color{243, 97, 255, 255});
+
+    shieldIcon.setTexture(assetManager.getTexture("shieldIcon"));
+    shieldIcon.setPosition(sf::Vector2f{900, UI_Y_POS});
+    shieldIcon.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+
+    shieldBar.setTexture(assetManager.getTexture("barWhite"));
+    shieldBar.setPosition(sf::Vector2f{975, UI_Y_POS});
+    shieldBar.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 }

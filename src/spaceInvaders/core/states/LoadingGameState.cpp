@@ -83,7 +83,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                                  std::to_string(assetsLoaded) + "/" + std::to_string(asset.numberOfAssets) + ").",
                                  this);
 
-                    window->clear(sf::Color{43, 43, 43, 255});
+                    window->clear(backGroundColor);
                     assetBeingLoaded.setString(
                             "Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) +
                             ", " + std::to_string(b) + ", " + std::to_string(a) + ")");
@@ -144,7 +144,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
         window->clear(sf::Color{43, 43, 43, 255});
         typeOfAssetsBeingLoaded.setString("Successfully loaded " + asset.name + " assets");
         assetBeingLoaded.setString("Waiting...");
-        progressBar.setSize(sf::Vector2f(0, 0));
+        progressBar.setSize(sf::Vector2f(0.f, 0.f));
         window->draw(progressBar);
         window->draw(typeOfAssetsBeingLoaded);
         window->draw(assetBeingLoaded);

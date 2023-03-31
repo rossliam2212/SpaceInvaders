@@ -18,7 +18,7 @@
 class Character : public Entity {
 protected:
     static constexpr const int MAX_HEALTH{100};
-    static constexpr const int MIN_HEALTH{100};
+    static constexpr const int MIN_HEALTH{0};
     static constexpr const float SPEED_MULTIPLIER{50.f};
 
     static constexpr const float DIRECTION_Y{0.f};
@@ -46,6 +46,7 @@ public:
     void kill();
 
     int getHealth() const;
+    int getMaxHealth() const;
     float getSpeed() const;
     bool isDead() const;
 

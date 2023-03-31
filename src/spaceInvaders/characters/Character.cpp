@@ -43,6 +43,10 @@ int Character::getHealth() const {
     return health;
 }
 
+int Character::getMaxHealth() const {
+    return MAX_HEALTH;
+}
+
 float Character::getSpeed() const {
     return speed;
 }
