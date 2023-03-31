@@ -23,6 +23,5 @@ void GameStateUI::initText() {
     scoreText.setCharacterSize(50);
     scoreText.setPosition(sf::Vector2f{100, 50});
     scoreText.setFont(assetManager.getFont("PixelFont"));
-    // TODO Change to use asset manager
-    scoreText.setFillColor(sf::Color::White);
+    scoreText.setFillColor(assetManager.getColor("white"));
 }

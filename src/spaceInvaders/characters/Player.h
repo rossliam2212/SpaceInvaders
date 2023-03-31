@@ -37,6 +37,7 @@ private:
 
     // TODO Add stats for number of each type of enemy killed
     int score;
+    std::unordered_map<std::string, int> killStats;
 
 public:
     Player(const AssetManager& assetManager, const SoundManager& soundManager) noexcept;
@@ -48,6 +49,8 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     PlayerWeapon* getWeapon();
+
+    void updateKillStats(const std::string& enemyKilled);
     void increaseScore(int scoreAmount);
     int getScore() const;
 
@@ -62,6 +65,7 @@ private:
 
     void initAnimations();
     void initWeapon();
+    void initStats();
 };
 
 

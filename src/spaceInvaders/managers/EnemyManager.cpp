@@ -12,11 +12,7 @@ EnemyManager::EnemyManager(Player* player, const AssetManager& assetManager, con
       logger{"logs"},
       explosionPlaying{false},
       explosionTimer{false},
-      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
-      numberOfBlueEnemies{},
-      numberOfGreenEnemies{},
-      numberOfYellowEnemies{},
-      numberOfPurpleEnemies{} {
+      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER} {
     initEnemies();
     initAnimation();
 }
@@ -143,9 +139,10 @@ void EnemyManager::checkCollisions() {
                 sf::FloatRect bulletHitBox{bullet->getHitBox()};
 
                 if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
-                    bullet->setIsAlive(false);
-                    enemy->takeDamage(bullet->getDamage());
-                    player->increaseScore(enemy->getScoreWorth());
+                    bullet->setIsAlive(false); // Kill the bullet
+                    enemy->takeDamage(bullet->getDamage()); // Deal damage to the enemy
+                    player->increaseScore(enemy->getScoreWorth()); // Increase the players score
+                    player->updateKillStats(enemy->getName()); // Update the players kill stats
                     logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
                 }
             }
@@ -181,7 +178,6 @@ void EnemyManager::initEnemies() {
     for (auto i = 0; i < MAX_NUMBER_OF_PURPLE_ENEMIES; ++i) {
         enemies.emplace_back(std::make_unique<PurpleEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
         x += GAP_BETWEEN_ENEMIES_X;
-        numberOfBlueEnemies++;
     }
     logger.info("Purple enemies initialized.", this);
 
@@ -192,7 +188,6 @@ void EnemyManager::initEnemies() {
     for (auto i = 0; i < MAX_NUMBER_OF_GREEN_ENEMIES; ++i) {
         enemies.emplace_back(std::make_unique<GreenEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
         x += GAP_BETWEEN_ENEMIES_X;
-        numberOfGreenEnemies++;
     }
     logger.info("Purple enemies initialized.", this);
 
@@ -203,7 +198,6 @@ void EnemyManager::initEnemies() {
     for (auto i = 0; i < MAX_NUMBER_OF_YELLOW_ENEMIES; ++i) {
         enemies.emplace_back(std::make_unique<YellowEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
         x += GAP_BETWEEN_ENEMIES_X;
-        numberOfYellowEnemies++;
     }
     logger.info("Yellow enemies initialized.", this);
 
@@ -214,7 +208,6 @@ void EnemyManager::initEnemies() {
     for (auto i = 0; i < MAX_NUMBER_OF_BLUE_ENEMIES; ++i) {
         enemies.emplace_back(std::make_unique<BlueEnemy>(sf::Vector2f{x, y}, assetManager, soundManager));
         x += GAP_BETWEEN_ENEMIES_X;
-        numberOfPurpleEnemies++;
     }
     logger.info("Blue enemies initialized.", this);
 

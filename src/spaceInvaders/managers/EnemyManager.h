@@ -50,11 +50,6 @@ private:
     float explosionCoolDown;
 
     std::vector<std::unique_ptr<Enemy>> enemies;
-    // TODO May not need these
-    int numberOfBlueEnemies;
-    int numberOfGreenEnemies;
-    int numberOfYellowEnemies;
-    int numberOfPurpleEnemies;
 
     AssetManager assetManager;
     SoundManager soundManager;

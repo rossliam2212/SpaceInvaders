@@ -12,6 +12,7 @@ Player::Player(const AssetManager& assetManager, const SoundManager& soundManage
     logger.info("Player initialized.", this);
     initAnimations();
     initWeapon();
+    initStats();
 }
 
 Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
@@ -22,6 +23,7 @@ Player::Player(const sf::Vector2f& position, const AssetManager& assetManager, c
     logger.info("Player initialized.", this);
     initAnimations();
     initWeapon();
+    initStats();
 }
 
 Player::Player(const std::string& name, const sf::Vector2f& position, float speed, const AssetManager& assetManager, const SoundManager& soundManager) noexcept
@@ -32,6 +34,7 @@ Player::Player(const std::string& name, const sf::Vector2f& position, float spee
     logger.info("Player initialized.", this);
     initAnimations();
     initWeapon();
+    initStats();
 }
 
 void Player::update(const float& dt) {
@@ -113,8 +116,25 @@ void Player::initWeapon() {
     weapon = std::make_unique<PlayerWeapon>(assetManager, soundManager);
 }
 
+void Player::initStats() {
+    killStats["Blue Enemy"] = 0;
+    killStats["Yellow Enemy"] = 0;
+    killStats["Green Enemy"] = 0;
+    killStats["Purple Enemy"] = 0;
+}
+
 PlayerWeapon* Player::getWeapon() {
     return weapon.get();
+}
+
+void Player::updateKillStats(const std::string& enemyKilled) {
+    int kills = killStats.at(enemyKilled);
+    kills++;
+    killStats.at(enemyKilled) = kills;
+
+//    for (const auto&[enemyName, timesKilled] : killStats) {
+//        logger.debug(enemyName + " kills : " + std::to_string(timesKilled));
+//    }
 }
 
 void Player::increaseScore(int scoreAmount) {
