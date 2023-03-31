@@ -239,9 +239,9 @@ void EnemyManager::initEnemies() {
 
 std::vector<Enemy*> EnemyManager::getEnemies() {
     std::vector<Enemy*> tmp;
-    for (auto& enemy : enemies) {
+    std::for_each(std::begin(enemies), std::end(enemies), [&tmp](const auto& enemy) {
         tmp.emplace_back(enemy.get());
-    }
+    });
     return tmp;
 }
 

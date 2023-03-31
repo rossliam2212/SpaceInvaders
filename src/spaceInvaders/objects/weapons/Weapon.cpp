@@ -20,9 +20,9 @@ void Weapon::cleanUpBullets() {
 
 std::vector<Bullet*> Weapon::getBullets() {
     std::vector<Bullet*> tmp;
-    for (auto& bullet : bullets) {
+    std::for_each(std::begin(bullets), std::end(bullets), [&tmp](const auto& bullet) {
         tmp.emplace_back(bullet.get());
-    }
+    });
     return tmp;
 }
 

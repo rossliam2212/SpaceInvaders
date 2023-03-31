@@ -131,10 +131,6 @@ void Player::updateKillStats(const std::string& enemyKilled) {
     int kills = killStats.at(enemyKilled);
     kills++;
     killStats.at(enemyKilled) = kills;
-
-//    for (const auto&[enemyName, timesKilled] : killStats) {
-//        logger.debug(enemyName + " kills : " + std::to_string(timesKilled));
-//    }
 }
 
 void Player::checkCollisions() {
@@ -153,6 +149,7 @@ void Player::checkCollisions() {
                 if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
                     bullet->setIsAlive(false);
                     takeDamage(bullet->getDamage());
+                    // TODO Add hit sound
                     logger.fatal("Player Hit", this);
                     break;
                 }

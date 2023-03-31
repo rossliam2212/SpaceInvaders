@@ -10,6 +10,7 @@ MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, st
     initSprites();
     initText();
     initButtons();
+    soundManager.startSound("badHabit", assetManager.getSound("badHabit"));
 }
 
 void MainMenuState::update(const float& dt) {
@@ -48,6 +49,11 @@ void MainMenuState::renderButtons(const std::shared_ptr<sf::RenderWindow>& windo
             btn.second->render(window);
         }
     }
+//    std::for_each(buttons.begin(), buttons.end(), [&window](const auto& btn) {
+//        if (btn.second->getShouldDisplay()) {
+//            btn.second->render(window);
+//        }
+//    });
 }
 
 void MainMenuState::initBackground() {
