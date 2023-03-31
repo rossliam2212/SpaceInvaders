@@ -9,6 +9,7 @@ Enemy::Enemy(const std::string& name, const sf::Vector2f& position, int scoreWor
       scoreWorth{scoreWorth},
       isShooting{false},
       explosion{} {
+    initWeapon();
 }
 
 void Enemy::update(const float& dt) {
@@ -35,8 +36,8 @@ void Enemy::moveY(const float& dt, float directionY) {
     sprite.move(DIRECTION_Y, directionY * delta);
 }
 
-void Enemy::shoot() {
-
+void Enemy::shoot(const sf::Vector2f& shootPosition) {
+    weapon->shoot(shootPosition);
 }
 
 void Enemy::takeDamage(int damage) {
@@ -51,4 +52,8 @@ void Enemy::initSprite(const std::string& textureName) {
     sprite.setTexture(assetManager.getTexture(textureName));
     sprite.setPosition(position);
     sprite.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+}
+
+void Enemy::initWeapon() {
+    weapon = std::make_unique<EnemyWeapon>(assetManager, soundManager);
 }

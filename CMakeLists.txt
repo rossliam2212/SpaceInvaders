@@ -28,6 +28,8 @@ set(SOURCE_FILES
         src/spaceInvaders/objects/Bullet.cpp
         src/spaceInvaders/objects/PlayerBullet.cpp
         src/spaceInvaders/objects/PlayerWeapon.cpp
+        src/spaceInvaders/objects/EnemyWeapon.cpp
+        src/spaceInvaders/objects/EnemyBullet.cpp
 
         src/spaceInvaders/utilities/Utils.cpp
         src/spaceInvaders/utilities/FixedClock.cpp
@@ -63,6 +65,8 @@ set(HEADER_FILES
         src/spaceInvaders/objects/Bullet.h
         src/spaceInvaders/objects/PlayerBullet.h
         src/spaceInvaders/objects/PlayerWeapon.h
+        src/spaceInvaders/objects/EnemyWeapon.h
+        src/spaceInvaders/objects/EnemyBullet.h
 
         src/spaceInvaders/utilities/Utils.h
         src/spaceInvaders/utilities/FixedClock.h

@@ -6,11 +6,13 @@
 #define SPACE_INVADERS_ENEMY_H
 
 #include "Character.h"
+#include "../objects/EnemyWeapon.h"
 
 class Enemy : public Character {
 protected:
     static constexpr const float DEFAULT_ENEMY_MOVE_SPEED{1.f};
 
+    std::unique_ptr<EnemyWeapon> weapon;
     int scoreWorth;
     bool isShooting;
 
@@ -28,7 +30,7 @@ public:
     void moveX(const float& dt, float directionX);
     void moveY(const float& dt, float directionY);
 
-    void shoot();
+    void shoot(const sf::Vector2f& shootPosition);
     // TODO May not need
     void takeDamage(int damage) override;
 
@@ -36,6 +38,9 @@ public:
 
 protected:
     void initSprite(const std::string& textureName);
+
+private:
+    void initWeapon();
 };
 
 

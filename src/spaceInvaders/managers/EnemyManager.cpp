@@ -21,6 +21,7 @@ void EnemyManager::update(const float& dt) {
     moveEnemiesX(dt);
     cleanUpEnemies();
     checkCollisions();
+    shoot();
 
     direction = getDirection(dt);
 
@@ -38,6 +39,15 @@ void EnemyManager::update(const float& dt) {
             explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
 
             soundManager.stopSound("explosionSound");
+        }
+    }
+
+    if (shootingTimer) {
+        shootCoolDown -= dt;
+        if (shootCoolDown <= 0.f) {
+            shooting = false;
+            shootingTimer = false;
+            shootCoolDown = 1.f;
         }
     }
 
@@ -88,6 +98,19 @@ void EnemyManager::moveEnemiesY(const float& dt) {
 //        sf::Vector2f newPos{sf::Vector2f{pos.x, pos.y + 20.f}};
 //        enemy->setPosition(newPos);
             enemy->moveY(dt, ENEMY_MOVE_Y_SPEED);
+        }
+    }
+}
+
+void EnemyManager::shoot() {
+    if (!allEnemiesDead()) {
+        if (!shooting) {
+            shooting = true;
+            int randomEnemy{utilities::randomInt(0, (int) enemies.size() - 1)};
+            sf::Vector2f shootPosition{enemies.at(randomEnemy)->getPosition()};
+            enemies.at(randomEnemy)->shoot(shootPosition);
+
+            shootingTimer = true;
         }
     }
 }

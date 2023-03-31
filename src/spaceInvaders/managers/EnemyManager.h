@@ -49,6 +49,10 @@ private:
     bool explosionTimer;
     float explosionCoolDown;
 
+    bool shooting{false};
+    bool shootingTimer{false};
+    float shootCoolDown{1.f};
+
     std::vector<std::unique_ptr<Enemy>> enemies;
 
     AssetManager assetManager;
@@ -65,6 +69,7 @@ public:
 private:
     void moveEnemiesX(const float& dt);
     void moveEnemiesY(const float& dt);
+    void shoot();
     void createExplosion(const sf::Vector2f& position);
 
     bool allEnemiesDead();
