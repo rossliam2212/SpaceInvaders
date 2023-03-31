@@ -31,8 +31,6 @@ public:
     void moveY(const float& dt, float directionY);
 
     void shoot(const sf::Vector2f& shootPosition);
-    // TODO May not need
-    void takeDamage(int damage) override;
 
     int getScoreWorth() const;
 

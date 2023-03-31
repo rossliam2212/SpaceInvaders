@@ -8,7 +8,9 @@ LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& wind
     : State(window, states, supportedKeys, assetManager, soundManager),
       progress{0.f},
       backGroundColor{sf::Color{43, 43, 43, 255}},
-      assets{} {
+      assets{},
+      loadNextState{false},
+      allAssetsLoaded{false} {
     initBackground();
     initFont();
     initText();

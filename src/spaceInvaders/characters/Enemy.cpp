@@ -42,10 +42,6 @@ void Enemy::shoot(const sf::Vector2f& shootPosition) {
     weapon.shoot(shootPosition);
 }
 
-void Enemy::takeDamage(int damage) {
-    Character::takeDamage(damage);
-}
-
 int Enemy::getScoreWorth() const {
     return scoreWorth;
 }

@@ -11,13 +11,19 @@ struct Asset {
     std::string name;
     std::string filePath;
     int numberOfAssets;
-    bool loaded{false};
+    bool loaded;
 
-    Asset() = default;
+    Asset()
+        : name{},
+          filePath{},
+          numberOfAssets{},
+          loaded{false} {
+    }
     Asset(const char* name, const char* filePath, int numberOfAssets)
         : name{name},
           filePath{filePath},
-          numberOfAssets{numberOfAssets} {
+          numberOfAssets{numberOfAssets},
+          loaded{false} {
     }
 };
 
@@ -49,9 +55,8 @@ private:
 
     std::array<Asset, 4> assets;
 
-    // TODO Initialize this on constructor
-    bool loadNextState{false};
-    bool allAssetsLoaded{false};
+    bool loadNextState;
+    bool allAssetsLoaded;
 
 public:
     LoadingGameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,
