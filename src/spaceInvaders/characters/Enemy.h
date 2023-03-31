@@ -33,6 +33,7 @@ public:
     void shoot(const sf::Vector2f& shootPosition);
 
     int getScoreWorth() const;
+    EnemyWeapon* getWeapon();
 
 protected:
     void initSprite(const sf::Texture& texture);

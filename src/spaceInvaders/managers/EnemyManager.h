@@ -15,6 +15,8 @@
 #include "../characters/Player.h"
 #include "EnemyFactory.h"
 
+class Player;
+
 enum MoveDirection {
     moveLeft = 0,
     moveRight
@@ -67,6 +69,8 @@ public:
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
+
+    std::vector<Enemy*> getEnemies();
 
 private:
     void moveEnemiesX(const float& dt);

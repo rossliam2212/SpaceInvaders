@@ -13,10 +13,12 @@ GameStateUI::GameStateUI(Player* player, AssetManager& assetManager, SoundManage
 
 void GameStateUI::update(const float& dt) {
     scoreText.setString("Score: " + std::to_string(player->getScore()));
+    healthText.setString("Health: " + std::to_string(player->getHealth()));
 }
 
 void GameStateUI::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(scoreText);
+    window->draw(healthText);
 }
 
 void GameStateUI::initText() {
@@ -24,4 +26,9 @@ void GameStateUI::initText() {
     scoreText.setPosition(sf::Vector2f{100, 50});
     scoreText.setFont(assetManager.getFont("PixelFont"));
     scoreText.setFillColor(assetManager.getColor("white"));
+
+    healthText.setCharacterSize(50);
+    healthText.setPosition(sf::Vector2f{500, 50});
+    healthText.setFont(assetManager.getFont("PixelFont"));
+    healthText.setFillColor(assetManager.getColor("white"));
 }

@@ -33,7 +33,14 @@ EnemyManager::EnemyManager(Player* player, AssetManager& assetManager, SoundMana
 void EnemyManager::update(const float& dt) {
     moveEnemiesX(dt);
     cleanUpEnemies();
-    checkCollisions();
+
+    // Only checking for collisions if has shot a bullet
+    if (player != nullptr) {
+        if (!player->getWeapon()->getBullets().empty()) {
+            checkCollisions();
+        }
+    }
+
     shoot();
 
     direction = getDirection(dt);
@@ -181,6 +188,7 @@ void EnemyManager::checkCollisions() {
                     player->increaseScore(enemy->getScoreWorth()); // Increase the players score
                     player->updateKillStats(enemy->getName()); // Update the players kill stats
                     logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
+                    break;
                 }
             }
         }
@@ -202,7 +210,7 @@ void EnemyManager::initEnemies() {
     // TODO Make this more efficient
 
     // Testing execution time
-    auto startTime{std::chrono::steady_clock::now()};
+//    auto startTime{std::chrono::steady_clock::now()};
     enemies.reserve(MAX_NUMBER_OF_BLUE_ENEMIES +
                     MAX_NUMBER_OF_GREEN_ENEMIES +
                     MAX_NUMBER_OF_YELLOW_ENEMIES +
@@ -214,15 +222,27 @@ void EnemyManager::initEnemies() {
     for (const auto& [name, number] : data) {
         x = ENEMY_START_POSITION_X;
         for (auto i = 0; i < number; ++i) {
+            auto startTime{std::chrono::steady_clock::now()};
             enemies.emplace_back(enemyFactory.createEnemy(name, sf::Vector2f{x, y}, assetManager, soundManager));
             x += GAP_BETWEEN_ENEMIES_X;
+            auto endTime = std::chrono::steady_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+            logger.timing("initEnemies", duration.count(), this);
         }
         y += GAP_BETWEEN_ENEMIES_Y;
         logger.info(name + " enemies initialized", this);
     }
-    auto endTime = std::chrono::steady_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    logger.timing("initEnemies", duration.count(), this);
+//    auto endTime = std::chrono::steady_clock::now();
+//    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+//    logger.timing("initEnemies", duration.count(), this);
+}
+
+std::vector<Enemy*> EnemyManager::getEnemies() {
+    std::vector<Enemy*> tmp;
+    for (auto& enemy : enemies) {
+        tmp.emplace_back(enemy.get());
+    }
+    return tmp;
 }
 
 

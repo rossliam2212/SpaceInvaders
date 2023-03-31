@@ -16,6 +16,7 @@ private:
     SoundManager soundManager;
 
     sf::Text scoreText;
+    sf::Text healthText;
 
 public:
     GameStateUI(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept;

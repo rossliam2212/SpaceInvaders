@@ -4,40 +4,44 @@
 
 #include "Player.h"
 
-Player::Player(AssetManager& assetManager, SoundManager& soundManager) noexcept
+Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
     : Character{PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager},
       moveState{still},
       weapon{assetManager, soundManager},
       score{},
-      isShootPressed{false} {
+      isShootPressed{false},
+      enemyManager{enemyManager}{
     logger.info("Player initialized.", this);
     initAnimations();
     initStats();
 }
 
-Player::Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept
+Player::Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
     : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager},
       moveState{still},
       weapon{assetManager, soundManager},
       score{},
-      isShootPressed{false} {
+      isShootPressed{false},
+      enemyManager{enemyManager}{
     logger.info("Player initialized.", this);
     initAnimations();
     initStats();
 }
 
-Player::Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager) noexcept
+Player::Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
     : Character{name, position, speed, assetManager, soundManager},
       moveState{still},
       weapon{assetManager, soundManager},
       score{},
-      isShootPressed{false} {
+      isShootPressed{false},
+      enemyManager{enemyManager} {
     logger.info("Player initialized.", this);
     initAnimations();
     initStats();
 }
 
 void Player::update(const float& dt) {
+    checkCollisions();
     getInput(dt);
     move(dt, moveDirection.x);
 
@@ -131,6 +135,30 @@ void Player::updateKillStats(const std::string& enemyKilled) {
 //    for (const auto&[enemyName, timesKilled] : killStats) {
 //        logger.debug(enemyName + " kills : " + std::to_string(timesKilled));
 //    }
+}
+
+void Player::checkCollisions() {
+    auto enemies{enemyManager->getEnemies()};
+
+    for (const auto& enemy : enemies) {
+        auto bullets{enemy->getWeapon()->getBullets()};
+        if (!bullets.empty()) {
+            for (const auto& bullet : bullets) {
+                if (!bullet->isAlive()) {
+                    continue;
+                }
+
+                sf::FloatRect bulletHitBox{bullet->getHitBox()};
+                sf::FloatRect playerHitBox{getHitBox()};
+                if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
+                    bullet->setIsAlive(false);
+                    takeDamage(bullet->getDamage());
+                    logger.fatal("Player Hit", this);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void Player::increaseScore(int scoreAmount) {

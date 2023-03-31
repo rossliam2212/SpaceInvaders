@@ -46,6 +46,10 @@ int Enemy::getScoreWorth() const {
     return scoreWorth;
 }
 
+EnemyWeapon* Enemy::getWeapon() {
+    return &weapon;
+}
+
 void Enemy::initSprite(const sf::Texture& texture) {
     sprite.setTexture(texture);
     sprite.setPosition(position);

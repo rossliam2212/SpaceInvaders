@@ -6,7 +6,7 @@
 
 GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : State(window, states, supportedKeys, assetManager, soundManager),
-      player{assetManager, soundManager},
+      player{assetManager, soundManager, &enemyManager},
       enemyManager{&player, assetManager, soundManager},
       ui{&player, assetManager, soundManager} {
     initKeyBinds();

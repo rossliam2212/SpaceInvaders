@@ -8,6 +8,10 @@
 #include "Character.h"
 #include "../objects/weapons/PlayerWeapon.h"
 #include "../utilities/Utils.h"
+#include "../managers/EnemyManager.h"
+
+
+class EnemyManager;
 
 enum MoveState {
     still = 0,
@@ -31,19 +35,20 @@ private:
     // TODO Add animation for player death
     std::unordered_map<MoveState, std::unique_ptr<Animation>> animations;
 
-//    std::unique_ptr<PlayerWeapon> weapon;
     PlayerWeapon weapon;
     sf::Vector2f shootPosition;
     bool isShootPressed;
+
+    EnemyManager* enemyManager;
 
     // TODO Add stats for number of each type of enemy killed
     int score;
     std::unordered_map<std::string, int> killStats;
 
 public:
-    Player(AssetManager& assetManager, SoundManager& soundManager) noexcept;
-    Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
-    Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager) noexcept;
+    Player(AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept;
+    Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept;
+    Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept;
     ~Player() override = default;
 
     void update(const float& dt) override;
@@ -61,6 +66,7 @@ private:
 
     void getInput(const float& dt);
 
+    void checkCollisions();
     void updateAnimations(const float& dt);
     void checkForSpriteChange();
 
