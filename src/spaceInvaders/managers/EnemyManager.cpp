@@ -17,11 +17,17 @@ EnemyManager::EnemyManager(Player* player, AssetManager& assetManager, SoundMana
       assetManager{assetManager},
       soundManager{soundManager},
       logger{"logs"},
+      explosion{assetManager.getTexture("explosion")},
+      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
       explosionPlaying{false},
       explosionTimer{false},
-      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER} {
+      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
+      shooting{false},
+      shootingTimer{false},
+      shootCoolDown{SHOOT_COOL_DOWN_TIMER} {
     initEnemies();
-    initAnimation();
+
+    explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 }
 
 void EnemyManager::update(const float& dt) {
@@ -34,13 +40,13 @@ void EnemyManager::update(const float& dt) {
 
     // Only update the animation when an enemy is killed
     if (explosionPlaying) {
-        explosionAnimation->update(dt);
+        explosionAnimation.update(dt);
     }
 
     // Displays the explosion animation for a certain amount of time.
     if (explosionTimer) {
         explosionCoolDown -= dt;
-        if (explosionCoolDown <= 0.f) {
+        if (explosionCoolDown <= TIMER_ZERO) {
             explosionPlaying = false;
             explosionTimer = false;
             explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
@@ -51,10 +57,10 @@ void EnemyManager::update(const float& dt) {
 
     if (shootingTimer) {
         shootCoolDown -= dt;
-        if (shootCoolDown <= 0.f) {
+        if (shootCoolDown <= TIMER_ZERO) {
             shooting = false;
             shootingTimer = false;
-            shootCoolDown = 3.f;
+            shootCoolDown = SHOOT_COOL_DOWN_TIMER;
         }
     }
 
@@ -88,10 +94,12 @@ void EnemyManager::render(std::shared_ptr<sf::RenderWindow> window) {
 void EnemyManager::moveEnemiesX(const float& dt) {
     if (!allEnemiesDead()) {
         for (const auto& enemy : enemies) {
-            if (direction == moveRight) {
-                enemy->moveX(dt, ENEMY_MOVE_X_SPEED);
-            } else if (direction == moveLeft) {
-                enemy->moveX(dt, -ENEMY_MOVE_X_SPEED);
+            if (!enemy->isDead()) {
+                if (direction == moveRight) {
+                    enemy->moveX(dt, ENEMY_MOVE_X_SPEED);
+                } else if (direction == moveLeft) {
+                    enemy->moveX(dt, -ENEMY_MOVE_X_SPEED);
+                }
             }
         }
     }
@@ -114,8 +122,7 @@ void EnemyManager::shoot() {
         if (!shooting) {
             shooting = true;
             int randomEnemy{utilities::randomInt(0, (int) enemies.size() - 1)};
-            sf::Vector2f shootPosition{enemies.at(randomEnemy)->getPosition()};
-            enemies.at(randomEnemy)->shoot(shootPosition);
+            enemies.at(randomEnemy)->shoot(enemies.at(randomEnemy)->getPosition());
 
             shootingTimer = true;
         }
@@ -161,7 +168,7 @@ void EnemyManager::checkCollisions() {
         for (const auto& enemy : enemies) {
             sf::FloatRect enemyHitBox{enemy->getHitBox()};
 
-            for (const auto& bullet: playerBullets) {
+            for (const auto& bullet : playerBullets) {
                 if (!bullet->isAlive()) {
                     continue;
                 }
@@ -201,7 +208,7 @@ void EnemyManager::initEnemies() {
                     MAX_NUMBER_OF_YELLOW_ENEMIES +
                     MAX_NUMBER_OF_PURPLE_ENEMIES);
 
-    float x{ENEMY_START_POSITION_X};
+    float x;
     float y{ENEMY_START_POSITION_Y};
 
     for (const auto& [name, number] : data) {
@@ -218,10 +225,4 @@ void EnemyManager::initEnemies() {
     logger.timing("initEnemies", duration.count(), this);
 }
 
-void EnemyManager::initAnimation() {
-    explosion.setTexture(assetManager.getTexture("explosion"));
-    explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
-
-    explosionAnimation = std::make_unique<Animation>(explosion, 1, 3, Animation::FRAME_DURATION, false);
-}
 

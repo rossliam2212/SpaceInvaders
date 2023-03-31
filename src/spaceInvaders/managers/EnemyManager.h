@@ -35,20 +35,23 @@ private:
     static constexpr const int MAX_NUMBER_OF_YELLOW_ENEMIES{10};
     static constexpr const int MAX_NUMBER_OF_PURPLE_ENEMIES{10};
 
+    static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
+    static constexpr const float SHOOT_COOL_DOWN_TIMER{3.f};
 
     Player* player;
     MoveDirection direction;
 
     sf::Sprite explosion;
-    std::unique_ptr<Animation> explosionAnimation;
+    Animation explosionAnimation;
+
     bool explosionPlaying;
     bool explosionTimer;
     float explosionCoolDown;
 
-    bool shooting{false};
-    bool shootingTimer{false};
-    float shootCoolDown{3.f};
+    bool shooting;
+    bool shootingTimer;
+    float shootCoolDown;
 
     static const std::vector<std::tuple<std::string, int>> data;
     std::vector<std::unique_ptr<Enemy>> enemies;
@@ -75,7 +78,6 @@ private:
     void cleanUpEnemies();
     MoveDirection getDirection(const float& dt);
     void initEnemies();
-    void initAnimation();
 };
 
 
