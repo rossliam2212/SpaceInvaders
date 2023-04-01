@@ -15,6 +15,8 @@ private:
 
     bool startPressed{false};
 
+    std::unique_ptr<GameState> gameState;
+
 public:
     MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states,
                   const std::unordered_map<std::string, int>& supportedKeys, AssetManager& assetManager,

@@ -29,6 +29,8 @@ private:
     static constexpr const float SHOOT_POSITION_OFFSET_LEFT{30.f};
     static constexpr const float SHOOT_POSITION_OFFSET_RIGHT{40.f};
 
+    static constexpr const int MAX_PLAYER_SHIELD_HEALTH{100.f};
+
     sf::Vector2f moveDirection;
     MoveState moveState{still};
 
@@ -39,7 +41,10 @@ private:
     sf::Vector2f shootPosition;
     bool isShootPressed;
 
-    EnemyManager* enemyManager;
+    int shieldHealth;
+    bool hasShield;
+
+    EnemyManager* enemyManager; // Needs access to the enemies for collision checking
 
     // TODO Add stats for number of each type of enemy killed
     int score;
@@ -56,6 +61,9 @@ public:
 
     PlayerWeapon* getWeapon();
 
+    int getShieldHealth() const;
+    bool getHasShield() const;
+
     void updateKillStats(const std::string& enemyKilled);
     void increaseScore(int scoreAmount);
     int getScore() const;
@@ -71,7 +79,6 @@ private:
     void checkForSpriteChange();
 
     void initAnimations();
-    void initWeapon();
     void initStats();
 };
 

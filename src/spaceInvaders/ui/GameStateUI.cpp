@@ -7,7 +7,8 @@
 GameStateUI::GameStateUI(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : player{player},
       assetManager{assetManager},
-      soundManager{soundManager} {
+      soundManager{soundManager},
+      healthBarValue{} {
     initText();
     initSprites();
 }
@@ -31,7 +32,7 @@ void GameStateUI::render(std::shared_ptr<sf::RenderWindow> window) {
 }
 
 void GameStateUI::calculateHealthBarValue() {
-    healthBarValue = (float)player->getHealth() / (float)player->getMaxHealth();
+    healthBarValue = (float)player->getHealth() / (float)Player::getMaxHealth();
 }
 
 void GameStateUI::calculateShieldBarValue() {
@@ -40,30 +41,33 @@ void GameStateUI::calculateShieldBarValue() {
 
 void GameStateUI::initText() {
     scoreText.setCharacterSize(50);
-    scoreText.setPosition(sf::Vector2f{100, 35});
+    scoreText.setPosition(sf::Vector2f{100.f, 35.f});
     scoreText.setFont(assetManager.getFont("PixelFont"));
     scoreText.setFillColor(assetManager.getColor("white"));
 }
 
 void GameStateUI::initSprites() {
     heartIcon.setTexture(assetManager.getTexture("heartIcon"));
-    heartIcon.setPosition(sf::Vector2f{500, UI_Y_POS});
+    heartIcon.setPosition(sf::Vector2f{500.f, UI_Y_POS});
     heartIcon.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 
     healthBar.setTexture(assetManager.getTexture("barWhite"));
-    healthBar.setPosition(sf::Vector2f{575, UI_Y_POS});
+    healthBar.setPosition(sf::Vector2f{575.f, UI_Y_POS});
     healthBar.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 
-    healthBarBackground.setPosition(585, UI_Y_POS);
+    healthBarBackground.setPosition(585.f, UI_Y_POS);
     healthBarBackground.setSize(sf::Vector2f{BAR_LENGTH, BAR_HEIGHT});
-//    healthBarBackground.setFillColor(assetManager.getColor("healthBarColor"));
-    healthBarBackground.setFillColor(sf::Color{243, 97, 255, 255});
+    healthBarBackground.setFillColor(assetManager.getColor("healthBarColor"));
 
     shieldIcon.setTexture(assetManager.getTexture("shieldIcon"));
-    shieldIcon.setPosition(sf::Vector2f{900, UI_Y_POS});
+    shieldIcon.setPosition(sf::Vector2f{900.f, UI_Y_POS});
     shieldIcon.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 
     shieldBar.setTexture(assetManager.getTexture("barWhite"));
-    shieldBar.setPosition(sf::Vector2f{975, UI_Y_POS});
+    shieldBar.setPosition(sf::Vector2f{975.f, UI_Y_POS});
     shieldBar.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+
+    shieldBarBackground.setPosition(985.f, UI_Y_POS);
+    shieldBarBackground.setSize(sf::Vector2f{BAR_LENGTH, BAR_HEIGHT});
+    shieldBarBackground.setFillColor(assetManager.getColor("shieldBarColor"));
 }

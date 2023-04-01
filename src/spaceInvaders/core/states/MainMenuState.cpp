@@ -10,6 +10,9 @@ MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, st
     initSprites();
     initText();
     initButtons();
+
+    // Initializing GameState here to stop waiting time when the Start Button is pressed
+    gameState = std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager);
     soundManager.startSound("badHabit", assetManager.getSound("badHabit"));
 }
 
@@ -32,7 +35,8 @@ void MainMenuState::updateButtons() {
 
     if (buttons.at("startBtn")->isPressed() && !startPressed) {
         logger.info("Starting GameState.", this);
-        states.push(std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager));
+//        states.push(std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager));
+        states.push(std::move(gameState));
         startPressed = true;
     }
 
@@ -64,8 +68,8 @@ void MainMenuState::initBackground() {
 void MainMenuState::initSprites() {
     logoSprite.setTexture(assetManager.getTexture("mainMenuLogoPixel"));
     sf::Vector2f spriteSize(logoSprite.getGlobalBounds().width, logoSprite.getGlobalBounds().height);
-    logoSprite.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
-    logoSprite.setPosition(sf::Vector2f{static_cast<float>(window->getSize().x/2), static_cast<float>(window->getSize().y/2.f)});
+    logoSprite.setOrigin(spriteSize.x / 2.f, spriteSize.y / 2.f);
+    logoSprite.setPosition(sf::Vector2f{static_cast<float>(window->getSize().x/2.f), static_cast<float>(window->getSize().y/2.f)});
 }
 
 void MainMenuState::initText() { }

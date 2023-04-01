@@ -46,7 +46,7 @@ public:
     void kill();
 
     int getHealth() const;
-    int getMaxHealth() const;
+    static int getMaxHealth() ;
     float getSpeed() const;
     bool isDead() const;
 

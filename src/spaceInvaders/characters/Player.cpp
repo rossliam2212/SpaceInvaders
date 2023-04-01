@@ -158,6 +158,14 @@ void Player::checkCollisions() {
     }
 }
 
+int Player::getShieldHealth() const {
+    return shieldHealth;
+}
+
+bool Player::getHasShield() const {
+    return hasShield;
+}
+
 void Player::increaseScore(int scoreAmount) {
     score += scoreAmount;
 }

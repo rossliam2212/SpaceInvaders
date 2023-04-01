@@ -26,6 +26,7 @@ private:
     sf::Sprite healthBar;
     sf::RectangleShape healthBarBackground;
 
+    bool hasShield{false};
     sf::Sprite shieldIcon;
     sf::Sprite shieldBar;
     sf::RectangleShape shieldBarBackground;

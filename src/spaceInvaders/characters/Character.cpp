@@ -43,7 +43,7 @@ int Character::getHealth() const {
     return health;
 }
 
-int Character::getMaxHealth() const {
+int Character::getMaxHealth() {
     return MAX_HEALTH;
 }
 
