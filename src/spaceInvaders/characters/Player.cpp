@@ -7,6 +7,11 @@
 Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
     : Character{PLAYER_NAME, sf::Vector2f{START_POSITION_X, START_POSITION_Y}, PLAYER_SPEED, assetManager, soundManager},
       moveState{still},
+      explosion{assetManager.getTexture("explosion")},
+      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
+      explosionPlaying{false},
+      explosionTimer{false},
+      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
       weapon{assetManager, soundManager},
       score{},
       isShootPressed{false},
@@ -19,6 +24,11 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
 Player::Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
     : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager},
       moveState{still},
+      explosion{assetManager.getTexture("explosion")},
+      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
+      explosionPlaying{false},
+      explosionTimer{false},
+      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
       weapon{assetManager, soundManager},
       score{},
       isShootPressed{false},
@@ -31,6 +41,11 @@ Player::Player(const sf::Vector2f& position, AssetManager& assetManager, SoundMa
 Player::Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
     : Character{name, position, speed, assetManager, soundManager},
       moveState{still},
+      explosion{assetManager.getTexture("explosion")},
+      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
+      explosionPlaying{false},
+      explosionTimer{false},
+      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
       weapon{assetManager, soundManager},
       score{},
       isShootPressed{false},
@@ -41,17 +56,51 @@ Player::Player(const std::string& name, const sf::Vector2f& position, float spee
 }
 
 void Player::update(const float& dt) {
-    checkCollisions();
-    getInput(dt);
-    move(dt, moveDirection.x);
+    if (explosionPlaying) {
+        explosionAnimation.update(dt);
+    }
 
-    updateAnimations(dt);
-    updateWeapons(dt);
+    // Displays the explosion animation for a certain amount of time.
+    if (explosionTimer) {
+        explosionCoolDown -= dt;
+        if (explosionCoolDown <= TIMER_ZERO) {
+            explosionPlaying = false;
+            explosionTimer = false;
+            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
+
+            soundManager.stopSound("biggerExplosionSound");
+            deathTimer = true;
+        }
+    }
+
+    // Gives time for the death animation to play before going back to the main menu
+    if (deathTimer) {
+        deathCoolDown -= dt;
+        if (deathCoolDown <= TIMER_ZERO) {
+            deathTimer = false;
+            Character::kill();
+        }
+    }
+
+    if (!explosionPlaying && !deathTimer) {
+        checkCollisions();
+        getInput(dt);
+        move(dt, moveDirection.x);
+
+        updateAnimations(dt);
+        updateWeapons(dt);
+    }
 }
 
 void Player::render(std::shared_ptr<sf::RenderWindow> window) {
-    weapon.render(window);
-    window->draw(sprite);
+    if (!explosionPlaying && !deathTimer) {
+        weapon.render(window);
+        window->draw(sprite);
+    } else {
+        if (explosionTimer) {
+            window->draw(explosion);
+        }
+    }
 }
 
 void Player::shoot() {
@@ -64,6 +113,18 @@ void Player::shoot() {
     }
 
     weapon.shoot(shootPosition);
+}
+
+void Player::kill() {
+    explosionPlaying = true;
+    createExplosion();
+}
+
+void Player::createExplosion() {
+    explosion.setPosition(sprite.getPosition());
+    explosionTimer = true;
+
+    soundManager.startSound("biggerExplosionSound", assetManager.getSound("biggerExplosionSound"));
 }
 
 void Player::updateWeapons(const float& dt) {
@@ -103,6 +164,8 @@ void Player::checkForSpriteChange() {
 }
 
 void Player::initAnimations() {
+    explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+
     sprite.setTexture(assetManager.getTexture("playerShipGrayCenterSheet"));
     sprite.setPosition(position);
     sprite.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);

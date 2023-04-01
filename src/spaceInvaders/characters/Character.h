@@ -43,7 +43,7 @@ public:
 
     void increaseHealth(int healthIncrease);
     void takeDamage(int damage);
-    void kill();
+    virtual void kill();
 
     int getHealth() const;
     static int getMaxHealth() ;

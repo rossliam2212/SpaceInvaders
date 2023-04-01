@@ -16,6 +16,12 @@ void GameState::update(const float& dt) {
     player.update(dt);
     enemyManager.update(dt);
     ui.update(dt);
+
+    if (player.isDead()) {
+        logger.info("Player killed!", this);
+        logger.info("Ending state.", this);
+        endState();
+    }
 }
 
 void GameState::render(std::shared_ptr<sf::RenderWindow> window) {

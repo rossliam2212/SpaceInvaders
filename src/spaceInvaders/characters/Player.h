@@ -29,13 +29,25 @@ private:
     static constexpr const float SHOOT_POSITION_OFFSET_LEFT{30.f};
     static constexpr const float SHOOT_POSITION_OFFSET_RIGHT{40.f};
 
-    static constexpr const int MAX_PLAYER_SHIELD_HEALTH{100.f};
+    static constexpr const float TIMER_ZERO{0.f};
+    static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
+    static constexpr const int MAX_PLAYER_SHIELD_HEALTH{100};
 
     sf::Vector2f moveDirection;
     MoveState moveState{still};
 
     // TODO Add animation for player death
     std::unordered_map<MoveState, std::unique_ptr<Animation>> animations;
+
+    sf::Sprite explosion;
+    Animation explosionAnimation;
+    bool explosionPlaying;
+    bool explosionTimer;
+    float explosionCoolDown;
+
+    bool death{false};
+    bool deathTimer{false};
+    float deathCoolDown{0.5f};
 
     PlayerWeapon weapon;
     sf::Vector2f shootPosition;
@@ -46,7 +58,6 @@ private:
 
     EnemyManager* enemyManager; // Needs access to the enemies for collision checking
 
-    // TODO Add stats for number of each type of enemy killed
     int score;
     std::unordered_map<std::string, int> killStats;
 
@@ -58,6 +69,8 @@ public:
 
     void update(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;
+
+    void kill() override;
 
     PlayerWeapon* getWeapon();
 
@@ -74,6 +87,7 @@ private:
 
     void getInput(const float& dt);
 
+    void createExplosion();
     void checkCollisions();
     void updateAnimations(const float& dt);
     void checkForSpriteChange();
