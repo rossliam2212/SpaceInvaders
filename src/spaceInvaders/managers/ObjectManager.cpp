@@ -7,7 +7,8 @@
 ObjectManager::ObjectManager(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : player{player},
       assetManager{assetManager},
-      soundManager{soundManager} {
+      soundManager{soundManager},
+      logger{"logs"} {
     createPowerUp();
 }
 
@@ -43,6 +44,10 @@ void ObjectManager::checkCollisions() {
             if (utilities::checkCollision(powerUpHitBox, playerHitBox)) {
                 if (powerUp->getName() == "Health") {
                     player->increaseHealth(100);
+                    logger.debug("Player collected Health Power Up", this);
+
+                    // TODO Fix this sound not working
+                    soundManager.startSound("healthPowerUpSound", assetManager.getSound("healthPowerUpSound"));
                 } else if (powerUp->getName() == "Shield") {
                     player->setHasShield(true);
                 }

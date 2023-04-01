@@ -64,6 +64,12 @@ private:
     sf::Vector2f shootPosition;
     bool isShootPressed;
 
+
+    sf::Sprite shield;
+    Animation shieldAnimation;
+    bool shieldPlaying{false};
+    bool shieldTimer{false};
+    float shieldCoolDown{0.5f};
     int shieldHealth;
     bool hasShield;
 
@@ -85,6 +91,7 @@ public:
     int getShieldHealth() const;
     bool getHasShield() const;
     void setHasShield(bool shield);
+    int getShieldMaxHealth() const;
 
     void updateKillStats(const std::string& enemyKilled);
     void increaseScore(int scoreAmount);

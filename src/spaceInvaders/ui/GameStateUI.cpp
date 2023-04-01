@@ -8,7 +8,8 @@ GameStateUI::GameStateUI(Player* player, AssetManager& assetManager, SoundManage
     : player{player},
       assetManager{assetManager},
       soundManager{soundManager},
-      healthBarValue{} {
+      healthBarValue{},
+      shieldBarValue{} {
     initText();
     initSprites();
 }
@@ -18,6 +19,9 @@ void GameStateUI::update(const float& dt) {
 
     calculateHealthBarValue();
     healthBarBackground.setSize(sf::Vector2f{BAR_LENGTH * healthBarValue, BAR_HEIGHT});
+
+    calculateShieldBarValue();
+    shieldBarBackground.setSize(sf::Vector2f{BAR_LENGTH * shieldBarValue, BAR_HEIGHT});
 }
 
 void GameStateUI::render(std::shared_ptr<sf::RenderWindow> window) {
@@ -28,6 +32,9 @@ void GameStateUI::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(healthBar);
 
     window->draw(shieldIcon);
+    if (player->getHasShield()) {
+        window->draw(shieldBarBackground);
+    }
     window->draw(shieldBar);
 }
 
@@ -36,7 +43,7 @@ void GameStateUI::calculateHealthBarValue() {
 }
 
 void GameStateUI::calculateShieldBarValue() {
-
+    shieldBarValue = (float)player->getShieldHealth() / (float)player->getShieldMaxHealth();
 }
 
 void GameStateUI::initText() {

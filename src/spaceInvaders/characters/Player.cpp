@@ -17,6 +17,8 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
       weapon{assetManager, soundManager},
       playerStats{},
       isShootPressed{false},
+      shield{assetManager.getTexture("shieldAnimation")},
+      shieldAnimation{shield, 1, 4, Animation::FRAME_DURATION, false},
       shieldHealth{MAX_PLAYER_SHIELD_HEALTH},
       hasShield{false},
       enemyManager{enemyManager}{
@@ -25,13 +27,29 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
 }
 
 void Player::update(const float& dt) {
+    position = sprite.getPosition();
+
     // Only update the explosion animation when the player has been killed
     if (explosionPlaying) {
+        shield.setPosition(position);
         explosionAnimation.update(dt);
     }
 
     updateDeathTimer(dt);
     updateExplosionTimer(dt);
+
+    if (shieldPlaying) {
+        shieldAnimation.update(dt);
+    }
+
+    if (shieldTimer) {
+        shieldCoolDown -= dt;
+        if (shieldCoolDown <= TIMER_ZERO) {
+            shieldPlaying = false;
+            shieldCoolDown = false;
+            shield.setTexture(assetManager.getTexture("shieldAroundPlayer"));
+        }
+    }
 
     // Don't update the player after death
     if (!explosionPlaying && !deathTimer) {
@@ -48,6 +66,14 @@ void Player::render(std::shared_ptr<sf::RenderWindow> window) {
     if (!explosionPlaying && !deathTimer) {
         weapon.render(window);
         window->draw(sprite);
+
+        if (shieldTimer) {
+            window->draw(shield);
+        }
+
+        if (hasShield && !shieldTimer) {
+            window->draw(shield);
+        }
     } else {
         if (explosionTimer) {
             window->draw(explosion);
@@ -144,6 +170,7 @@ void Player::checkForSpriteChange() {
 
 void Player::initAnimations() {
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+    shield.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
 
     sprite.setTexture(assetManager.getTexture("playerShipGrayCenterSheet"));
     sprite.setPosition(position);
@@ -206,7 +233,13 @@ bool Player::getHasShield() const {
 }
 
 void Player::setHasShield(bool shield) {
+    shieldPlaying = true;
+    shieldTimer = true;
     hasShield = shield;
+}
+
+int Player::getShieldMaxHealth() const {
+    return MAX_PLAYER_SHIELD_HEALTH;
 }
 
 void Player::increaseScore(int scoreAmount) {
