@@ -8,6 +8,9 @@
 #include "PowerUp.h"
 
 class ShieldPowerUp : public PowerUp {
+private:
+    static constexpr const char* POWER_UP_NAME{"Shield"};
+
 public:
     ShieldPowerUp(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~ShieldPowerUp() override = default;

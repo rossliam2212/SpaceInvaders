@@ -8,6 +8,9 @@
 #include "PowerUp.h"
 
 class HealthPowerUp : public PowerUp {
+private:
+    static constexpr const char* POWER_UP_NAME{"Health"};
+
 public:
     HealthPowerUp(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     ~HealthPowerUp() override = default;

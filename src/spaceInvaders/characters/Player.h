@@ -10,7 +10,6 @@
 #include "../utilities/Utils.h"
 #include "../managers/EnemyManager.h"
 
-
 class EnemyManager;
 
 enum MoveState {
@@ -85,6 +84,7 @@ public:
 
     int getShieldHealth() const;
     bool getHasShield() const;
+    void setHasShield(bool shield);
 
     void updateKillStats(const std::string& enemyKilled);
     void increaseScore(int scoreAmount);

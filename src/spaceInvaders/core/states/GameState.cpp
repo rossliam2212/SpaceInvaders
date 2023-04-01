@@ -8,6 +8,7 @@ GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack
     : State(window, states, supportedKeys, assetManager, soundManager),
       player{assetManager, soundManager, &enemyManager},
       enemyManager{&player, assetManager, soundManager},
+      objectManager{&player, assetManager, soundManager},
       ui{&player, assetManager, soundManager} {
     initKeyBinds();
 }
@@ -15,10 +16,11 @@ GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack
 void GameState::update(const float& dt) {
     player.update(dt);
     enemyManager.update(dt);
+    objectManager.update(dt);
     ui.update(dt);
 
     if (player.isDead()) {
-        logger.info("Player killed!", this);
+        logger.debug("Player killed!", this);
         logger.info("Ending state.", this);
         endState();
     }
@@ -27,6 +29,7 @@ void GameState::update(const float& dt) {
 void GameState::render(std::shared_ptr<sf::RenderWindow> window) {
     player.render(window);
     enemyManager.render(window);
+    objectManager.render(window);
     ui.render(window);
 }
 

@@ -5,11 +5,13 @@
 #include "HealthPowerUp.h"
 
 HealthPowerUp::HealthPowerUp(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept
-        : PowerUp{position, assetManager, soundManager} {
+    : PowerUp{POWER_UP_NAME, position, assetManager, soundManager} {
     initSprite(assetManager.getTexture("healthPowerUp"));
 }
 
-void HealthPowerUp::update(const float& dt) { }
+void HealthPowerUp::update(const float& dt) {
+    position = sprite.getPosition();
+}
 
 void HealthPowerUp::render(std::shared_ptr<sf::RenderWindow> window) {
     window->draw(sprite);

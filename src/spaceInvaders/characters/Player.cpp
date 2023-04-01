@@ -205,6 +205,10 @@ bool Player::getHasShield() const {
     return hasShield;
 }
 
+void Player::setHasShield(bool shield) {
+    hasShield = shield;
+}
+
 void Player::increaseScore(int scoreAmount) {
     playerStats.score += scoreAmount;
 }

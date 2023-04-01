@@ -14,6 +14,7 @@ set(SOURCE_FILES
         src/spaceInvaders/managers/SoundManager.cpp
         src/spaceInvaders/managers/EnemyManager.cpp
         src/spaceInvaders/managers/EnemyFactory.cpp
+        src/spaceInvaders/managers/ObjectManager.cpp
 
         src/spaceInvaders/characters/Entity.cpp
         src/spaceInvaders/characters/Character.cpp
@@ -55,6 +56,7 @@ set(HEADER_FILES
         src/spaceInvaders/managers/SoundManager.h
         src/spaceInvaders/managers/EnemyManager.h
         src/spaceInvaders/managers/EnemyFactory.h
+        src/spaceInvaders/managers/ObjectManager.h
 
         src/spaceInvaders/characters/Entity.h
         src/spaceInvaders/characters/Character.h
