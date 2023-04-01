@@ -46,6 +46,8 @@ private:
     static constexpr const float DEATH_COOL_DOWN_TIMER{0.5f};
 
     static constexpr const int MAX_PLAYER_SHIELD_HEALTH{100};
+    static constexpr const float SHIELD_OFFSET_X{40.f};
+    static constexpr const float SHIELD_OFFSET_Y{25.f};
 
     sf::Vector2f moveDirection;
     MoveState moveState{still};
@@ -92,7 +94,7 @@ public:
 
     int getShieldHealth() const;
     bool getHasShield() const;
-    void setHasShield(bool shield);
+    void setHasShield(bool shieldActive);
     static int getShieldMaxHealth() ;
 
     void updateKillStats(const std::string& enemyKilled);
@@ -104,6 +106,7 @@ private:
     void updateWeapons(const float& dt);
     void updateDeathTimer(const float& dt);
     void updateExplosionTimer(const float& dt);
+    void updateShieldTimer(const float& dt);
 
     void getInput(const float& dt);
 

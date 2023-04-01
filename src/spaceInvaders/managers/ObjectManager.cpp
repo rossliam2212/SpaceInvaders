@@ -43,6 +43,7 @@ void ObjectManager::checkCollisions() {
 
             if (utilities::checkCollision(powerUpHitBox, playerHitBox)) {
                 if (powerUp->getName() == "Health") {
+                    // TODO Make this a constant
                     player->increaseHealth(100);
                     logger.debug("Player collected Health Power Up", this);
 
@@ -50,6 +51,7 @@ void ObjectManager::checkCollisions() {
                     soundManager.startSound("healthPowerUpSound", assetManager.getSound("healthPowerUpSound"));
                 } else if (powerUp->getName() == "Shield") {
                     player->setHasShield(true);
+                    logger.debug("Player collected Shield Power Up", this);
                 }
                 powerUp->setIsUsed(true);
             }

@@ -30,33 +30,18 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
 }
 
 void Player::update(const float& dt) {
-    position = sprite.getPosition();
-
     // Only update the explosion animation when the player has been killed
     if (explosionPlaying) {
-        shield.setPosition(sprite.getPosition());
+//        shield.setPosition(sprite.getPosition());
         explosionAnimation.update(dt);
     }
 
     updateDeathTimer(dt);
     updateExplosionTimer(dt);
+    updateShieldTimer(dt);
 
     if (shieldPlaying) {
         shieldAnimation.update(dt);
-    }
-
-    if (shieldTimer) {
-        shieldCoolDown -= dt;
-        if (shieldCoolDown <= TIMER_ZERO) {
-            shieldPlaying = false;
-            shieldCoolDown = false;
-            shieldTimer = false;
-
-            // After the animation has played, set the texture to the still shield
-            shield.setTexture(assetManager.getTexture("shieldAroundPlayer"));
-//            shield.setOrigin(assetManager.getTexture("shieldAroundPlayer").getSize().x/2.f, assetManager.getTexture("shieldAroundPlayer").getSize().x/2.f);
-            shield.setPosition(sprite.getPosition());
-        }
     }
 
     // Don't update the player after death
@@ -80,6 +65,8 @@ void Player::render(std::shared_ptr<sf::RenderWindow> window) {
         window->draw(sprite);
 
         if (shieldTimer) {
+            sf::Vector2f shieldPosition{sprite.getPosition().x - SHIELD_OFFSET_X, sprite.getPosition().y - SHIELD_OFFSET_Y};
+            shield.setPosition(shieldPosition);
             window->draw(shield);
         }
 
@@ -157,6 +144,22 @@ void Player::updateExplosionTimer(const float& dt) {
     }
 }
 
+void Player::updateShieldTimer(const float& dt) {
+    if (shieldTimer) {
+        shieldCoolDown -= dt;
+        if (shieldCoolDown <= TIMER_ZERO) {
+            shieldPlaying = false;
+            shieldCoolDown = false;
+            shieldTimer = false;
+
+            // After the animation has played, set the texture to the still shield
+            shield.setTexture(assetManager.getTexture("shieldAroundPlayer"));
+            sf::Vector2f shieldPosition{sprite.getPosition().x - SHIELD_OFFSET_X, sprite.getPosition().y - SHIELD_OFFSET_Y};
+            shield.setPosition(shieldPosition);
+        }
+    }
+}
+
 void Player::getInput(const float& dt) {
     moveDirection.x = input::Input::KeyBoard::getAxis(dt, input::Input::KeyBoard::Axis::Horizontal);
 
@@ -190,6 +193,7 @@ void Player::checkForSpriteChange() {
 
 void Player::initAnimations() {
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+
     shield.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
     shield.setPosition(position);
 
@@ -221,30 +225,41 @@ void Player::checkCollisions() {
 
     for (const auto& enemy : enemies) {
         auto bullets{enemy->getWeapon()->getBullets()};
+
         if (!bullets.empty()) {
             for (const auto& bullet : bullets) {
                 if (!bullet->isAlive()) {
                     continue;
                 }
 
-                // TODO Change this so the hit box for the shield is checked for collisions if the player has the shield
                 sf::FloatRect bulletHitBox{bullet->getHitBox()};
-                sf::FloatRect playerHitBox{getHitBox()};
-                if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
-                    bullet->setIsAlive(false);
 
-                    if (hasShield) {
+                if (hasShield) {
+                    sf::FloatRect shieldHitBox{shield.getGlobalBounds()};
+
+                    if (utilities::checkCollision(bulletHitBox, shieldHitBox)) {
+                        bullet->setIsAlive(false);
+
                         takeShieldDamage(bullet->getDamage());
                         soundManager.startSound("bulletHittingPlayerShieldSound", assetManager.getSound("bulletHittingPlayerShieldSound"));
-                    } else {
+
+                        logger.fatal("Player Shield Hit", this);
+                        break;
+                    }
+                } else {
+                    sf::FloatRect playerHitBox{getHitBox()};
+
+                    if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
+                        bullet->setIsAlive(false);
+
                         takeDamage(bullet->getDamage());
                         // Play the hit sound when the player gets hit until they are dea, then play the explosion sound
                         if (!isDead()) {
                             soundManager.startSound("bulletHittingPlayerSound", assetManager.getSound("bulletHittingPlayerSound"));
                         }
+                        logger.fatal("Player Hit", this);
+                        break;
                     }
-                    logger.fatal("Player Hit", this);
-                    break;
                 }
             }
         }
@@ -259,11 +274,11 @@ bool Player::getHasShield() const {
     return hasShield;
 }
 
-void Player::setHasShield(bool shield) {
+void Player::setHasShield(bool shieldActive) {
     logger.debug("Player shield activated.", this);
     shieldPlaying = true;
     shieldTimer = true;
-    hasShield = shield;
+    hasShield = shieldActive;
 }
 
 int Player::getShieldMaxHealth() {
