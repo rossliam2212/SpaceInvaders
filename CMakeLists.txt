@@ -31,6 +31,9 @@ set(SOURCE_FILES
         src/spaceInvaders/objects/weapons/PlayerWeapon.cpp
         src/spaceInvaders/objects/weapons/EnemyWeapon.cpp
         src/spaceInvaders/objects/bullets/EnemyBullet.cpp
+        src/spaceInvaders/objects/powerUps/PowerUp.cpp
+        src/spaceInvaders/objects/powerUps/ShieldPowerUp.cpp
+        src/spaceInvaders/objects/powerUps/HealthPowerUp.cpp
 
         src/spaceInvaders/utilities/Utils.cpp
         src/spaceInvaders/utilities/FixedClock.cpp
@@ -69,6 +72,9 @@ set(HEADER_FILES
         src/spaceInvaders/objects/weapons/PlayerWeapon.h
         src/spaceInvaders/objects/weapons/EnemyWeapon.h
         src/spaceInvaders/objects/bullets/EnemyBullet.h
+        src/spaceInvaders/objects/powerUps/PowerUp.h
+        src/spaceInvaders/objects/powerUps/ShieldPowerUp.h
+        src/spaceInvaders/objects/powerUps/HealthPowerUp.h
 
         src/spaceInvaders/utilities/Utils.h
         src/spaceInvaders/utilities/FixedClock.h
