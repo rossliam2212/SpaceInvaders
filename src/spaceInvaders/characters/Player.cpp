@@ -30,27 +30,8 @@ void Player::update(const float& dt) {
         explosionAnimation.update(dt);
     }
 
-    // Displays the explosion animation for a certain amount of time.
-    if (explosionTimer) {
-        explosionCoolDown -= dt;
-        if (explosionCoolDown <= TIMER_ZERO) {
-            explosionPlaying = false;
-            explosionTimer = false;
-            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
-
-            soundManager.stopSound("biggerExplosionSound");
-            deathTimer = true;
-        }
-    }
-
-    // Gives time for the death animation to play before going back to the main menu
-    if (deathTimer) {
-        deathCoolDown -= dt;
-        if (deathCoolDown <= TIMER_ZERO) {
-            deathTimer = false;
-            Character::kill();
-        }
-    }
+    updateDeathTimer(dt);
+    updateExplosionTimer(dt);
 
     // Don't update the player after death
     if (!explosionPlaying && !deathTimer) {
@@ -104,6 +85,32 @@ void Player::updateWeapons(const float& dt) {
     isShootPressed = weapon.getIsShooting();
 }
 
+void Player::updateDeathTimer(const float& dt) {
+    // Gives time for the death animation to play before going back to the main menu
+    if (deathTimer) {
+        deathCoolDown -= dt;
+        if (deathCoolDown <= TIMER_ZERO) {
+            deathTimer = false;
+            Character::kill();
+        }
+    }
+}
+
+void Player::updateExplosionTimer(const float& dt) {
+    // Displays the explosion animation for a certain amount of time.
+    if (explosionTimer) {
+        explosionCoolDown -= dt;
+        if (explosionCoolDown <= TIMER_ZERO) {
+            explosionPlaying = false;
+            explosionTimer = false;
+            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
+
+            soundManager.stopSound("biggerExplosionSound");
+            deathTimer = true;
+        }
+    }
+}
+
 void Player::getInput(const float& dt) {
     moveDirection.x = input::Input::KeyBoard::getAxis(dt, input::Input::KeyBoard::Axis::Horizontal);
 
@@ -126,9 +133,9 @@ void Player::updateAnimations(const float& dt) {
 }
 
 void Player::checkForSpriteChange() {
-    if (moveDirection.x < 0) {
+    if (moveDirection.x < 0.f) {
         moveState = left;
-    } else if (moveDirection.x > 0) {
+    } else if (moveDirection.x > 0.f) {
         moveState = right;
     } else {
         moveState = still;

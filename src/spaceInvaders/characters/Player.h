@@ -93,6 +93,8 @@ public:
 private:
     void shoot();
     void updateWeapons(const float& dt);
+    void updateDeathTimer(const float& dt);
+    void updateExplosionTimer(const float& dt);
 
     void getInput(const float& dt);
 
