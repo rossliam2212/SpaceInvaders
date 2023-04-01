@@ -42,6 +42,7 @@ private:
 
     static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
+    static constexpr const float SHIELD_COOL_DOWN_TIMER{0.5f};
     static constexpr const float DEATH_COOL_DOWN_TIMER{0.5f};
 
     static constexpr const int MAX_PLAYER_SHIELD_HEALTH{100};
@@ -67,9 +68,9 @@ private:
 
     sf::Sprite shield;
     Animation shieldAnimation;
-    bool shieldPlaying{false};
-    bool shieldTimer{false};
-    float shieldCoolDown{0.5f};
+    bool shieldPlaying;
+    bool shieldTimer;
+    float shieldCoolDown;
     int shieldHealth;
     bool hasShield;
 
@@ -84,6 +85,7 @@ public:
     void update(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
+    void takeShieldDamage(int damage);
     void kill() override;
 
     PlayerWeapon* getWeapon();
@@ -91,7 +93,7 @@ public:
     int getShieldHealth() const;
     bool getHasShield() const;
     void setHasShield(bool shield);
-    int getShieldMaxHealth() const;
+    static int getShieldMaxHealth() ;
 
     void updateKillStats(const std::string& enemyKilled);
     void increaseScore(int scoreAmount);

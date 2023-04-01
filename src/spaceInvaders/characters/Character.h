@@ -40,6 +40,7 @@ public:
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
     void move(const float& dt, float directionX);
+    void move(const float& dt, sf::Sprite& s, float directionX);
 
     void increaseHealth(int healthIncrease);
     void takeDamage(int damage);

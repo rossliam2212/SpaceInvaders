@@ -19,6 +19,9 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
       isShootPressed{false},
       shield{assetManager.getTexture("shieldAnimation")},
       shieldAnimation{shield, 1, 4, Animation::FRAME_DURATION, false},
+      shieldPlaying{false},
+      shieldTimer{false},
+      shieldCoolDown{SHIELD_COOL_DOWN_TIMER},
       shieldHealth{MAX_PLAYER_SHIELD_HEALTH},
       hasShield{false},
       enemyManager{enemyManager}{
@@ -31,7 +34,7 @@ void Player::update(const float& dt) {
 
     // Only update the explosion animation when the player has been killed
     if (explosionPlaying) {
-        shield.setPosition(position);
+        shield.setPosition(sprite.getPosition());
         explosionAnimation.update(dt);
     }
 
@@ -47,7 +50,12 @@ void Player::update(const float& dt) {
         if (shieldCoolDown <= TIMER_ZERO) {
             shieldPlaying = false;
             shieldCoolDown = false;
+            shieldTimer = false;
+
+            // After the animation has played, set the texture to the still shield
             shield.setTexture(assetManager.getTexture("shieldAroundPlayer"));
+//            shield.setOrigin(assetManager.getTexture("shieldAroundPlayer").getSize().x/2.f, assetManager.getTexture("shieldAroundPlayer").getSize().x/2.f);
+            shield.setPosition(sprite.getPosition());
         }
     }
 
@@ -56,6 +64,10 @@ void Player::update(const float& dt) {
         checkCollisions();
         getInput(dt);
         move(dt, moveDirection.x);
+
+        if (hasShield) {
+            move(dt, shield, moveDirection.x);
+        }
 
         updateAnimations(dt);
         updateWeapons(dt);
@@ -91,6 +103,14 @@ void Player::shoot() {
     }
 
     weapon.shoot(shootPosition);
+}
+
+void Player::takeShieldDamage(int damage) {
+    shieldHealth -= damage;
+
+    if (shieldHealth <= 0) {
+        hasShield = false;
+    }
 }
 
 void Player::kill() {
@@ -171,6 +191,7 @@ void Player::checkForSpriteChange() {
 void Player::initAnimations() {
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
     shield.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR, AssetManager::SPRITE_SCALE_UP_FACTOR);
+    shield.setPosition(position);
 
     sprite.setTexture(assetManager.getTexture("playerShipGrayCenterSheet"));
     sprite.setPosition(position);
@@ -206,15 +227,21 @@ void Player::checkCollisions() {
                     continue;
                 }
 
+                // TODO Change this so the hit box for the shield is checked for collisions if the player has the shield
                 sf::FloatRect bulletHitBox{bullet->getHitBox()};
                 sf::FloatRect playerHitBox{getHitBox()};
                 if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
                     bullet->setIsAlive(false);
-                    takeDamage(bullet->getDamage());
 
-                    // Play the hit sound when the player gets hit until they are dea, then play the explosion sound
-                    if (!isDead()) {
-                        soundManager.startSound("bulletHittingPlayerSound", assetManager.getSound("bulletHittingPlayerSound"));
+                    if (hasShield) {
+                        takeShieldDamage(bullet->getDamage());
+                        soundManager.startSound("bulletHittingPlayerShieldSound", assetManager.getSound("bulletHittingPlayerShieldSound"));
+                    } else {
+                        takeDamage(bullet->getDamage());
+                        // Play the hit sound when the player gets hit until they are dea, then play the explosion sound
+                        if (!isDead()) {
+                            soundManager.startSound("bulletHittingPlayerSound", assetManager.getSound("bulletHittingPlayerSound"));
+                        }
                     }
                     logger.fatal("Player Hit", this);
                     break;
@@ -233,12 +260,13 @@ bool Player::getHasShield() const {
 }
 
 void Player::setHasShield(bool shield) {
+    logger.debug("Player shield activated.", this);
     shieldPlaying = true;
     shieldTimer = true;
     hasShield = shield;
 }
 
-int Player::getShieldMaxHealth() const {
+int Player::getShieldMaxHealth() {
     return MAX_PLAYER_SHIELD_HEALTH;
 }
 

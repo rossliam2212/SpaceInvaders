@@ -43,7 +43,7 @@ void GameStateUI::calculateHealthBarValue() {
 }
 
 void GameStateUI::calculateShieldBarValue() {
-    shieldBarValue = (float)player->getShieldHealth() / (float)player->getShieldMaxHealth();
+    shieldBarValue = (float)player->getShieldHealth() / (float)Player::getShieldMaxHealth();
 }
 
 void GameStateUI::initText() {
