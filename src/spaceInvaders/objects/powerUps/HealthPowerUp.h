@@ -10,6 +10,7 @@
 class HealthPowerUp : public PowerUp {
 public:
     HealthPowerUp(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
+    ~HealthPowerUp() override = default;
 
     void update(const float& dt) override;
     void render(std::shared_ptr<sf::RenderWindow> window) override;

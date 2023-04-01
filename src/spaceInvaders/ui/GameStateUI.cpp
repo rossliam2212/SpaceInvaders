@@ -14,7 +14,7 @@ GameStateUI::GameStateUI(Player* player, AssetManager& assetManager, SoundManage
 }
 
 void GameStateUI::update(const float& dt) {
-    scoreText.setString("Score: " + std::to_string(player->getScore()));
+    scoreText.setString("Score: " + std::to_string(player->getPlayerStats().score));
 
     calculateHealthBarValue();
     healthBarBackground.setSize(sf::Vector2f{BAR_LENGTH * healthBarValue, BAR_HEIGHT});

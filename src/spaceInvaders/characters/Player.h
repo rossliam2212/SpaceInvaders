@@ -19,6 +19,18 @@ enum MoveState {
     right
 };
 
+struct Stats {
+    int score;
+    std::unordered_map<std::string, int> killStats;
+
+    Stats() : score{} {
+        killStats["Blue Enemy"] = 0;
+        killStats["Yellow Enemy"] = 0;
+        killStats["Green Enemy"] = 0;
+        killStats["Purple Enemy"] = 0;
+    }
+};
+
 class Player : public Character {
 private:
     static constexpr const char* PLAYER_NAME{"Player"};
@@ -31,12 +43,13 @@ private:
 
     static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
+    static constexpr const float DEATH_COOL_DOWN_TIMER{0.5f};
+
     static constexpr const int MAX_PLAYER_SHIELD_HEALTH{100};
 
     sf::Vector2f moveDirection;
     MoveState moveState{still};
 
-    // TODO Add animation for player death
     std::unordered_map<MoveState, std::unique_ptr<Animation>> animations;
 
     sf::Sprite explosion;
@@ -45,9 +58,8 @@ private:
     bool explosionTimer;
     float explosionCoolDown;
 
-    bool death{false};
-    bool deathTimer{false};
-    float deathCoolDown{0.5f};
+    bool deathTimer;
+    float deathCoolDown;
 
     PlayerWeapon weapon;
     sf::Vector2f shootPosition;
@@ -58,13 +70,10 @@ private:
 
     EnemyManager* enemyManager; // Needs access to the enemies for collision checking
 
-    int score;
-    std::unordered_map<std::string, int> killStats;
+    Stats playerStats;
 
 public:
     Player(AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept;
-    Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept;
-    Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept;
     ~Player() override = default;
 
     void update(const float& dt) override;
@@ -79,7 +88,7 @@ public:
 
     void updateKillStats(const std::string& enemyKilled);
     void increaseScore(int scoreAmount);
-    int getScore() const;
+    Stats getPlayerStats() const;
 
 private:
     void shoot();
@@ -93,7 +102,6 @@ private:
     void checkForSpriteChange();
 
     void initAnimations();
-    void initStats();
 };
 
 

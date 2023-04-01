@@ -12,50 +12,20 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
       explosionPlaying{false},
       explosionTimer{false},
       explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
+      deathTimer{false},
+      deathCoolDown{DEATH_COOL_DOWN_TIMER},
       weapon{assetManager, soundManager},
-      score{},
+      playerStats{},
       isShootPressed{false},
+      shieldHealth{MAX_PLAYER_SHIELD_HEALTH},
+      hasShield{false},
       enemyManager{enemyManager}{
     logger.info("Player initialized.", this);
     initAnimations();
-    initStats();
-}
-
-Player::Player(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
-    : Character{PLAYER_NAME, position, PLAYER_SPEED, assetManager, soundManager},
-      moveState{still},
-      explosion{assetManager.getTexture("explosion")},
-      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
-      explosionPlaying{false},
-      explosionTimer{false},
-      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
-      weapon{assetManager, soundManager},
-      score{},
-      isShootPressed{false},
-      enemyManager{enemyManager}{
-    logger.info("Player initialized.", this);
-    initAnimations();
-    initStats();
-}
-
-Player::Player(const std::string& name, const sf::Vector2f& position, float speed, AssetManager& assetManager, SoundManager& soundManager, EnemyManager* enemyManager) noexcept
-    : Character{name, position, speed, assetManager, soundManager},
-      moveState{still},
-      explosion{assetManager.getTexture("explosion")},
-      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
-      explosionPlaying{false},
-      explosionTimer{false},
-      explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
-      weapon{assetManager, soundManager},
-      score{},
-      isShootPressed{false},
-      enemyManager{enemyManager} {
-    logger.info("Player initialized.", this);
-    initAnimations();
-    initStats();
 }
 
 void Player::update(const float& dt) {
+    // Only update the explosion animation when the player has been killed
     if (explosionPlaying) {
         explosionAnimation.update(dt);
     }
@@ -82,6 +52,7 @@ void Player::update(const float& dt) {
         }
     }
 
+    // Don't update the player after death
     if (!explosionPlaying && !deathTimer) {
         checkCollisions();
         getInput(dt);
@@ -124,6 +95,7 @@ void Player::createExplosion() {
     explosion.setPosition(sprite.getPosition());
     explosionTimer = true;
 
+    soundManager.stopSound("bulletHittingPlayerSound");
     soundManager.startSound("biggerExplosionSound", assetManager.getSound("biggerExplosionSound"));
 }
 
@@ -135,7 +107,7 @@ void Player::updateWeapons(const float& dt) {
 void Player::getInput(const float& dt) {
     moveDirection.x = input::Input::KeyBoard::getAxis(dt, input::Input::KeyBoard::Axis::Horizontal);
 
-    // TODO Add input checks for shooting
+    // TODO Used Input::KeyBoard for shooting input
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isShootPressed) {
         isShootPressed = true;
         shoot();
@@ -179,21 +151,14 @@ void Player::initAnimations() {
     // Right
 }
 
-void Player::initStats() {
-    killStats["Blue Enemy"] = 0;
-    killStats["Yellow Enemy"] = 0;
-    killStats["Green Enemy"] = 0;
-    killStats["Purple Enemy"] = 0;
-}
-
 PlayerWeapon* Player::getWeapon() {
     return &weapon;
 }
 
 void Player::updateKillStats(const std::string& enemyKilled) {
-    int kills = killStats.at(enemyKilled);
+    int kills = playerStats.killStats.at(enemyKilled);
     kills++;
-    killStats.at(enemyKilled) = kills;
+    playerStats.killStats.at(enemyKilled) = kills;
 }
 
 void Player::checkCollisions() {
@@ -212,7 +177,11 @@ void Player::checkCollisions() {
                 if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
                     bullet->setIsAlive(false);
                     takeDamage(bullet->getDamage());
-                    // TODO Add hit sound
+
+                    // Play the hit sound when the player gets hit until they are dea, then play the explosion sound
+                    if (!isDead()) {
+                        soundManager.startSound("bulletHittingPlayerSound", assetManager.getSound("bulletHittingPlayerSound"));
+                    }
                     logger.fatal("Player Hit", this);
                     break;
                 }
@@ -230,10 +199,10 @@ bool Player::getHasShield() const {
 }
 
 void Player::increaseScore(int scoreAmount) {
-    score += scoreAmount;
+    playerStats.score += scoreAmount;
 }
 
-int Player::getScore() const {
-    return score;
+Stats Player::getPlayerStats() const {
+    return playerStats;
 }
 

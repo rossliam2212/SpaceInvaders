@@ -23,6 +23,7 @@ protected:
 
 public:
     PowerUp(const sf::Vector2f& position, AssetManager& assetManager, SoundManager& soundManager) noexcept;
+    virtual ~PowerUp() = default;
 
     virtual void update(const float& dt) = 0;
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
