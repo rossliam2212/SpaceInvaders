@@ -35,6 +35,7 @@ set(SOURCE_FILES
         src/spaceInvaders/objects/powerUps/PowerUp.cpp
         src/spaceInvaders/objects/powerUps/ShieldPowerUp.cpp
         src/spaceInvaders/objects/powerUps/HealthPowerUp.cpp
+        src/spaceInvaders/objects/Asteroid.cpp
 
         src/spaceInvaders/utilities/Utils.cpp
         src/spaceInvaders/utilities/FixedClock.cpp
@@ -77,6 +78,7 @@ set(HEADER_FILES
         src/spaceInvaders/objects/powerUps/PowerUp.h
         src/spaceInvaders/objects/powerUps/ShieldPowerUp.h
         src/spaceInvaders/objects/powerUps/HealthPowerUp.h
+        src/spaceInvaders/objects/Asteroid.h
 
         src/spaceInvaders/utilities/Utils.h
         src/spaceInvaders/utilities/FixedClock.h

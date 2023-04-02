@@ -276,6 +276,7 @@ bool Player::getHasShield() const {
 
 void Player::setHasShield(bool shieldActive) {
     logger.debug("Player shield activated.", this);
+    soundManager.startSound("playerActivatingShieldSound", assetManager.getSound("playerActivatingShieldSound"));
     shieldPlaying = true;
     shieldTimer = true;
     hasShield = shieldActive;

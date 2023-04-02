@@ -13,11 +13,16 @@
 #include "../characters/Player.h"
 #include "../objects/powerUps/HealthPowerUp.h"
 #include "../objects/powerUps/ShieldPowerUp.h"
+#include "../objects/Asteroid.h"
 
 class ObjectManager {
 private:
+    static constexpr const float POWER_UP_SPAWN_POSITION_BOUNDARY_LEFT{50.f};
+    static constexpr const float POWER_UP_SPAWN_POSITION_BOUNDARY_RIGHT{1450.f};
+
     // TODO Create vector to hold asteroids
 
+    std::vector<Asteroid> asteroids;
     std::vector<std::unique_ptr<PowerUp>> powerUps;
 
     Player* player;
@@ -25,6 +30,7 @@ private:
     SoundManager soundManager;
 
     logger::Logger logger;
+
 public:
     ObjectManager(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept;
 
@@ -36,6 +42,8 @@ private:
     void cleanUpPowerUps();
     void createPowerUp();
     bool allPowerUpsDead() const;
+
+    void initAsteroids();
 };
 
 

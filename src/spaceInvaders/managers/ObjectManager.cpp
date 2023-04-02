@@ -5,11 +5,13 @@
 #include "ObjectManager.h"
 
 ObjectManager::ObjectManager(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept
-    : player{player},
+    : asteroids{},
+      player{player},
       assetManager{assetManager},
       soundManager{soundManager},
       logger{"logs"} {
     createPowerUp();
+//    initAsteroids();
 }
 
 void ObjectManager::update(const float& dt) {
@@ -23,6 +25,10 @@ void ObjectManager::update(const float& dt) {
             }
         }
     }
+
+    for (auto& asteroid : asteroids) {
+        asteroid.update(dt);
+    }
 }
 
 void ObjectManager::render(std::shared_ptr<sf::RenderWindow> window) {
@@ -32,6 +38,10 @@ void ObjectManager::render(std::shared_ptr<sf::RenderWindow> window) {
                 powerUp->render(window);
             }
         }
+    }
+
+    for (auto& asteroid : asteroids) {
+        asteroid.render(window);
     }
 }
 
@@ -66,6 +76,7 @@ void ObjectManager::cleanUpPowerUps() {
 }
 
 void ObjectManager::createPowerUp() {
+    // TODO Make the creation of power up random
     sf::Vector2f pos{100, 1200};
     powerUps.emplace_back(std::make_unique<ShieldPowerUp>(pos, assetManager, soundManager));
 
@@ -75,4 +86,8 @@ void ObjectManager::createPowerUp() {
 
 bool ObjectManager::allPowerUpsDead() const {
     return powerUps.empty();
+}
+
+void ObjectManager::initAsteroids() {
+    asteroids.emplace_back(Asteroid{sf::Vector2f{100, 100}, assetManager, soundManager});
 }
