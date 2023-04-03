@@ -5,7 +5,7 @@
 #include "PlayerBullet.h"
 
 PlayerBullet::PlayerBullet(const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
-    : Bullet{PLAYER_BULLET_DAMAGE, spawnPosition, assetManager, soundManager} {
+    : Bullet{PLAYER_BULLET_DAMAGE, PLAYER_BULLET_DAMAGE_ASTEROID, spawnPosition, assetManager, soundManager} {
     initSprite(assetManager.getTexture("playerBullet"));
 }
 

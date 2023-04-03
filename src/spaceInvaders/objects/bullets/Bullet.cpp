@@ -4,9 +4,10 @@
 
 #include "Bullet.h"
 
-Bullet::Bullet(int damage, const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
+Bullet::Bullet(int damage, int damageToAsteroid, const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : spawnPosition{spawnPosition},
       damage{damage},
+      damageToAsteroid{damageToAsteroid},
       alive{true},
       assetManager{assetManager},
       soundManager{soundManager} {
@@ -14,6 +15,10 @@ Bullet::Bullet(int damage, const sf::Vector2f& spawnPosition, AssetManager& asse
 
 int Bullet::getDamage() const {
     return damage;
+}
+
+int Bullet::getDamageToAsteroid() const {
+    return damageToAsteroid;
 }
 
 bool Bullet::isAlive() const {

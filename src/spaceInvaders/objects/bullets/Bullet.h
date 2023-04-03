@@ -23,19 +23,21 @@ protected:
     sf::Vector2f spawnPosition;
 
     int damage;
+    int damageToAsteroid;
     bool alive;
 
     AssetManager assetManager;
     SoundManager soundManager;
 
 public:
-    Bullet(int damage, const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept;
+    Bullet(int damage, int damageToAsteroid, const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept;
     virtual ~Bullet() = default;
 
     virtual void update(const float& dt) = 0;
     virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 
     int getDamage() const;
+    int getDamageToAsteroid() const;
     bool isAlive() const;
     void setIsAlive(bool isAlive);
     sf::Vector2f getPosition() const;

@@ -9,8 +9,6 @@ Asteroid::Asteroid(const sf::Vector2f& position, AssetManager& assetManager, Sou
       health{ASTEROID_MAX_HEALTH},
       dead{false},
       sprite{assetManager.getTexture("bigAsteroid")},
-      explosion{assetManager.getTexture("explosion")},
-      explosionAnimation{explosion, 1, 3, Animation::FRAME_DURATION, false},
       assetManager{assetManager},
       soundManager{soundManager} {
     initText();
@@ -64,6 +62,4 @@ void Asteroid::initSprite() {
     sprite.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR * 1.5f, AssetManager::SPRITE_SCALE_UP_FACTOR * 1.5f);
     sprite.setOrigin(sprite.getTexture()->getSize().x / 2.f, sprite.getTexture()->getSize().y / 2.f);
     sprite.setPosition(position);
-
-    explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 }

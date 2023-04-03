@@ -20,9 +20,6 @@ private:
     int health;
     bool dead;
 
-    sf::Sprite explosion;
-    Animation explosionAnimation;
-
     AssetManager assetManager;
     SoundManager soundManager;
 

@@ -5,7 +5,7 @@
 #include "EnemyBullet.h"
 
 EnemyBullet::EnemyBullet(const sf::Vector2f& spawnPosition, AssetManager& assetManager, SoundManager& soundManager) noexcept
-    : Bullet{ENEMY_BULLET_DAMAGE, spawnPosition, assetManager, soundManager} {
+    : Bullet{ENEMY_BULLET_DAMAGE, ENEMY_BULLET_DAMAGE_ASTEROID, spawnPosition, assetManager, soundManager} {
     initSprite(assetManager.getTexture("enemyBullet"));
 }
 

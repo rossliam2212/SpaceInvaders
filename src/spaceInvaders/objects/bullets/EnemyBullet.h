@@ -10,6 +10,7 @@
 class EnemyBullet : public Bullet {
 private:
     static constexpr const int ENEMY_BULLET_DAMAGE{20};
+    static constexpr const int ENEMY_BULLET_DAMAGE_ASTEROID{10};
     static constexpr const float ENEMY_BULLET_SPEED_MULTIPLIER{25.f};
     static constexpr const float ENEMY_BULLET_SPEED{30.f};
 
