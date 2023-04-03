@@ -40,7 +40,6 @@ private:
     static constexpr const float SHOOT_POSITION_OFFSET_LEFT{30.f};
     static constexpr const float SHOOT_POSITION_OFFSET_RIGHT{40.f};
 
-    static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
     static constexpr const float SHIELD_COOL_DOWN_TIMER{0.5f};
     static constexpr const float DEATH_COOL_DOWN_TIMER{0.5f};

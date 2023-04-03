@@ -33,6 +33,8 @@ EnemyManager::EnemyManager(Player* player, AssetManager& assetManager, SoundMana
 void EnemyManager::update(const float& dt) {
     moveEnemiesX(dt);
     cleanUpEnemies();
+    updateExplosionTimer(dt);
+    updateShootingTimer(dt);
 
     // Only checking for collisions if has shot a bullet
     if (player != nullptr) {
@@ -48,27 +50,6 @@ void EnemyManager::update(const float& dt) {
     // Only update the animation when an enemy is killed
     if (explosionPlaying) {
         explosionAnimation.update(dt);
-    }
-
-    // Displays the explosion animation for a certain amount of time.
-    if (explosionTimer) {
-        explosionCoolDown -= dt;
-        if (explosionCoolDown <= TIMER_ZERO) {
-            explosionPlaying = false;
-            explosionTimer = false;
-            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
-
-            soundManager.stopSound("explosionSound");
-        }
-    }
-
-    if (shootingTimer) {
-        shootCoolDown -= dt;
-        if (shootCoolDown <= TIMER_ZERO) {
-            shooting = false;
-            shootingTimer = false;
-            shootCoolDown = SHOOT_COOL_DOWN_TIMER;
-        }
     }
 
     if (!allEnemiesDead()) {
@@ -162,6 +143,31 @@ void EnemyManager::createExplosion(const sf::Vector2f& position) {
     explosionTimer = true;
 
     soundManager.startSound("explosionSound", assetManager.getSound("explosionSound"));
+}
+
+void EnemyManager::updateExplosionTimer(const float& dt) {
+    // Displays the explosion animation for a certain amount of time.
+    if (explosionTimer) {
+        explosionCoolDown -= dt;
+        if (explosionCoolDown <= Animation::TIMER_ZERO) {
+            explosionPlaying = false;
+            explosionTimer = false;
+            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
+
+            soundManager.stopSound("explosionSound");
+        }
+    }
+}
+
+void EnemyManager::updateShootingTimer(const float& dt) {
+    if (shootingTimer) {
+        shootCoolDown -= dt;
+        if (shootCoolDown <= Animation::TIMER_ZERO) {
+            shooting = false;
+            shootingTimer = false;
+            shootCoolDown = SHOOT_COOL_DOWN_TIMER;
+        }
+    }
 }
 
 void EnemyManager::checkCollisions() {

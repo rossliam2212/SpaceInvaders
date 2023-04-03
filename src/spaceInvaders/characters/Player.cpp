@@ -122,7 +122,7 @@ void Player::updateDeathTimer(const float& dt) {
     // Gives time for the death animation to play before going back to the main menu
     if (deathTimer) {
         deathCoolDown -= dt;
-        if (deathCoolDown <= TIMER_ZERO) {
+        if (deathCoolDown <= Animation::TIMER_ZERO) {
             deathTimer = false;
             Character::kill();
         }
@@ -133,7 +133,7 @@ void Player::updateExplosionTimer(const float& dt) {
     // Displays the explosion animation for a certain amount of time.
     if (explosionTimer) {
         explosionCoolDown -= dt;
-        if (explosionCoolDown <= TIMER_ZERO) {
+        if (explosionCoolDown <= Animation::TIMER_ZERO) {
             explosionPlaying = false;
             explosionTimer = false;
             explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
@@ -147,7 +147,7 @@ void Player::updateExplosionTimer(const float& dt) {
 void Player::updateShieldTimer(const float& dt) {
     if (shieldTimer) {
         shieldCoolDown -= dt;
-        if (shieldCoolDown <= TIMER_ZERO) {
+        if (shieldCoolDown <= Animation::TIMER_ZERO) {
             shieldPlaying = false;
             shieldCoolDown = false;
             shieldTimer = false;

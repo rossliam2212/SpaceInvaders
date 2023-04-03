@@ -26,7 +26,6 @@ private:
     static constexpr const float ASTEROID_SPAWN_POSITION_Y{900.f};
     static constexpr const float GAP_BETWEEN_ASTEROIDS{500.f};
 
-    static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
 
     std::vector<std::unique_ptr<Asteroid>> asteroids;
@@ -63,6 +62,7 @@ private:
     void createPowerUp();
     bool allPowerUpsDead() const;
     bool allAsteroidsDead() const;
+    void updateExplosionTimer(const float& dt);
 
     void initAsteroids();
 };

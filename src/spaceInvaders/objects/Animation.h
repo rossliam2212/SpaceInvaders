@@ -10,6 +10,7 @@
 
 class Animation {
 public:
+    static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float FRAME_DURATION{0.1f};
 
 private:

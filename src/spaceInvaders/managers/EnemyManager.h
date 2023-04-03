@@ -37,7 +37,6 @@ private:
     static constexpr const int MAX_NUMBER_OF_YELLOW_ENEMIES{10};
     static constexpr const int MAX_NUMBER_OF_PURPLE_ENEMIES{10};
 
-    static constexpr const float TIMER_ZERO{0.f};
     static constexpr const float EXPLOSION_COOL_DOWN_TIMER{0.5f};
     static constexpr const float SHOOT_COOL_DOWN_TIMER{3.f};
 
@@ -77,7 +76,8 @@ private:
     void moveEnemiesY(const float& dt);
     void shoot();
     void createExplosion(const sf::Vector2f& position);
-
+    void updateExplosionTimer(const float& dt);
+    void updateShootingTimer(const float& dt);
     bool allEnemiesDead();
     void checkCollisions();
     void cleanUpEnemies();

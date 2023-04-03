@@ -17,6 +17,8 @@ ObjectManager::ObjectManager(Player* player, EnemyManager* enemyManager, AssetMa
       logger{"logs"} {
     createPowerUp();
     initAsteroids();
+
+    explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 }
 
 void ObjectManager::update(const float& dt) {
@@ -24,21 +26,10 @@ void ObjectManager::update(const float& dt) {
     cleanUpPowerUps();
     checkAsteroidCollisions();
     cleanUpAsteroids();
+    updateExplosionTimer(dt);
 
     if (explosionPlaying) {
         explosionAnimation.update(dt);
-    }
-
-    // Displays the explosion animation for a certain amount of time.
-    if (explosionTimer) {
-        explosionCoolDown -= dt;
-        if (explosionCoolDown <= TIMER_ZERO) {
-            explosionPlaying = false;
-            explosionTimer = false;
-            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
-
-            soundManager.stopSound("explosionSound");
-        }
     }
 
     if (!allPowerUpsDead()) {
@@ -204,6 +195,20 @@ bool ObjectManager::allPowerUpsDead() const {
 
 bool ObjectManager::allAsteroidsDead() const {
     return asteroids.empty();
+}
+
+void ObjectManager::updateExplosionTimer(const float& dt) {
+    // Displays the explosion animation for a certain amount of time.
+    if (explosionTimer) {
+        explosionCoolDown -= dt;
+        if (explosionCoolDown <= Animation::TIMER_ZERO) {
+            explosionPlaying = false;
+            explosionTimer = false;
+            explosionCoolDown = EXPLOSION_COOL_DOWN_TIMER;
+
+            soundManager.stopSound("explosionSound");
+        }
+    }
 }
 
 void ObjectManager::initAsteroids() {
