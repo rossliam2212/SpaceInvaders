@@ -18,6 +18,7 @@ private:
     sf::Sprite sprite;
     sf::Text healthText;
     int health;
+    bool dead;
 
     sf::Sprite explosion;
     Animation explosionAnimation;
@@ -31,6 +32,13 @@ public:
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
+
+    void takeDamage(int damage);
+    int getHealth() const;
+    static int getMaxHealth();
+
+    sf::FloatRect getHitBox() const;
+    bool isDead() const;
 
 private:
     void initText();

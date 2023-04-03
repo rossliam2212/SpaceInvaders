@@ -14,6 +14,7 @@
 #include "../objects/powerUps/HealthPowerUp.h"
 #include "../objects/powerUps/ShieldPowerUp.h"
 #include "../objects/Asteroid.h"
+#include "../managers/EnemyManager.h"
 
 class ObjectManager {
 private:
@@ -22,26 +23,31 @@ private:
 
     // TODO Create vector to hold asteroids
 
-    std::vector<Asteroid> asteroids;
+    std::vector<std::unique_ptr<Asteroid>> asteroids;
+//    std::vector<Asteroid> asteroids;
     std::vector<std::unique_ptr<PowerUp>> powerUps;
 
     Player* player;
+    EnemyManager* enemyManager;
     AssetManager assetManager;
     SoundManager soundManager;
 
     logger::Logger logger;
 
 public:
-    ObjectManager(Player* player, AssetManager& assetManager, SoundManager& soundManager) noexcept;
+    ObjectManager(Player* player, EnemyManager* enemyManager, AssetManager& assetManager, SoundManager& soundManager) noexcept;
 
     void update(const float& dt);
     void render(std::shared_ptr<sf::RenderWindow> window);
 
 private:
-    void checkCollisions();
+    void checkPowerUpCollisions();
+    void checkAsteroidCollisions();
     void cleanUpPowerUps();
+    void cleanUpAsteroids();
     void createPowerUp();
     bool allPowerUpsDead() const;
+    bool allAsteroidsDead() const;
 
     void initAsteroids();
 };

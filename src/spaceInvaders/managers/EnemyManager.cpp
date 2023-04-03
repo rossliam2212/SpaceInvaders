@@ -172,23 +172,25 @@ void EnemyManager::checkCollisions() {
     if (!allEnemiesDead() && player != nullptr) {
         auto playerBullets{player->getWeapon()->getBullets()};
 
-        for (const auto& enemy : enemies) {
-            sf::FloatRect enemyHitBox{enemy->getHitBox()};
+        if (!playerBullets.empty()) {
+            for (const auto& enemy: enemies) {
+                sf::FloatRect enemyHitBox{enemy->getHitBox()};
 
-            for (const auto& bullet : playerBullets) {
-                if (!bullet->isAlive()) {
-                    continue;
-                }
+                for (const auto& bullet : playerBullets) {
+                    if (!bullet->isAlive()) {
+                        continue;
+                    }
 
-                sf::FloatRect bulletHitBox{bullet->getHitBox()};
+                    sf::FloatRect bulletHitBox{bullet->getHitBox()};
 
-                if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
-                    bullet->setIsAlive(false); // Kill the bullet
-                    enemy->takeDamage(bullet->getDamage()); // Deal damage to the enemy
-                    player->increaseScore(enemy->getScoreWorth()); // Increase the players score
-                    player->updateKillStats(enemy->getName()); // Update the players kill stats
-                    logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
-                    break;
+                    if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
+                        bullet->setIsAlive(false); // Kill the bullet
+                        enemy->takeDamage(bullet->getDamage()); // Deal damage to the enemy
+                        player->increaseScore(enemy->getScoreWorth()); // Increase the players score
+                        player->updateKillStats(enemy->getName()); // Update the players kill stats
+                        logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
+                        break;
+                    }
                 }
             }
         }

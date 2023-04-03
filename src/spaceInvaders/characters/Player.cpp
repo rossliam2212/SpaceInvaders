@@ -223,42 +223,46 @@ void Player::updateKillStats(const std::string& enemyKilled) {
 void Player::checkCollisions() {
     auto enemies{enemyManager->getEnemies()};
 
-    for (const auto& enemy : enemies) {
-        auto bullets{enemy->getWeapon()->getBullets()};
+    if (!enemies.empty()) {
+        for (const auto& enemy : enemies) {
+            auto bullets{enemy->getWeapon()->getBullets()};
 
-        if (!bullets.empty()) {
-            for (const auto& bullet : bullets) {
-                if (!bullet->isAlive()) {
-                    continue;
-                }
-
-                sf::FloatRect bulletHitBox{bullet->getHitBox()};
-
-                if (hasShield) {
-                    sf::FloatRect shieldHitBox{shield.getGlobalBounds()};
-
-                    if (utilities::checkCollision(bulletHitBox, shieldHitBox)) {
-                        bullet->setIsAlive(false);
-
-                        takeShieldDamage(bullet->getDamage());
-                        soundManager.startSound("bulletHittingPlayerShieldSound", assetManager.getSound("bulletHittingPlayerShieldSound"));
-
-                        logger.fatal("Player Shield Hit", this);
-                        break;
+            if (!bullets.empty()) {
+                for (const auto& bullet: bullets) {
+                    if (!bullet->isAlive()) {
+                        continue;
                     }
-                } else {
-                    sf::FloatRect playerHitBox{getHitBox()};
 
-                    if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
-                        bullet->setIsAlive(false);
+                    sf::FloatRect bulletHitBox{bullet->getHitBox()};
 
-                        takeDamage(bullet->getDamage());
-                        // Play the hit sound when the player gets hit until they are dea, then play the explosion sound
-                        if (!isDead()) {
-                            soundManager.startSound("bulletHittingPlayerSound", assetManager.getSound("bulletHittingPlayerSound"));
+                    if (hasShield) {
+                        sf::FloatRect shieldHitBox{shield.getGlobalBounds()};
+
+                        if (utilities::checkCollision(bulletHitBox, shieldHitBox)) {
+                            bullet->setIsAlive(false);
+
+                            takeShieldDamage(bullet->getDamage());
+                            soundManager.startSound("bulletHittingPlayerShieldSound",
+                                                    assetManager.getSound("bulletHittingPlayerShieldSound"));
+
+                            logger.fatal("Player Shield Hit", this);
+                            break;
                         }
-                        logger.fatal("Player Hit", this);
-                        break;
+                    } else {
+                        sf::FloatRect playerHitBox{getHitBox()};
+
+                        if (utilities::checkCollision(bulletHitBox, playerHitBox)) {
+                            bullet->setIsAlive(false);
+
+                            takeDamage(bullet->getDamage());
+                            // Play the hit sound when the player gets hit until they are dea, then play the explosion sound
+                            if (!isDead()) {
+                                soundManager.startSound("bulletHittingPlayerSound",
+                                                        assetManager.getSound("bulletHittingPlayerSound"));
+                            }
+                            logger.fatal("Player Hit", this);
+                            break;
+                        }
                     }
                 }
             }

@@ -8,7 +8,7 @@ GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack
     : State(window, states, supportedKeys, assetManager, soundManager),
       player{assetManager, soundManager, &enemyManager},
       enemyManager{&player, assetManager, soundManager},
-      objectManager{&player, assetManager, soundManager},
+      objectManager{&player, &enemyManager, assetManager, soundManager},
       ui{&player, assetManager, soundManager} {
     initKeyBinds();
 }
