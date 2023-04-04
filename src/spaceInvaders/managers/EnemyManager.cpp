@@ -24,35 +24,29 @@ EnemyManager::EnemyManager(Player* player, AssetManager& assetManager, SoundMana
       explosionCoolDown{EXPLOSION_COOL_DOWN_TIMER},
       shooting{false},
       shootingTimer{false},
-      shootCoolDown{SHOOT_COOL_DOWN_TIMER} {
+      shootCoolDown{SHOOT_COOL_DOWN_TIMER},
+      moveDown{false},
+      moveDownTimer{false},
+      moveDownCoolDown{MOVE_DOWN_TIMER} {
 
     initEnemies();
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 }
 
 void EnemyManager::update(const float& dt) {
-    moveEnemiesX(dt);
-    cleanUpEnemies();
-    updateExplosionTimer(dt);
-    updateShootingTimer(dt);
-
-    // Only checking for collisions if has shot a bullet
-    if (player != nullptr) {
-        if (!player->getWeapon()->getBullets().empty()) {
-            checkCollisions();
-        }
-    }
-
-    shoot();
-
-    direction = getDirection(dt);
-
-    // Only update the animation when an enemy is killed
-    if (explosionPlaying) {
-        explosionAnimation.update(dt);
-    }
-
     if (!allEnemiesDead()) {
+        moveEnemies(dt);
+        getDirection();
+        shoot();
+
+        // Only checking for collisions if has shot a bullet
+        if (player != nullptr) {
+            if (!player->getWeapon()->getBullets().empty()) {
+                checkCollisions();
+            }
+        }
+
+        // Updating each of the enemies
         for (const auto& enemy: enemies) {
             if (!enemy->isDead()) {
                 enemy->update(dt);
@@ -62,6 +56,16 @@ void EnemyManager::update(const float& dt) {
                 createExplosion(enemy->getPosition());
             }
         }
+    }
+
+    cleanUpEnemies();
+    updateExplosionTimer(dt);
+    updateShootingTimer(dt);
+    updateMoveDownTimer(dt);
+
+    // Only update the animation when an enemy is killed
+    if (explosionPlaying) {
+        explosionAnimation.update(dt);
     }
 }
 
@@ -79,10 +83,13 @@ void EnemyManager::render(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
-void EnemyManager::moveEnemiesX(const float& dt) {
-    if (!allEnemiesDead()) {
-        for (const auto& enemy : enemies) {
-            if (!enemy->isDead()) {
+void EnemyManager::moveEnemies(const float& dt) {
+    for (const auto& enemy : enemies) {
+        if (!enemy->isDead()) {
+            if (moveDown) {
+                moveDownTimer = true;
+                enemy->moveY(dt, ENEMY_MOVE_Y_SPEED);
+            } else {
                 if (direction == moveRight) {
                     enemy->moveX(dt, ENEMY_MOVE_X_SPEED);
                 } else if (direction == moveLeft) {
@@ -93,49 +100,25 @@ void EnemyManager::moveEnemiesX(const float& dt) {
     }
 }
 
-// TODO Not Working - FIX
-void EnemyManager::moveEnemiesY(const float& dt) {
-    if (!allEnemiesDead()) {
-        for (const auto& enemy: enemies) {
-//        sf::Vector2f pos{enemy->getPosition()};
-//        sf::Vector2f newPos{sf::Vector2f{pos.x, pos.y + 20.f}};
-//        enemy->setPosition(newPos);
-            enemy->moveY(dt, ENEMY_MOVE_Y_SPEED);
+void EnemyManager::getDirection() {
+    for (const auto& enemy : enemies) {
+        sf::FloatRect enemyBounds{enemy->getHitBox()};
+        sf::FloatRect screenBounds{0, 0, static_cast<float>(1500 - enemy->getSize().x), 1500};
+
+        if (!utilities::checkCollision(enemyBounds, screenBounds)) {
+            moveDown = true;
         }
     }
 }
 
 void EnemyManager::shoot() {
-    if (!allEnemiesDead()) {
-        if (!shooting) {
-            shooting = true;
-            int randomEnemy{utilities::randomInt(0, (int) enemies.size() - 1)};
-            enemies.at(randomEnemy)->shoot(enemies.at(randomEnemy)->getPosition());
+    if (!shooting) {
+        shooting = true;
+        int randomEnemy{utilities::randomInt(0, (int) enemies.size() - 1)};
+        enemies.at(randomEnemy)->shoot(enemies.at(randomEnemy)->getPosition());
 
-            shootingTimer = true;
-        }
+        shootingTimer = true;
     }
-}
-
-MoveDirection EnemyManager::getDirection(const float& dt) {
-    if (!allEnemiesDead()) {
-        for (const auto& enemy: enemies) {
-            // TODO Fix this so the enemies don't go off screen
-            sf::FloatRect enemyBounds{enemy->getHitBox()};
-            sf::FloatRect screenBounds{0, 0, static_cast<float>(1500 - enemy->getSize().x), 1500};
-
-            if (!utilities::checkCollision(enemyBounds, screenBounds)) {
-                if (direction == moveRight) {
-                    moveEnemiesY(dt);
-                    return moveLeft;
-                } else {
-                    moveEnemiesY(dt);
-                    return moveRight;
-                }
-            }
-        }
-    }
-    return direction;
 }
 
 void EnemyManager::createExplosion(const sf::Vector2f& position) {
@@ -170,33 +153,48 @@ void EnemyManager::updateShootingTimer(const float& dt) {
     }
 }
 
+void EnemyManager::updateMoveDownTimer(const float& dt) {
+    if (moveDownTimer) {
+        moveDownCoolDown -= dt;
+        if (moveDownCoolDown <= Animation::TIMER_ZERO) {
+            moveDown = false;
+            moveDownTimer = false;
+            moveDownCoolDown = MOVE_DOWN_TIMER;
+
+            // After the enemies move down, move them back in the opposite direction
+            if (direction == moveRight) {
+                direction = moveLeft;
+            } else {
+                direction = moveRight;
+            }
+        }
+    }
+}
+
 void EnemyManager::checkCollisions() {
     // Get player bullet sprite
     // Get enemy sprite
     // Check if their boundaries intersect
+    auto playerBullets{player->getWeapon()->getBullets()};
 
-    if (!allEnemiesDead() && player != nullptr) {
-        auto playerBullets{player->getWeapon()->getBullets()};
+    if (!playerBullets.empty()) {
+        for (const auto& enemy: enemies) {
+            sf::FloatRect enemyHitBox{enemy->getHitBox()};
 
-        if (!playerBullets.empty()) {
-            for (const auto& enemy: enemies) {
-                sf::FloatRect enemyHitBox{enemy->getHitBox()};
+            for (const auto& bullet : playerBullets) {
+                if (!bullet->isAlive()) {
+                    continue;
+                }
 
-                for (const auto& bullet : playerBullets) {
-                    if (!bullet->isAlive()) {
-                        continue;
-                    }
+                sf::FloatRect bulletHitBox{bullet->getHitBox()};
 
-                    sf::FloatRect bulletHitBox{bullet->getHitBox()};
-
-                    if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
-                        bullet->setIsAlive(false); // Kill the bullet
-                        enemy->takeDamage(bullet->getDamage()); // Deal damage to the enemy
-                        player->increaseScore(enemy->getScoreWorth()); // Increase the players score
-                        player->updateKillStats(enemy->getName()); // Update the players kill stats
-                        logger.debug("ENEMY HIT => " + enemy->getName() + ".", this, __LINE__);
-                        break;
-                    }
+                if (utilities::checkCollision(bulletHitBox, enemyHitBox)) {
+                    bullet->setIsAlive(false); // Kill the bullet
+                    enemy->takeDamage(bullet->getDamage()); // Deal damage to the enemy
+                    player->increaseScore(enemy->getScoreWorth()); // Increase the players score
+                    player->updateKillStats(enemy->getName()); // Update the players kill stats
+                    logger.debug("ENEMY HIT => " + enemy->getName() + ".", this, __LINE__);
+                    break;
                 }
             }
         }
