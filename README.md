@@ -7,23 +7,18 @@ https://user-images.githubusercontent.com/73957889/229925159-8c5dc74d-be7d-4fb7-
 
 ### Building with CMake
 ```
-git clone https://github.com/rossliam2212/SpaceInvaders.git
-
-cd SpaceInvaders
-
-mkdir build
-
-cd build
-
-cmake ..
-
-cmake --build .
+$ git clone https://github.com/rossliam2212/SpaceInvaders.git
+$ cd SpaceInvaders
+$ mkdir build
+$ cd build
+$ cmake ..
+$ cmake --build .
 ```
 
 ### Running the game
 After building with CMake, simply run:
 ```
-./space-invaders
+$ ./space-invaders
 ```
 
 ### Asset Sources:
