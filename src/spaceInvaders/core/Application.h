@@ -11,6 +11,9 @@
 #include "../utilities/FixedClock.h"
 #include "../utilities/Utils.h"
 
+/**
+ * @brief Main entry point for game.
+ */
 class Application {
 private:
     static constexpr const int WINDOW_HEIGHT{1500};
@@ -48,12 +51,6 @@ private:
     void initWindow();
     void initStates();
     void initKeys();
-
-    void initAssets();
-    void initFontAssets();
-    void initTextureAssets();
-    void initSoundAssets();
-    void initColorAssets();
 };
 
 
