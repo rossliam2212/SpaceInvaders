@@ -14,7 +14,7 @@ namespace logger {
         if (record.getClassName().empty())
             ss << " []  ";
         else
-            ss << " [" << record.getClassName() << "]  ";
+            ss << " [" << record.getClassName() << "@" << record.getLine() << "]  ";
 
         if (record.getIsTiming()) {
             ss << "Execution time of function '" << record.getMessage() << "()' : " << record.getExecutionTime() << "ms";
@@ -36,7 +36,7 @@ namespace logger {
         if (record.getClassName().empty())
             ss << " []  ";
         else
-            ss << " [" << record.getClassName() << "]  ";
+            ss << " [" << record.getClassName() << "@" << record.getLine() << "]  ";
 
         if (record.getIsTiming()) {
             ss << "Execution time of function '" << record.getMessage() << "()' : " << record.getExecutionTime() << "ms";

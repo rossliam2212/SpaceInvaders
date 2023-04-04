@@ -37,13 +37,14 @@ namespace logger {
         Date d;
         std::string message;
         Severity severity;
+        int line;
 
         bool isTiming;
         long executionTime;
 
     public:
         Record(const std::string& message, Severity severity, bool timing, long executionTime);
-        Record(const std::string& message, Severity severity, const std::string& className, bool timing, long executionTime);
+        Record(const std::string& message, Severity severity, const std::string& className, bool timing, long executionTime, int line);
 
         static std::string getSeverityText(Severity s) ;
         static std::string getColor(Severity s) ;
@@ -52,6 +53,7 @@ namespace logger {
         Date getTime() const;
         std::string getMessage() const;
         Severity getSeverity() const;
+        int getLine() const;
         bool getIsTiming() const;
         long getExecutionTime() const;
     };

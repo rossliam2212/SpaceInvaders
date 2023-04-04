@@ -9,15 +9,17 @@ namespace logger {
         : clasName{""},
           message{message},
           severity{severity},
+          line{},
           d{},
           isTiming{timing},
           executionTime{executionTime} {
     }
 
-    Record::Record(const std::string& message, logger::Severity severity, const std::string& className, bool timing, long executionTime)
+    Record::Record(const std::string& message, logger::Severity severity, const std::string& className, bool timing, long executionTime, int line)
         :  clasName{className},
            message{message},
            severity{severity},
+           line{line},
            d{},
            isTiming{timing},
            executionTime{executionTime} {
@@ -78,6 +80,10 @@ namespace logger {
 
     Severity Record::getSeverity() const {
         return severity;
+    }
+
+    int Record::getLine() const {
+        return line;
     }
 
     bool Record::getIsTiming() const {

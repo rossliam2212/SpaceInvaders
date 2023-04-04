@@ -25,51 +25,51 @@ namespace logger {
         explicit Logger(const std::string& outputFileName);
 
         template<typename T>
-        void start(const std::string& message, const T& type) {
+        void start(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::start, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::start, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void end(const std::string& message, const T& type) {
+        void end(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::end, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::end, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void info(const std::string& message, const T& type) {
+        void info(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::info, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::info, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void debug(const std::string& message, const T& type) {
+        void debug(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::debug, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::debug, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void warning(const std::string& message, const T& type) {
+        void warning(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::warning, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::warning, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void error(const std::string& message, const T& type) {
+        void error(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::error, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::error, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void fatal(const std::string& message, const T& type) {
+        void fatal(const std::string& message, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({message, logger::fatal, className, false, Record::NO_EXECUTION_TIME});
+            log({message, logger::fatal, className, false, Record::NO_EXECUTION_TIME, line});
         }
 
         template<typename T>
-        void timing(const std::string& functionName, long executionTime, const T& type) {
+        void timing(const std::string& functionName, long executionTime, const T& type, int line) {
             std::string className{getClassName(type)};
-            log({functionName, logger::timing, className, true, executionTime});
+            log({functionName, logger::timing, className, true, executionTime, line});
         }
 
         void start(const std::string& message);
