@@ -22,6 +22,7 @@ private:
     static constexpr const float POWER_UP_SPAWN_POSITION_BOUNDARY_RIGHT{1450.f};
     static constexpr const float POWER_UP_SPAWN_POSITION_Y{1200.f};
 
+    static constexpr const int NUMBER_OF_ASTEROIDS{3};
     static constexpr const float ASTEROID_SPAWN_POSITION_X{250.f};
     static constexpr const float ASTEROID_SPAWN_POSITION_Y{900.f};
     static constexpr const float GAP_BETWEEN_ASTEROIDS{500.f};
@@ -56,14 +57,13 @@ private:
     void checkAsteroidCollisions();
     void checkForCollisionsBetweenAsteroidAndPlayerBullets();
     void checkForCollisionsBetweenAsteroidAndEnemyBullets();
+    void createPowerUp();
     void createExplosion(const sf::Vector2f& position);
     void cleanUpPowerUps();
     void cleanUpAsteroids();
-    void createPowerUp();
     bool allPowerUpsDead() const;
     bool allAsteroidsDead() const;
     void updateExplosionTimer(const float& dt);
-
     void initAsteroids();
 };
 

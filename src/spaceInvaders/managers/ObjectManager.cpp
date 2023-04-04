@@ -21,11 +21,12 @@ ObjectManager::ObjectManager(Player* player, EnemyManager* enemyManager, AssetMa
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 }
 
+/**
+ * @brief ObjectManager update function.
+ * @param dt
+ *          Delta time.
+ */
 void ObjectManager::update(const float& dt) {
-    checkPowerUpCollisions();
-    cleanUpPowerUps();
-    checkAsteroidCollisions();
-    cleanUpAsteroids();
     updateExplosionTimer(dt);
 
     if (explosionPlaying) {
@@ -33,6 +34,12 @@ void ObjectManager::update(const float& dt) {
     }
 
     if (!allPowerUpsDead()) {
+        cleanUpPowerUps();
+
+        if (player != nullptr) {
+            checkPowerUpCollisions();
+        }
+
         for (const auto& powerUp : powerUps) {
             if (!powerUp->getIsUsed()) {
                 powerUp->update(dt);
@@ -41,6 +48,12 @@ void ObjectManager::update(const float& dt) {
     }
 
     if (!allAsteroidsDead()) {
+        cleanUpAsteroids();
+
+        if (player != nullptr) {
+            checkAsteroidCollisions();
+        }
+
         for (const auto& asteroid : asteroids) {
             if (!asteroid->isDead()) {
                 asteroid->update(dt);
@@ -52,6 +65,11 @@ void ObjectManager::update(const float& dt) {
     }
 }
 
+/**
+ * @brief ObjectManager render function.
+ * @param window
+ *          The game window to render to.
+ */
 void ObjectManager::render(std::shared_ptr<sf::RenderWindow> window) {
     if (!allPowerUpsDead()) {
         for (const auto& powerUp : powerUps) {
@@ -74,37 +92,44 @@ void ObjectManager::render(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief Checks for collisions between the player and power-ups.
+ */
 void ObjectManager::checkPowerUpCollisions() {
-    if (!allPowerUpsDead() && player != nullptr) {
-        for (const auto& powerUp : powerUps) {
-            sf::FloatRect powerUpHitBox{powerUp->getHitBox()};
-            sf::FloatRect playerHitBox{player->getHitBox()};
+    for (const auto& powerUp : powerUps) {
+        sf::FloatRect powerUpHitBox{powerUp->getHitBox()};
+        sf::FloatRect playerHitBox{player->getHitBox()};
 
-            if (utilities::checkCollision(powerUpHitBox, playerHitBox)) {
-                if (powerUp->getName() == "Health") {
-                    // TODO Make this a constant
-                    player->increaseHealth(100);
-                    logger.debug("Player collected Health Power Up", this, __LINE__);
+        if (utilities::checkCollision(powerUpHitBox, playerHitBox)) {
+            if (powerUp->getName() == "Health") {
+                // TODO Make this a constant
+                player->increaseHealth(100);
+                logger.debug("Player collected Health Power Up", this, __LINE__);
 
-                    // TODO Fix this sound not working
-                    soundManager.startSound("healthPowerUpSound", assetManager.getSound("healthPowerUpSound"));
-                } else if (powerUp->getName() == "Shield") {
-                    player->setHasShield(true);
-                    logger.debug("Player collected Shield Power Up", this, __LINE__);
-                }
-                powerUp->setIsUsed(true);
+                // TODO Fix this sound not working
+                soundManager.startSound("healthPowerUpSound", assetManager.getSound("healthPowerUpSound"));
+            } else if (powerUp->getName() == "Shield") {
+                player->setHasShield(true);
+                logger.debug("Player collected Shield Power Up", this, __LINE__);
             }
+            powerUp->setIsUsed(true);
         }
     }
 }
 
+/**
+ * @brief Checks for collisions with asteroids.
+ *
+ * Calls @c ObjectManager::checkForCollisionsBetweenAsteroidAndPlayerBullets() and @c ObjectManager::checkForCollisionsBetweenAsteroidAndEnemyBullets().
+ */
 void ObjectManager::checkAsteroidCollisions() {
-    if (!allAsteroidsDead() && player != nullptr) {
-        checkForCollisionsBetweenAsteroidAndPlayerBullets();
-        checkForCollisionsBetweenAsteroidAndEnemyBullets();
-    }
+    checkForCollisionsBetweenAsteroidAndPlayerBullets();
+    checkForCollisionsBetweenAsteroidAndEnemyBullets();
 }
 
+/**
+ * @brief Checks for collisions between asteroids and player bullets.
+ */
 void ObjectManager::checkForCollisionsBetweenAsteroidAndPlayerBullets() {
     // Checking for collisions with player bullets
     auto playerBullets{player->getWeapon()->getBullets()};
@@ -130,6 +155,9 @@ void ObjectManager::checkForCollisionsBetweenAsteroidAndPlayerBullets() {
     }
 }
 
+/**
+ * @brief Checks for collisions between asteroids and enemy bullets.
+ */
 void ObjectManager::checkForCollisionsBetweenAsteroidAndEnemyBullets() {
     // Checking for collisions with enemy bullets;
     auto enemies{enemyManager->getEnemies()};
@@ -160,18 +188,33 @@ void ObjectManager::checkForCollisionsBetweenAsteroidAndEnemyBullets() {
     }
 }
 
+/**
+ * @brief Cleans up the @c ObjectManager::powerUps vector.
+ *
+ * This function loops through the @c ObjectManager::powerUps vector and removes any power-up that has been used.
+ */
 void ObjectManager::cleanUpPowerUps() {
     powerUps.erase(std::remove_if(std::begin(powerUps), std::end(powerUps), [](const auto& e) {
         return e->getIsUsed();
     }), std::end(powerUps));
 }
 
+/**
+ * @brief Cleans up the @c ObjectManager::asteroids vector.
+ *
+ * This function loops through the @c ObjectManager::asteroids vector and removes any asteroid that has been destroyed.
+ */
 void ObjectManager::cleanUpAsteroids() {
     asteroids.erase(std::remove_if(std::begin(asteroids), std::end(asteroids), [](const auto& e) {
         return e->isDead();
     }), std::end(asteroids));
 }
 
+/**
+ * @brief Creates an explosion at the given position.
+ * @param position
+ *          The position to create the explosion at.
+ */
 void ObjectManager::createExplosion(const sf::Vector2f& position) {
     // TODO Fix explosion animation not working
     explosion.setPosition(position);
@@ -189,10 +232,18 @@ void ObjectManager::createPowerUp() {
     powerUps.emplace_back(std::make_unique<HealthPowerUp>(pos1, assetManager, soundManager));
 }
 
+/**
+ * @brief Checks if all the power-ups are used.
+ * @return @c true if all the power-ups are used, @c false otherwise.
+ */
 bool ObjectManager::allPowerUpsDead() const {
     return powerUps.empty();
 }
 
+/**
+ * @brief Checks if all the asteroids are destroyed.
+ * @return @c true if all the asteroids are destroyed, @c false otherwise.
+ */
 bool ObjectManager::allAsteroidsDead() const {
     return asteroids.empty();
 }
@@ -211,7 +262,12 @@ void ObjectManager::updateExplosionTimer(const float& dt) {
     }
 }
 
+/**
+ * @brief Initializes the asteroids.
+ */
 void ObjectManager::initAsteroids() {
+    asteroids.reserve(NUMBER_OF_ASTEROIDS);
+
     sf::Vector2f pos{ASTEROID_SPAWN_POSITION_X, ASTEROID_SPAWN_POSITION_Y};
     asteroids.emplace_back(std::make_unique<Asteroid>(pos, assetManager, soundManager));
 
