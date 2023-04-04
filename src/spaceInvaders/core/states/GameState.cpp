@@ -14,20 +14,30 @@ GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack
 }
 
 void GameState::update(const float& dt) {
-    if (!enemyManager.allEnemiesDead()) {
-        player.update(dt);
-        enemyManager.update(dt);
-        objectManager.update(dt);
-        ui.update(dt);
+    // TODO Move to separate function
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && !isPaused()) {
+        logger.info("Starting PauseState.", this, __LINE__);
+        logger.debug("Game paused.", this, __LINE__);
+        pauseState();
+        states.push(std::make_unique<PauseState>(window, states, supportedKeys, assetManager, soundManager));
+    }
 
-        if (player.isDead()) {
-            logger.debug("Player killed!", this, __LINE__);
-            logger.info("Ending state.", this, __LINE__);
-            endState();
+    if (!isPaused()) {
+        if (!enemyManager.allEnemiesDead()) {
+            player.update(dt);
+            enemyManager.update(dt);
+            objectManager.update(dt);
+            ui.update(dt);
+
+            if (player.isDead()) {
+                logger.debug("Player killed!", this, __LINE__);
+                logger.info("Ending state.", this, __LINE__);
+                endState();
+            }
+        } else {
+            enemyManager.reset();
+            enemyManager.initEnemies();
         }
-    } else {
-        enemyManager.reset();
-        enemyManager.initEnemies();
     }
 }
 

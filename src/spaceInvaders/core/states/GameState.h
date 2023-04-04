@@ -5,7 +5,7 @@
 #ifndef SPACE_INVADERS_GAMESTATE_H
 #define SPACE_INVADERS_GAMESTATE_H
 
-#include "State.h"
+#include "PauseState.h"
 #include "../../managers/EnemyManager.h"
 #include "../../managers/ObjectManager.h"
 #include "../../ui/GameStateUI.h"

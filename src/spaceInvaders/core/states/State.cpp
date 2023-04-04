@@ -10,6 +10,7 @@ State::State(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::un
       supportedKeys{supportedKeys},
       assetManager{assetManager},
       soundManager{soundManager},
+      paused{false},
       end{false},
       logger{"logs"} {
     input::Input::Mouse::init(window.get());
@@ -27,6 +28,18 @@ void State::endState() {
 
 bool State::getEnd() const {
     return end;
+}
+
+void State::pauseState() {
+    paused = true;
+}
+
+void State::unpauseState() {
+    paused = false;
+}
+
+bool State::isPaused() const {
+    return paused;
 }
 
 void State::delayForMilliseconds(int milliseconds) {

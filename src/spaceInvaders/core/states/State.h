@@ -31,6 +31,7 @@ protected:
     std::unordered_map<std::string, int> keyBinds;
     AssetManager assetManager;
     SoundManager soundManager;
+    bool paused;
     bool end;
 
     sf::Vector2f mousePosWindow;
@@ -50,6 +51,11 @@ public:
 
     void endState();
     bool getEnd() const;
+
+    void pauseState();
+    void unpauseState();
+    bool isPaused() const;
+
     static void delayForMilliseconds(int milliseconds);
 
 protected:

@@ -9,6 +9,7 @@ set(SOURCE_FILES
         src/spaceInvaders/core/states/LoadingGameState.cpp
         src/spaceInvaders/core/states/MainMenuState.cpp
         src/spaceInvaders/core/states/GameState.cpp
+        src/spaceInvaders/core/states/PauseState.cpp
 
         src/spaceInvaders/managers/AssetManager.cpp
         src/spaceInvaders/managers/SoundManager.cpp
@@ -52,6 +53,7 @@ set(HEADER_FILES
         src/spaceInvaders/core/states/LoadingGameState.h
         src/spaceInvaders/core/states/MainMenuState.h
         src/spaceInvaders/core/states/GameState.h
+        src/spaceInvaders/core/states/PauseState.h
 
         src/spaceInvaders/managers/AssetManager.h
         src/spaceInvaders/managers/SoundManager.h
