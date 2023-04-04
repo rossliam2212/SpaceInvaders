@@ -194,7 +194,7 @@ void EnemyManager::checkCollisions() {
                         enemy->takeDamage(bullet->getDamage()); // Deal damage to the enemy
                         player->increaseScore(enemy->getScoreWorth()); // Increase the players score
                         player->updateKillStats(enemy->getName()); // Update the players kill stats
-                        logger.debug("ENEMY HIT => " + enemy->getName() + ".", this);
+                        logger.debug("ENEMY HIT => " + enemy->getName() + ".", this, __LINE__);
                         break;
                     }
                 }
@@ -232,11 +232,11 @@ void EnemyManager::initEnemies() {
             x += GAP_BETWEEN_ENEMIES_X;
         }
         y += GAP_BETWEEN_ENEMIES_Y;
-        logger.info(name + " enemies initialized", this);
+        logger.info(name + " enemies initialized", this, __LINE__);
     }
     auto endTime = std::chrono::steady_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    logger.timing("initEnemies", duration.count(), this);
+    logger.timing("initEnemies", duration.count(), this, __LINE__);
 }
 
 std::vector<Enemy*> EnemyManager::getEnemies() {

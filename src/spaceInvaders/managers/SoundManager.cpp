@@ -26,13 +26,13 @@ void SoundManager::startSound(const std::string& name, const sf::SoundBuffer& so
  */
 void SoundManager::playSound(const std::string& name) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
     } else {
         if (soundsPLaying.at(name).getStatus() == sf::SoundSource::Paused) {
-            logger.info("'" + name + "' sound => Playing.", this);
+            logger.info("'" + name + "' sound => Playing.", this, __LINE__);
             soundsPLaying.at(name).play();
         } else {
-            logger.warning("'" + name + "' sound already playing.", this);
+            logger.warning("'" + name + "' sound already playing.", this, __LINE__);
         }
     }
 }
@@ -43,13 +43,13 @@ void SoundManager::playSound(const std::string& name) {
  */
 void SoundManager::pauseSound(const std::string& name) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
     } else {
         if (soundsPLaying.at(name).getStatus() == sf::SoundSource::Playing) {
-            logger.info("'" + name + "' sound => Paused.", this);
+            logger.info("'" + name + "' sound => Paused.", this, __LINE__);
             soundsPLaying.at(name).pause();
         } else {
-            logger.warning("'" + name + "' sound already paused.", this);
+            logger.warning("'" + name + "' sound already paused.", this, __LINE__);
         }
     }
 }
@@ -60,9 +60,9 @@ void SoundManager::pauseSound(const std::string& name) {
  */
 void SoundManager::stopSound(const std::string& name) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
     } else {
-        logger.info("'" + name + "' sound => Stopped.", this);
+        logger.info("'" + name + "' sound => Stopped.", this, __LINE__);
 
         auto iter{soundsPLaying.find(name)};
         soundsPLaying.erase(iter);
@@ -85,7 +85,7 @@ bool SoundManager::isSoundPlaying(const std::string& name) {
  */
 void SoundManager::setSoundToLoop(const std::string& name) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
     } else {
         soundsPLaying.at(name).setLoop(true);
     }
@@ -97,7 +97,7 @@ void SoundManager::setSoundToLoop(const std::string& name) {
  */
 void SoundManager::stopSoundLoop(const std::string& name) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
     } else {
         soundsPLaying.at(name).setLoop(false);
     }
@@ -110,14 +110,14 @@ void SoundManager::stopSoundLoop(const std::string& name) {
  */
 void SoundManager::setSoundVolume(const std::string& name, float volume) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
         return;
     }
 
     if (volume <= MAX_SOUND_VOLUME && volume >= MIN_SOUND_VOLUME) {
         soundsPLaying.at(name).setVolume(volume);
     } else {
-        logger.error("Value for sound volume must be between 0 and 100.", this);
+        logger.error("Value for sound volume must be between 0 and 100.", this, __LINE__);
     }
 }
 
@@ -128,7 +128,7 @@ void SoundManager::setSoundVolume(const std::string& name, float volume) {
  */
 float SoundManager::getVolume(const std::string& name) {
     if (!checkSound(name)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
         return MIN_SOUND_VOLUME;
     } else {
         return soundsPLaying.at(name).getVolume();
@@ -142,7 +142,7 @@ float SoundManager::getVolume(const std::string& name) {
  */
 bool SoundManager::checkSound(const std::string& name) {
     if (soundsPLaying.find(name) == std::end(soundsPLaying)) {
-        logger.warning("'" + name + "' sound not currently playing.", this);
+        logger.warning("'" + name + "' sound not currently playing.", this, __LINE__);
         return false;
     }
     return true;

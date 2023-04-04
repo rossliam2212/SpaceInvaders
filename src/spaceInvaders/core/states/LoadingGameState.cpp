@@ -27,10 +27,10 @@ void LoadingGameState::update(const float& dt) {
         if (!loadNextState) {
             setAllAssetsLoaded();
             loadNextState = true;
-            logger.info("Starting MainMenuState.", this);
+            logger.info("Starting MainMenuState.", this, __LINE__);
             states.push(std::make_unique<MainMenuState>(window, states, supportedKeys, assetManager, soundManager));
         }
-        logger.info("Ending state.", this);
+        logger.info("Ending state.", this, __LINE__);
         endState();
     }
 }
@@ -54,12 +54,12 @@ void LoadingGameState::loadAsset(Asset& asset) {
     std::ifstream assetConfigFile{asset.filePath};
 
     if (!assetConfigFile.is_open()) {
-        logger.error("Failed to open " + asset.name + " assets config file.", this);
+        logger.error("Failed to open " + asset.name + " assets config file.", this, __LINE__);
         std::exit(-1);
     }
 
     if (utilities::isFileEmpty(assetConfigFile)) {
-        logger.warning(asset.name + " assets config file empty. Skipping...", this);
+        logger.warning(asset.name + " assets config file empty. Skipping...", this, __LINE__);
         assetBeingLoaded.setString("Loading: " + asset.name + " assets config file empty. Skipping...");
         window->draw(assetBeingLoaded);
         window->display();
@@ -81,7 +81,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                     logger.debug("Loading Color: " + name + " => rgba(" + std::to_string(r) + ", " + std::to_string(g) +
                                  ", " + std::to_string(b) + ", " + std::to_string(a) + "). (" +
                                  std::to_string(assetsLoaded) + "/" + std::to_string(asset.numberOfAssets) + ").",
-                                 this);
+                                 this, __LINE__);
 
                     window->clear(backGroundColor);
                     assetBeingLoaded.setString(
@@ -98,7 +98,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 }
             } catch (const std::exception& ex) {
                 std::string exception{ex.what()};
-                logger.error("Exception caught: " + exception, this);
+                logger.error("Exception caught: " + exception, this, __LINE__);
             }
         }
         // Font, Texture & Sound Assets
@@ -119,7 +119,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
                     assetsLoaded++;
                     logger.debug("Loading " + asset.name + ": " + name + " => '" + path + "' (" +
                                  std::to_string(assetsLoaded) + "/" +
-                                 std::to_string((asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets) + ").", this);
+                                 std::to_string((asset.numberOfAssets == 0) ? 1 : asset.numberOfAssets) + ").", this, __LINE__);
 
                     window->clear(backGroundColor);
                     assetBeingLoaded.setString("Loading " + asset.name + ": " + name + " => '" + path + "'");
@@ -134,12 +134,12 @@ void LoadingGameState::loadAsset(Asset& asset) {
                 }
             } catch (std::exception& ex) {
                 std::string exception{ex.what()};
-                logger.error("Exception caught: " + exception, this);
+                logger.error("Exception caught: " + exception, this, __LINE__);
             }
         }
         asset.loaded = true;
         progress = 0.f;
-        logger.info("Successfully loaded " + asset.name + " assets.", this);
+        logger.info("Successfully loaded " + asset.name + " assets.", this, __LINE__);
 
         window->clear(sf::Color{43, 43, 43, 255});
         typeOfAssetsBeingLoaded.setString("Successfully loaded " + asset.name + " assets");
@@ -194,10 +194,10 @@ void LoadingGameState::initBackground() {
 
 void LoadingGameState::initFont() {
     if (!font.loadFromFile("../assets/fonts/Pixellari.ttf")) {
-        logger.error("Failed to load starting font.", this);
+        logger.error("Failed to load starting font.", this, __LINE__);
         std::exit(-1);
     }
-    logger.info("Starting font loaded.", this);
+    logger.info("Starting font loaded.", this, __LINE__);
 }
 
 void LoadingGameState::initText() {

@@ -84,13 +84,13 @@ void ObjectManager::checkPowerUpCollisions() {
                 if (powerUp->getName() == "Health") {
                     // TODO Make this a constant
                     player->increaseHealth(100);
-                    logger.debug("Player collected Health Power Up", this);
+                    logger.debug("Player collected Health Power Up", this, __LINE__);
 
                     // TODO Fix this sound not working
                     soundManager.startSound("healthPowerUpSound", assetManager.getSound("healthPowerUpSound"));
                 } else if (powerUp->getName() == "Shield") {
                     player->setHasShield(true);
-                    logger.debug("Player collected Shield Power Up", this);
+                    logger.debug("Player collected Shield Power Up", this, __LINE__);
                 }
                 powerUp->setIsUsed(true);
             }

@@ -12,7 +12,7 @@ void AssetManager::loadTexture(const std::string& name, const std::string& filen
     if (!isTextureLoaded(name)) {
         textures[name].loadFromFile(filename);
     } else {
-        logger.info("'" + name + "' texture already loaded.", this);
+        logger.warning("'" + name + "' texture already loaded.", this, __LINE__);
     }
 }
 
@@ -27,7 +27,7 @@ void AssetManager::loadFont(const std::string& name, const std::string& filename
     if (!isFontLoaded(name)) {
         fonts[name].loadFromFile(filename);
     } else {
-        logger.info("'" + name + "' font already loaded.", this);
+        logger.warning("'" + name + "' font already loaded.", this, __LINE__);
     }
 }
 
@@ -42,7 +42,7 @@ void AssetManager::loadSound(const std::string& name, const std::string& filenam
     if (!isSoundLoaded(name)) {
         sounds[name].loadFromFile(filename);
     } else {
-        logger.info("'" + name + "' sound already loaded.", this);
+        logger.warning("'" + name + "' sound already loaded.", this, __LINE__);
     }
 }
 
@@ -57,7 +57,7 @@ void AssetManager::loadColor(const std::string& name, sf::Color color) {
     if (!isColorLoaded(name)) {
         colors[name] = color;
     } else {
-        logger.info("'" + name + "' color already loaded.", this);
+        logger.warning("'" + name + "' color already loaded.", this, __LINE__);
     }
 }
 

@@ -25,7 +25,7 @@ Player::Player(AssetManager& assetManager, SoundManager& soundManager, EnemyMana
       shieldHealth{MAX_PLAYER_SHIELD_HEALTH},
       hasShield{false},
       enemyManager{enemyManager}{
-    logger.info("Player initialized.", this);
+    logger.info("Player initialized.", this, __LINE__);
     initAnimations();
 }
 
@@ -245,7 +245,7 @@ void Player::checkCollisions() {
                             soundManager.startSound("bulletHittingPlayerShieldSound",
                                                     assetManager.getSound("bulletHittingPlayerShieldSound"));
 
-                            logger.fatal("Player Shield Hit", this);
+                            logger.fatal("Player Shield Hit", this, __LINE__);
                             break;
                         }
                     } else {
@@ -260,7 +260,7 @@ void Player::checkCollisions() {
                                 soundManager.startSound("bulletHittingPlayerSound",
                                                         assetManager.getSound("bulletHittingPlayerSound"));
                             }
-                            logger.fatal("Player Hit", this);
+                            logger.fatal("Player Hit", this, __LINE__);
                             break;
                         }
                     }
@@ -279,7 +279,7 @@ bool Player::getHasShield() const {
 }
 
 void Player::setHasShield(bool shieldActive) {
-    logger.debug("Player shield activated.", this);
+    logger.debug("Player shield activated.", this, __LINE__);
     soundManager.startSound("playerActivatingShieldSound", assetManager.getSound("playerActivatingShieldSound"));
     shieldPlaying = true;
     shieldTimer = true;

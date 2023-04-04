@@ -20,8 +20,8 @@ void GameState::update(const float& dt) {
     ui.update(dt);
 
     if (player.isDead()) {
-        logger.debug("Player killed!", this);
-        logger.info("Ending state.", this);
+        logger.debug("Player killed!", this, __LINE__);
+        logger.info("Ending state.", this, __LINE__);
         endState();
     }
 }
@@ -37,12 +37,12 @@ void GameState::initKeyBinds() {
     std::ifstream gameStateKeyBindsConfig{GAME_STATE_KEY_BINDS};
 
     if (!gameStateKeyBindsConfig.is_open()) {
-        logger.error("Failed to open key binds config.", this);
+        logger.error("Failed to open key binds config.", this, __LINE__);
         std::exit(-1);
     }
 
     if (utilities::isFileEmpty(gameStateKeyBindsConfig)) {
-        logger.error("Key binds config empty.", this);
+        logger.error("Key binds config empty.", this, __LINE__);
         std::exit(-1);
     } else {
         try {
@@ -52,10 +52,10 @@ void GameState::initKeyBinds() {
             while (gameStateKeyBindsConfig >> action >> key) {
                 keyBinds[action] = supportedKeys.at(key);
             }
-            logger.info("Successfully initialized key binds.", this);
+            logger.info("Successfully initialized key binds.", this, __LINE__);
         } catch (const std::exception& ex) {
             std::string exception{ex.what()};
-            logger.error("Exception caught: " + exception, this);
+            logger.error("Exception caught: " + exception, this, __LINE__);
         }
     }
     gameStateKeyBindsConfig.close();

@@ -38,14 +38,14 @@ void MainMenuState::updateButtons() {
     }
 
     if (buttons.at("startBtn")->isPressed() && !startPressed) {
-        logger.info("Starting GameState.", this);
+        logger.info("Starting GameState.", this, __LINE__);
 //        states.push(std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager));
         states.push(std::move(gameState));
         startPressed = true;
     }
 
     if (buttons.at("quitBtn")->isPressed()) {
-        logger.info("Ending state.", this);
+        logger.info("Ending state.", this, __LINE__);
         startPressed = true;
         endState();
     }
