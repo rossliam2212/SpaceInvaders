@@ -34,6 +34,7 @@ private:
     void initSprites();
     void initText();
     void initButtons();
+    void initGameState();
 };
 
 

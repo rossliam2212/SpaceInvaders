@@ -6,13 +6,17 @@
 
 MainMenuState::MainMenuState(const std::shared_ptr<sf::RenderWindow>& window, std::stack<std::unique_ptr<State>>& states, const std::unordered_map<std::string, int>& supportedKeys, AssetManager& assetManager, SoundManager& soundManager) noexcept
     : State(window, states, supportedKeys, assetManager, soundManager) {
+
+    // Initializing GameState in a separate thread
+    std::thread t{&MainMenuState::initGameState, this};
+
     initBackground();
     initSprites();
     initText();
     initButtons();
 
-    // Initializing GameState here to stop waiting time when the Start Button is pressed
-    gameState = std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager);
+    t.join();
+
     soundManager.startSound("badHabit", assetManager.getSound("badHabit"));
 }
 
@@ -77,5 +81,10 @@ void MainMenuState::initText() { }
 void MainMenuState::initButtons() {
     buttons["startBtn"] = std::make_unique<Button>(350, 1100, 300, 100, assetManager.getFont("PixelFont"), AssetManager::FONT_HEADING_2, "Start", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
     buttons["quitBtn"] = std::make_unique<Button>(850, 1100, 300, 100, assetManager.getFont("PixelFont"), AssetManager::FONT_HEADING_2, "Quit", assetManager.getColor("transparent"), assetManager.getColor("btnHoverLightGray"), assetManager.getColor("white"), true);
+}
+
+void MainMenuState::initGameState() {
+    // Initializing GameState here to stop waiting time when the Start Button is pressed
+    gameState = std::make_unique<GameState>(window, states, supportedKeys, assetManager, soundManager);
 }
 

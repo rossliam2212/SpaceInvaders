@@ -25,8 +25,8 @@ EnemyManager::EnemyManager(Player* player, AssetManager& assetManager, SoundMana
       shooting{false},
       shootingTimer{false},
       shootCoolDown{SHOOT_COOL_DOWN_TIMER} {
-    initEnemies();
 
+    initEnemies();
     explosion.setScale(AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f, AssetManager::SPRITE_SCALE_UP_FACTOR + 5.f);
 }
 
@@ -215,8 +215,6 @@ void EnemyManager::cleanUpEnemies() {
 }
 
 void EnemyManager::initEnemies() {
-    // TODO Make this more efficient
-
     // Testing execution time
     auto startTime{std::chrono::steady_clock::now()};
     enemies.reserve(MAX_NUMBER_OF_BLUE_ENEMIES +
@@ -230,12 +228,8 @@ void EnemyManager::initEnemies() {
     for (const auto& [name, number] : data) {
         x = ENEMY_START_POSITION_X;
         for (auto i = 0; i < number; ++i) {
-//            auto startTime{std::chrono::steady_clock::now()};
             enemies.emplace_back(enemyFactory.createEnemy(name, sf::Vector2f{x, y}, assetManager, soundManager));
             x += GAP_BETWEEN_ENEMIES_X;
-//            auto endTime = std::chrono::steady_clock::now();
-//            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-//            logger.timing("initEnemies", duration.count(), this);
         }
         y += GAP_BETWEEN_ENEMIES_Y;
         logger.info(name + " enemies initialized", this);

@@ -11,7 +11,6 @@
 #include <array>
 #include <Logger.h>
 #include <chrono>
-
 #include "../characters/Player.h"
 #include "EnemyFactory.h"
 
