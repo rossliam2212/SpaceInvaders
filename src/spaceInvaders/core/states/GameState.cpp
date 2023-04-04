@@ -14,15 +14,20 @@ GameState::GameState(const std::shared_ptr<sf::RenderWindow>& window, std::stack
 }
 
 void GameState::update(const float& dt) {
-    player.update(dt);
-    enemyManager.update(dt);
-    objectManager.update(dt);
-    ui.update(dt);
+    if (!enemyManager.allEnemiesDead()) {
+        player.update(dt);
+        enemyManager.update(dt);
+        objectManager.update(dt);
+        ui.update(dt);
 
-    if (player.isDead()) {
-        logger.debug("Player killed!", this, __LINE__);
-        logger.info("Ending state.", this, __LINE__);
-        endState();
+        if (player.isDead()) {
+            logger.debug("Player killed!", this, __LINE__);
+            logger.info("Ending state.", this, __LINE__);
+            endState();
+        }
+    } else {
+        enemyManager.reset();
+        enemyManager.initEnemies();
     }
 }
 

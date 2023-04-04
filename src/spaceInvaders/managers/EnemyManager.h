@@ -74,6 +74,10 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window);
 
     std::vector<Enemy*> getEnemies();
+    bool allEnemiesDead();
+
+    void reset();
+    void initEnemies();
 
 private:
     void moveEnemies(const float& dt);
@@ -82,11 +86,9 @@ private:
     void updateExplosionTimer(const float& dt);
     void updateShootingTimer(const float& dt);
     void updateMoveDownTimer(const float& dt);
-    bool allEnemiesDead();
     void checkCollisions();
     void cleanUpEnemies();
     void getDirection();
-    void initEnemies();
 };
 
 

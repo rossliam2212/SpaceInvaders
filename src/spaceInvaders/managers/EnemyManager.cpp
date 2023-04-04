@@ -38,6 +38,7 @@ void EnemyManager::update(const float& dt) {
         moveEnemies(dt);
         getDirection();
         shoot();
+        cleanUpEnemies();
 
         // Only checking for collisions if has shot a bullet
         if (player != nullptr) {
@@ -57,8 +58,6 @@ void EnemyManager::update(const float& dt) {
             }
         }
     }
-
-    cleanUpEnemies();
     updateExplosionTimer(dt);
     updateShootingTimer(dt);
     updateMoveDownTimer(dt);
@@ -210,6 +209,11 @@ void EnemyManager::cleanUpEnemies() {
     enemies.erase(std::remove_if(std::begin(enemies), std::end(enemies), [](const auto& e) {
         return e->isDead();
     }), std::end(enemies));
+}
+
+void EnemyManager::reset() {
+    enemies.clear();
+    direction = moveRight;
 }
 
 void EnemyManager::initEnemies() {
