@@ -7,11 +7,14 @@
 
 #include "MainMenuState.h"
 
+/**
+ * @brief Represents an Asset type being loaded.
+ */
 struct Asset {
-    std::string name;
-    std::string filePath;
-    int numberOfAssets;
-    bool loaded;
+    std::string name; /**< The name of the asset - e.g. Texture */
+    std::string filePath; /**< The path to the asset config file. */
+    int numberOfAssets; /**< The number of assets in the config file to load. */
+    bool loaded; /**< Whether the asset has been fully loaded or not. */
 
     Asset()
         : name{},
@@ -27,6 +30,11 @@ struct Asset {
     }
 };
 
+/**
+ * @brief LoadingGameState - Inherits from @c State
+ *
+ * Responsive for loading in all the games assets.
+ */
 class LoadingGameState : public State {
 private:
     static constexpr const char* FONT_ASSETS_NAME{"Font"};
@@ -53,7 +61,7 @@ private:
     sf::RectangleShape progressBar;
     float progress;
 
-    std::array<Asset, 4> assets;
+    std::array<Asset, 4> assets; /**< All the assets to be loaded */
 
     bool loadNextState;
     bool allAssetsLoaded;

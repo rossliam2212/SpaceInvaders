@@ -18,6 +18,10 @@ LoadingGameState::LoadingGameState(const std::shared_ptr<sf::RenderWindow>& wind
     initAssets();
 }
 
+/**
+ * @brief LoadingGameState update function.
+ * @param dt Delta time.
+ */
 void LoadingGameState::update(const float& dt) {
     if (!checkIfAllAssetsLoaded()) {
         for (auto& asset : assets) {
@@ -35,6 +39,10 @@ void LoadingGameState::update(const float& dt) {
     }
 }
 
+/**
+ * @brief LoadingGameState render function.
+ * @param window The game window to render to.
+ */
 void LoadingGameState::render(std::shared_ptr<sf::RenderWindow> window) {
     if (allAssetsLoaded) {
         window->draw(backGround);
@@ -44,6 +52,13 @@ void LoadingGameState::render(std::shared_ptr<sf::RenderWindow> window) {
     }
 }
 
+/**
+ * @brief Loads an asset.
+ *
+ * This function loads an asset. The type of asset is checked and the relevant @c AssetManager function is called to load in and store the asset.
+ * This function also updates the values for progress bar.
+ * @param asset The asset to load.
+ */
 void LoadingGameState::loadAsset(Asset& asset) {
     window->clear(backGroundColor);
     typeOfAssetsBeingLoaded.setString("Loading: " + asset.name + " assets...");
@@ -141,7 +156,7 @@ void LoadingGameState::loadAsset(Asset& asset) {
         progress = 0.f;
         logger.info("Successfully loaded " + asset.name + " assets.", this, __LINE__);
 
-        window->clear(sf::Color{43, 43, 43, 255});
+        window->clear(backGroundColor);
         typeOfAssetsBeingLoaded.setString("Successfully loaded " + asset.name + " assets");
         assetBeingLoaded.setString("Waiting...");
         progressBar.setSize(sf::Vector2f(0.f, 0.f));
@@ -154,12 +169,21 @@ void LoadingGameState::loadAsset(Asset& asset) {
     assetConfigFile.close();
 }
 
+/**
+ * @brief Checks if all the assets have been loaded.
+ *
+ * This function checks if all the assets have been loaded by looping through the @c LoadingGameState::assets array and checking if all the @c Asset::loaded members has been set to true.
+ * @return @c true if all the assets have been loaded, @c false otherwise.
+ */
 bool LoadingGameState::checkIfAllAssetsLoaded() {
     return std::any_of(std::begin(assets), std::end(assets), [](const Asset& asset) {
         return asset.loaded;
     });
 }
 
+/**
+ * @brief Called when all the assets have been loaded in and displays the All assets loaded UI.
+ */
 void LoadingGameState::setAllAssetsLoaded() {
     progressBar.setSize(sf::Vector2f(PROGRESS_BAR_LENGTH, PROGRESS_BAR_HEIGHT));
     typeOfAssetsBeingLoaded.setString("All assets loaded successfully.");
@@ -174,10 +198,23 @@ void LoadingGameState::setAllAssetsLoaded() {
     allAssetsLoaded = true;
 }
 
+/**
+ * @brief Calculates the progress of the asset that is currently being loaded.
+ * @param numberOfAssetsLoaded
+ *          The number of assets already loaded of that type.
+ * @param totalAssetsToLoad
+ *          The total number of assets to load of one type of asset.
+ */
 void LoadingGameState::calculateProgress(int numberOfAssetsLoaded, int totalAssetsToLoad) {
     progress = (float)numberOfAssetsLoaded / (float)totalAssetsToLoad;
 }
 
+/**
+ * @brief Counts the number of lines in an asset config file.
+ * @param filePath
+ *          The path to the asset config file.
+ * @return The number of lines in the asset config file.
+ */
 int LoadingGameState::countLinesInAssetFiles(const char* filePath) {
     std::ifstream file(filePath);
 
@@ -187,11 +224,17 @@ int LoadingGameState::countLinesInAssetFiles(const char* filePath) {
     return lineCount;
 }
 
+/**
+ * @brief Initializes the background.
+ */
 void LoadingGameState::initBackground() {
     backGround.setSize(sf::Vector2f{static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y)});
     backGround.setFillColor(backGroundColor);
 }
 
+/**
+ * @brief Initializes the font.
+ */
 void LoadingGameState::initFont() {
     if (!font.loadFromFile("../assets/fonts/Pixellari.ttf")) {
         logger.error("Failed to load starting font.", this, __LINE__);
@@ -200,6 +243,9 @@ void LoadingGameState::initFont() {
     logger.info("Starting font loaded.", this, __LINE__);
 }
 
+/**
+ * @brief Initializes the text.
+ */
 void LoadingGameState::initText() {
     typeOfAssetsBeingLoaded.setFillColor(sf::Color::White);
     typeOfAssetsBeingLoaded.setPosition(200, 550);
@@ -214,6 +260,9 @@ void LoadingGameState::initText() {
     assetBeingLoaded.setString("Loading: ");
 }
 
+/**
+ * @brief Initializes the progress bar.
+ */
 void LoadingGameState::initProgressBar() {
     progressBar.setPosition(sf::Vector2f{200, static_cast<float>(window->getSize().y)/2});
     progressBar.setOutlineColor(sf::Color::Black);
@@ -221,6 +270,17 @@ void LoadingGameState::initProgressBar() {
     progressBar.setFillColor(sf::Color::Green);
 }
 
+/**
+ * @brief Initializes the assets:
+ * This function initializes the four types of assets:
+ * <ul>
+ *  <li> Fonts </li>
+ *  <li> Textures </li>
+ *  <li> Sounds </li>
+ *  <li> Colors </li>
+ * </ul>
+ * and then stores them in the @c LoadingGameState::assets array.
+ */
 void LoadingGameState::initAssets() {
     Asset fonts{FONT_ASSETS_NAME, FONT_ASSETS_CONFIG, countLinesInAssetFiles(FONT_ASSETS_CONFIG)};
     Asset textures{TEXTURE_ASSETS_NAME, TEXTURE_ASSETS_CONFIG, countLinesInAssetFiles(TEXTURE_ASSETS_CONFIG)};
